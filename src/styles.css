@@ -5,7 +5,7 @@
   --surface: #ffffff;
   --surface-2: #f5f8f5;
   --ink: #0f2219;
-  --muted: #5a6e62;
+  --muted: #3f5347;
   --line: #d2ddd5;
   --line-strong: #b3c4b8;
   --accent: #0e5a38;
@@ -31,12 +31,13 @@
   --blob-mint: rgba(124, 224, 168, 0.40);
   --blob-gold: rgba(214, 168, 52, 0.24);
   --blur: blur(18px) saturate(170%);
-  --stripe: rgba(14, 74, 48, 0.035);
-  --topo: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240' viewBox='0 0 240 240'%3E%3Cg fill='none' stroke='rgba%2814%2C74%2C48%2C0.10%29' stroke-width='1.1'%3E%3Cpath d='M0 18 C40 4 80 4 120 18 S200 32 240 18'/%3E%3Cpath d='M0 46 C50 66 70 66 120 46 S190 26 240 46'/%3E%3Cpath d='M0 70 C40 60 80 60 120 70 S200 80 240 70'/%3E%3Cpath d='M0 98 C50 122 70 122 120 98 S190 74 240 98'/%3E%3Cpath d='M0 130 C40 114 80 114 120 130 S200 146 240 130'/%3E%3Cpath d='M0 156 C50 178 70 178 120 156 S190 134 240 156'/%3E%3Cpath d='M0 184 C40 172 80 172 120 184 S200 196 240 184'/%3E%3Cpath d='M0 214 C50 234 70 234 120 214 S190 194 240 214'/%3E%3C/g%3E%3C/svg%3E");
-  --glass-top: rgba(255, 255, 255, 0.74);
-  --glass-bottom: rgba(255, 255, 255, 0.40);
+  --stripe: rgba(255, 255, 255, 0.09);
+  --turf-wash: rgba(236, 244, 238, 0.4);
+  --glass-edge: rgba(255, 255, 255, 0.4);
+  --glass-top: rgba(255, 255, 255, 0.64);
+  --glass-bottom: rgba(255, 255, 255, 0.32);
   --glass-sheen: rgba(255, 255, 255, 0.55);
-  --glass-depth: rgba(14, 74, 48, 0.16);
+  --glass-depth: rgba(0, 40, 20, 0.22);
   --glass-catch: rgba(255, 255, 255, 0.55);
   --f-display: "Unbounded", "Arial Black", system-ui, sans-serif;
   --f-body: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -53,9 +54,8 @@
     --half: #c4b37a; --gold: #e0b54a;
     --band-glow: #1d6e47; --glass: rgba(24, 52, 39, 0.55); --glass-strong: rgba(32, 66, 50, 0.72); --glass-inset: rgba(255, 255, 255, 0.04);
     --glass-line: rgba(255, 255, 255, 0.10); --glass-hl: rgba(255, 255, 255, 0.16); --glass-shadow: 0 14px 34px -18px rgba(0, 0, 0, 0.7), 0 1px 2px rgba(0, 0, 0, 0.3);
-    --blob-green: rgba(30, 138, 76, 0.38); --blob-mint: rgba(77, 190, 132, 0.18); --blob-gold: rgba(224, 181, 74, 0.13); --stripe: rgba(255, 255, 255, 0.022);
-    --topo: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240' viewBox='0 0 240 240'%3E%3Cg fill='none' stroke='rgba%28160%2C220%2C185%2C0.07%29' stroke-width='1.1'%3E%3Cpath d='M0 18 C40 4 80 4 120 18 S200 32 240 18'/%3E%3Cpath d='M0 46 C50 66 70 66 120 46 S190 26 240 46'/%3E%3Cpath d='M0 70 C40 60 80 60 120 70 S200 80 240 70'/%3E%3Cpath d='M0 98 C50 122 70 122 120 98 S190 74 240 98'/%3E%3Cpath d='M0 130 C40 114 80 114 120 130 S200 146 240 130'/%3E%3Cpath d='M0 156 C50 178 70 178 120 156 S190 134 240 156'/%3E%3Cpath d='M0 184 C40 172 80 172 120 184 S200 196 240 184'/%3E%3Cpath d='M0 214 C50 234 70 234 120 214 S190 194 240 214'/%3E%3C/g%3E%3C/svg%3E");
-    --glass-top: rgba(46, 88, 67, 0.58); --glass-bottom: rgba(16, 38, 28, 0.46); --glass-sheen: rgba(255, 255, 255, 0.10); --glass-depth: rgba(0, 0, 0, 0.35); --glass-catch: rgba(255, 255, 255, 0.10);
+    --blob-green: rgba(30, 138, 76, 0.38); --blob-mint: rgba(77, 190, 132, 0.18); --blob-gold: rgba(224, 181, 74, 0.13); --stripe: rgba(255, 255, 255, 0.03); --turf-wash: rgba(5, 16, 11, 0.68); --glass-edge: rgba(255, 255, 255, 0.10);
+    --glass-top: rgba(255, 255, 255, 0.13); --glass-bottom: rgba(255, 255, 255, 0.04); --glass-sheen: rgba(255, 255, 255, 0.10); --glass-depth: rgba(0, 0, 0, 0.45); --glass-catch: rgba(255, 255, 255, 0.10);
     color-scheme: dark;
   }
 }
@@ -66,9 +66,8 @@
   --half: #c4b37a; --gold: #e0b54a;
     --band-glow: #1d6e47; --glass: rgba(24, 52, 39, 0.55); --glass-strong: rgba(32, 66, 50, 0.72); --glass-inset: rgba(255, 255, 255, 0.04);
     --glass-line: rgba(255, 255, 255, 0.10); --glass-hl: rgba(255, 255, 255, 0.16); --glass-shadow: 0 14px 34px -18px rgba(0, 0, 0, 0.7), 0 1px 2px rgba(0, 0, 0, 0.3);
-    --blob-green: rgba(30, 138, 76, 0.38); --blob-mint: rgba(77, 190, 132, 0.18); --blob-gold: rgba(224, 181, 74, 0.13); --stripe: rgba(255, 255, 255, 0.022);
-    --topo: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240' viewBox='0 0 240 240'%3E%3Cg fill='none' stroke='rgba%28160%2C220%2C185%2C0.07%29' stroke-width='1.1'%3E%3Cpath d='M0 18 C40 4 80 4 120 18 S200 32 240 18'/%3E%3Cpath d='M0 46 C50 66 70 66 120 46 S190 26 240 46'/%3E%3Cpath d='M0 70 C40 60 80 60 120 70 S200 80 240 70'/%3E%3Cpath d='M0 98 C50 122 70 122 120 98 S190 74 240 98'/%3E%3Cpath d='M0 130 C40 114 80 114 120 130 S200 146 240 130'/%3E%3Cpath d='M0 156 C50 178 70 178 120 156 S190 134 240 156'/%3E%3Cpath d='M0 184 C40 172 80 172 120 184 S200 196 240 184'/%3E%3Cpath d='M0 214 C50 234 70 234 120 214 S190 194 240 214'/%3E%3C/g%3E%3C/svg%3E");
-    --glass-top: rgba(46, 88, 67, 0.58); --glass-bottom: rgba(16, 38, 28, 0.46); --glass-sheen: rgba(255, 255, 255, 0.10); --glass-depth: rgba(0, 0, 0, 0.35); --glass-catch: rgba(255, 255, 255, 0.10);
+    --blob-green: rgba(30, 138, 76, 0.38); --blob-mint: rgba(77, 190, 132, 0.18); --blob-gold: rgba(224, 181, 74, 0.13); --stripe: rgba(255, 255, 255, 0.03); --turf-wash: rgba(5, 16, 11, 0.68); --glass-edge: rgba(255, 255, 255, 0.10);
+    --glass-top: rgba(255, 255, 255, 0.13); --glass-bottom: rgba(255, 255, 255, 0.04); --glass-sheen: rgba(255, 255, 255, 0.10); --glass-depth: rgba(0, 0, 0, 0.45); --glass-catch: rgba(255, 255, 255, 0.10);
     color-scheme: dark;
 }
 
@@ -594,28 +593,37 @@ a.roster-row:active { background: var(--surface-2); }
    things content scrolls beneath (tab bar, header chips) and cards; edges get a specular top highlight. */
 html { background: var(--bg); }
 body { background: transparent; }
+/* Putting-green turf (public/turf.webp, a seamless 480px tile) drifts at a quarter of scroll speed
+   (see main.tsx); a wash, mowing stripes and soft light sit still on top of it. */
 html::before {
+  content: ""; position: fixed; inset: 0 0 -480px; z-index: -1; pointer-events: none;
+  background: #4a803e url("/turf.webp") 0 0 / 480px 480px repeat;
+  transform: translate3d(0, calc(var(--py, 0px) * -1), 0); will-change: transform;
+}
+html::after {
   content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
   background:
     repeating-linear-gradient(112deg, var(--stripe) 0 72px, transparent 72px 144px),
     radial-gradient(46vmax 38vmax at 8% 12%, var(--blob-green), transparent 70%),
     radial-gradient(40vmax 34vmax at 96% 34%, var(--blob-mint), transparent 70%),
     radial-gradient(44vmax 36vmax at 74% 100%, var(--blob-gold), transparent 70%),
-    radial-gradient(34vmax 30vmax at 0% 80%, var(--blob-mint), transparent 70%);
+    linear-gradient(var(--turf-wash), var(--turf-wash));
 }
-/* Thick glass: a top-lit gradient body, heavy blur, a bright upper rim, a faint catch light on the
-   lower edge, shading inside the bottom for depth, and a long soft drop shadow. */
+/* Thick glassmorphism: a clear-to-frosted body with heavy blur over the turf, a bevel (bright top-left,
+   faint bottom-right), shading inside the lower edge, a lighter slab edge just under the card that reads
+   as the glass's thickness, and a long soft drop shadow. */
 .card {
-  position: relative; border: 0; border-radius: 20px;
-  background: linear-gradient(165deg, var(--glass-top), var(--glass-bottom));
-  -webkit-backdrop-filter: blur(30px) saturate(190%); backdrop-filter: blur(30px) saturate(190%);
+  position: relative; border: 0; border-radius: 22px;
+  background: linear-gradient(150deg, var(--glass-top), var(--glass-bottom));
+  -webkit-backdrop-filter: blur(26px) saturate(185%); backdrop-filter: blur(26px) saturate(185%);
   box-shadow:
-    inset 0 1.5px 0 var(--glass-hl),
-    inset 0 -1px 0 var(--glass-catch),
-    inset 0 0 0 1px var(--glass-line),
-    inset 0 -18px 30px -24px var(--glass-depth),
-    0 26px 48px -26px rgba(10, 52, 33, 0.5),
-    0 4px 10px -6px rgba(10, 52, 33, 0.2);
+    inset 1.5px 1.5px 0 var(--glass-hl),
+    inset -1px -1.5px 0 var(--glass-catch),
+    inset 0 0 0 1px var(--glass-edge),
+    inset 0 -26px 40px -32px var(--glass-depth),
+    0 3px 0 -1px var(--glass-edge),
+    0 30px 60px -30px rgba(0, 30, 15, 0.55),
+    0 6px 14px -8px rgba(0, 30, 15, 0.3);
 }
 .card::before {
   content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit; pointer-events: none;
@@ -656,13 +664,6 @@ html::before {
 .subtabs { background: var(--glass-inset); border-color: var(--glass-line); border-radius: 16px; }
 .subtab { border-radius: 12px; }
 .subtab.active { background: var(--glass-strong); box-shadow: inset 0 1px 0 var(--glass-hl), 0 4px 14px -6px rgba(14, 74, 48, 0.35); }
-
-/* Yardage-book contours drift behind the glass at a fraction of scroll speed (see main.tsx). */
-html::after {
-  content: ""; position: fixed; inset: 0 0 -240px; z-index: -1; pointer-events: none;
-  background: var(--topo) 0 0 / 240px 240px repeat;
-  transform: translate3d(0, calc(var(--py, 0px) * -1), 0); will-change: transform;
-}
 
 /* Phone: the tab bar floats as a tinted glass capsule */
 @media (max-width: 859.98px) {

@@ -16,7 +16,7 @@ createRoot(document.getElementById("root")!).render(
   </StrictMode>,
 );
 
-// Parallax: the background contour texture moves at a quarter of scroll speed, wrapped to its 240px tile.
+// Parallax: the turf texture moves at a quarter of scroll speed, wrapped to its 480px tile.
 if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
   let frame = 0;
   const root = document.documentElement;
@@ -26,7 +26,7 @@ if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       if (frame) return;
       frame = requestAnimationFrame(() => {
         frame = 0;
-        root.style.setProperty("--py", `${((window.scrollY * 0.25) % 240).toFixed(1)}px`);
+        root.style.setProperty("--py", `${((window.scrollY * 0.25) % 480).toFixed(1)}px`);
       });
     },
     { passive: true },
