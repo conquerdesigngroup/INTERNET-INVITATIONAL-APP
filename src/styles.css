@@ -33,6 +33,8 @@
   --blur: blur(18px) saturate(170%);
   --stripe: rgba(255, 255, 255, 0.09);
   --turf-wash: rgba(236, 244, 238, 0.4);
+  --sun: rgba(255, 248, 214, 0.42);
+  --vignette: rgba(4, 34, 18, 0.28);
   --glass-edge: rgba(255, 255, 255, 0.4);
   --glass-top: rgba(255, 255, 255, 0.64);
   --glass-bottom: rgba(255, 255, 255, 0.32);
@@ -54,7 +56,7 @@
     --half: #c4b37a; --gold: #e0b54a;
     --band-glow: #1d6e47; --glass: rgba(24, 52, 39, 0.55); --glass-strong: rgba(32, 66, 50, 0.72); --glass-inset: rgba(255, 255, 255, 0.04);
     --glass-line: rgba(255, 255, 255, 0.10); --glass-hl: rgba(255, 255, 255, 0.16); --glass-shadow: 0 14px 34px -18px rgba(0, 0, 0, 0.7), 0 1px 2px rgba(0, 0, 0, 0.3);
-    --blob-green: rgba(30, 138, 76, 0.38); --blob-mint: rgba(77, 190, 132, 0.18); --blob-gold: rgba(224, 181, 74, 0.13); --stripe: rgba(255, 255, 255, 0.03); --turf-wash: rgba(5, 16, 11, 0.68); --glass-edge: rgba(255, 255, 255, 0.10);
+    --blob-green: rgba(30, 138, 76, 0.38); --blob-mint: rgba(77, 190, 132, 0.18); --blob-gold: rgba(224, 181, 74, 0.13); --stripe: rgba(255, 255, 255, 0.03); --turf-wash: rgba(5, 16, 11, 0.68); --sun: rgba(190, 230, 160, 0.10); --vignette: rgba(0, 0, 0, 0.45); --glass-edge: rgba(255, 255, 255, 0.10);
     --glass-top: rgba(255, 255, 255, 0.13); --glass-bottom: rgba(255, 255, 255, 0.04); --glass-sheen: rgba(255, 255, 255, 0.10); --glass-depth: rgba(0, 0, 0, 0.45); --glass-catch: rgba(255, 255, 255, 0.10);
     color-scheme: dark;
   }
@@ -66,7 +68,7 @@
   --half: #c4b37a; --gold: #e0b54a;
     --band-glow: #1d6e47; --glass: rgba(24, 52, 39, 0.55); --glass-strong: rgba(32, 66, 50, 0.72); --glass-inset: rgba(255, 255, 255, 0.04);
     --glass-line: rgba(255, 255, 255, 0.10); --glass-hl: rgba(255, 255, 255, 0.16); --glass-shadow: 0 14px 34px -18px rgba(0, 0, 0, 0.7), 0 1px 2px rgba(0, 0, 0, 0.3);
-    --blob-green: rgba(30, 138, 76, 0.38); --blob-mint: rgba(77, 190, 132, 0.18); --blob-gold: rgba(224, 181, 74, 0.13); --stripe: rgba(255, 255, 255, 0.03); --turf-wash: rgba(5, 16, 11, 0.68); --glass-edge: rgba(255, 255, 255, 0.10);
+    --blob-green: rgba(30, 138, 76, 0.38); --blob-mint: rgba(77, 190, 132, 0.18); --blob-gold: rgba(224, 181, 74, 0.13); --stripe: rgba(255, 255, 255, 0.03); --turf-wash: rgba(5, 16, 11, 0.68); --sun: rgba(190, 230, 160, 0.10); --vignette: rgba(0, 0, 0, 0.45); --glass-edge: rgba(255, 255, 255, 0.10);
     --glass-top: rgba(255, 255, 255, 0.13); --glass-bottom: rgba(255, 255, 255, 0.04); --glass-sheen: rgba(255, 255, 255, 0.10); --glass-depth: rgba(0, 0, 0, 0.45); --glass-catch: rgba(255, 255, 255, 0.10);
     color-scheme: dark;
 }
@@ -603,6 +605,8 @@ html::before {
 html::after {
   content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
   background:
+    radial-gradient(70vmax 52vmax at 12% -8%, var(--sun), transparent 70%),
+    radial-gradient(ellipse 120% 90% at 50% 40%, transparent 55%, var(--vignette) 100%),
     repeating-linear-gradient(112deg, var(--stripe) 0 72px, transparent 72px 144px),
     radial-gradient(46vmax 38vmax at 8% 12%, var(--blob-green), transparent 70%),
     radial-gradient(40vmax 34vmax at 96% 34%, var(--blob-mint), transparent 70%),
@@ -627,7 +631,7 @@ html::after {
 }
 .card::before {
   content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit; pointer-events: none;
-  background: linear-gradient(135deg, var(--glass-sheen), transparent 32%);
+  background: radial-gradient(circle 260px at var(--mx, 12%) var(--my, 0%), var(--glass-sheen), transparent 70%);
 }
 
 .band {
@@ -635,8 +639,9 @@ html::after {
   background:
     radial-gradient(90% 140% at 0% 0%, var(--band-glow), transparent 62%),
     radial-gradient(60% 120% at 100% 0%, color-mix(in srgb, var(--gold) 22%, transparent), transparent 70%),
-    var(--band);
-  box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.10), 0 16px 34px -22px rgba(6, 30, 20, 0.7);
+    color-mix(in srgb, var(--band) 84%, transparent);
+  -webkit-backdrop-filter: blur(16px) saturate(160%); backdrop-filter: blur(16px) saturate(160%);
+  box-shadow: inset 0 -1.5px 0 rgba(255, 255, 255, 0.16), inset 0 -24px 40px -30px rgba(0, 0, 0, 0.4), 0 3px 0 -1px rgba(255, 255, 255, 0.14), 0 22px 40px -24px rgba(6, 30, 20, 0.75);
 }
 .band h1 { text-shadow: 0 1px 0 rgba(0, 0, 0, 0.12); }
 .status, .theme-btn {
@@ -742,6 +747,19 @@ html::after {
 @media (min-width: 860px) {
   .band-art { right: max(16px, calc((100vw - 1120px) / 2 + 10px)); bottom: -4px; width: 180px; opacity: 1; }
 }
+
+/* ---------- Motion: cards rise into place on each section, controls press in like glass ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  section.view > * { animation: rise 0.55s cubic-bezier(0.2, 0.75, 0.2, 1) both; }
+  section.view > :nth-child(2) { animation-delay: 0.06s; }
+  section.view > :nth-child(3) { animation-delay: 0.12s; }
+  section.view > :nth-child(4) { animation-delay: 0.18s; }
+  section.view > :nth-child(n + 5) { animation-delay: 0.24s; }
+  .card::before { transition: background 0.25s ease; }
+  .tab, .seg button, .chipset button, .legend-toggle button, .node, .sc-hole, .btn, .subtab, a.roster-row, summary { transition: transform 0.14s ease; }
+  .tab:active, .seg button:active, .chipset button:active, .legend-toggle button:active, .node:active, .sc-hole:active, .btn:active, .subtab:active, summary:active { transform: scale(0.96); }
+}
+@keyframes rise { from { opacity: 0; transform: translateY(14px) scale(0.985); } }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }

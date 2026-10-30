@@ -33,6 +33,27 @@ if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
   );
 }
 
+// Glass sheen follows the pointer across whichever card it is over (mouse and pen only).
+if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+  let last: HTMLElement | null = null;
+  document.addEventListener(
+    "pointermove",
+    (e) => {
+      const card = (e.target as Element | null)?.closest?.<HTMLElement>(".card") ?? null;
+      if (last && last !== card) {
+        last.style.removeProperty("--mx");
+        last.style.removeProperty("--my");
+      }
+      last = card;
+      if (!card) return;
+      const r = card.getBoundingClientRect();
+      card.style.setProperty("--mx", `${e.clientX - r.left}px`);
+      card.style.setProperty("--my", `${e.clientY - r.top}px`);
+    },
+    { passive: true },
+  );
+}
+
 if ("serviceWorker" in navigator && import.meta.env.PROD) {
   window.addEventListener("load", () => navigator.serviceWorker.register("/sw.js").catch(() => {}));
 }
