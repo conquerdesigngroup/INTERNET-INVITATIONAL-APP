@@ -53,3 +53,15 @@ export function SecHead({ title, children }: { title: string; children?: ReactNo
     </div>
   );
 }
+
+export function Chips({ value, options, onChange, label }: { value: string; options: [string, string][]; onChange: (v: string) => void; label: string }) {
+  return (
+    <div className="chipset" role="group" aria-label={label}>
+      {options.map(([v, l]) => (
+        <button key={v} type="button" aria-pressed={value === v} onClick={() => onChange(v)}>
+          {l}
+        </button>
+      ))}
+    </div>
+  );
+}

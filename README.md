@@ -22,11 +22,13 @@ npm run preview   # serve the production build
 | `src/lib/scoring.ts` | Pure functions: match points, session and contest totals, player records, `½` formatting |
 | `src/lib/scoring.test.ts` | Tests (FR is 8–8, DB is 5½–10½, playoffs don't count) |
 | `src/content.ts` | Editorial words that aren't in the JSON (board stories, bracket blurbs) |
-| `src/screens/` | Standings, Teams, Matches, Format & Bracket |
+| `src/screens/` | Standings, Teams, Matches, Stats & Course, Format & Bracket |
+| `src/lib/stats.ts` | Chart math: running score, margins, net holes, player and pairing lines, hole tallies |
+| `src/course.ts` | Ozarks National scorecard, hole moments, Big Cedar course locations |
 | `public/` | PWA manifest, service worker, icons |
 | `reference/prototype.html` | The original single-file prototype |
 
-Routes: `/standings`, `/teams/:team`, `/matches?player=Big%20John&session=2&matchup=FR`, `/format`. Every view is a shareable link.
+Routes: `/standings`, `/teams/:team`, `/stats`, `/stats/players`, `/stats/course`, `/matches?player=Big%20John&session=2&matchup=FR`, `/format`. Every view is a shareable link.
 
 ## Add a new episode's results
 
@@ -35,8 +37,9 @@ Results come from <https://ytgolfstats.com/internet-invitational/2026/>.
 1. **Matches.** Append the new matches to `matches[]` in `data/tournament.json`. Give them a new `session` key (for example `"3"`) and add that key to `sessions` with its label, format and hole count. A playoff session gets `"countsTowardPoints": false`.
 2. **Day 2 teams.** Day 2 likely re-drafts players into new teams. Add a new structure (for example `day2Teams`) instead of changing the Day 1 `teams`, which are history.
 3. **Episode + stage.** Flip the episode's `status` to `"released"` and give it a `summary`. Set the stage to `"status": "complete"`, `"confirmed": true`, with real `format` text. Bump `meta.updatedThrough` and `meta.updatedAt`.
-4. **Words.** Update `src/content.ts` if a story line or bracket blurb changed, and add any new `moments`.
-5. **Check and ship.** `npm test && npm run build`, then push to `main`. Vercel deploys automatically.
+4. **Course.** If a new day moves to another course, add its scorecard to `src/course.ts`, update `NINES` (which session played which holes) and add any hole moments.
+5. **Words.** Update `src/content.ts` if a story line or bracket blurb changed, and add any new `moments`.
+6. **Check and ship.** `npm test && npm run build`, then push to `main`. Vercel deploys automatically.
 
 Scores, records, standings and "up next" are all computed, so you never type a total by hand.
 
