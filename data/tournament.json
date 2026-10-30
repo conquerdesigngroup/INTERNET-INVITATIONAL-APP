@@ -1,0 +1,1297 @@
+{
+  "meta": {
+    "event": "Internet Invitational 2026",
+    "edition": 2,
+    "updatedThrough": "Episode 2",
+    "updatedAt": "2026-10-29",
+    "venue": "Big Cedar Lodge, Ridgedale, Missouri",
+    "day1Course": "Ozarks National",
+    "host": "Dave Portnoy",
+    "rulesOfficial": "Kevin Kisner",
+    "presentedBy": [
+      "Barstool Sports",
+      "Bob Does Sports"
+    ],
+    "prizeTotalUSD": 4000000,
+    "prizePerWinnerUSD": 1300000,
+    "bonuses": [
+      {
+        "name": "Reese's hole-in-one",
+        "amountUSD": 500000,
+        "detail": "First ace on each day's Reese's hole"
+      },
+      {
+        "name": "Captains' closest-to-the-pin",
+        "amountUSD": 5000,
+        "detail": "Paid to each Team Ruffels player; Ruffels also chose Finch as opponent"
+      }
+    ],
+    "trophy": "Cody \"Beef\" Franke Trophy",
+    "sources": [
+      "https://ytgolfstats.com/internet-invitational/2026/",
+      "https://ytgolfstats.com/internet-invitational/2025/",
+      "https://www.thebiglead.com/2026-internet-invitational-episode-2-spoilers-champions-out/"
+    ]
+  },
+  "episodes": [
+    {
+      "n": 1,
+      "date": "2026-10-26",
+      "timeET": "13:00",
+      "status": "released",
+      "summary": "Captain vote, snake draft, Session 1 scramble"
+    },
+    {
+      "n": 2,
+      "date": "2026-10-29",
+      "timeET": "13:00",
+      "status": "released",
+      "summary": "Session 2 alternate shot, playoff, cut to 32"
+    },
+    {
+      "n": 3,
+      "date": "2026-11-02",
+      "timeET": "13:00",
+      "status": "upcoming",
+      "summary": null
+    },
+    {
+      "n": 4,
+      "date": "2026-11-05",
+      "timeET": "13:00",
+      "status": "upcoming",
+      "summary": null
+    },
+    {
+      "n": 5,
+      "date": "2026-11-09",
+      "timeET": "13:00",
+      "status": "upcoming",
+      "summary": null
+    },
+    {
+      "n": 6,
+      "date": "2026-11-12",
+      "timeET": "13:00",
+      "status": "upcoming",
+      "summary": "Finale"
+    }
+  ],
+  "sessions": {
+    "1": {
+      "episode": 1,
+      "format": "scramble",
+      "holes": 9,
+      "label": "Episode 1 · Scramble"
+    },
+    "2": {
+      "episode": 2,
+      "format": "alternate_shot",
+      "holes": 9,
+      "label": "Episode 2 · Alternate shot"
+    },
+    "P": {
+      "episode": 2,
+      "format": "alternate_shot_playoff",
+      "holes": null,
+      "label": "Episode 2 · Sudden-death playoff",
+      "countsTowardPoints": false
+    }
+  },
+  "matchups": {
+    "FR": {
+      "home": "finch",
+      "away": "ruffels",
+      "label": "Finch vs Ruffels"
+    },
+    "DB": {
+      "home": "dalke",
+      "away": "bryan",
+      "label": "Dalke vs Bryan"
+    }
+  },
+  "matchupOutcomes": {
+    "FR": {
+      "winner": "ruffels",
+      "decidedBy": "playoff",
+      "note": "8–8 after 16 matches; Ruffels won on 2nd sudden-death hole"
+    },
+    "DB": {
+      "winner": "bryan",
+      "decidedBy": "points",
+      "note": "10.5–5.5"
+    }
+  },
+  "stages": [
+    {
+      "id": "draft",
+      "label": "Draft",
+      "status": "complete",
+      "players": 64
+    },
+    {
+      "id": "day1",
+      "label": "Day 1 · Eps 1–2",
+      "status": "complete",
+      "players": 64,
+      "playersAfter": 32,
+      "format": "Two head-to-head contests: 8 scramble + 8 alternate-shot matches, 1 pt each; winners advance as full teams"
+    },
+    {
+      "id": "day2",
+      "label": "Day 2 · Eps 3–4",
+      "status": "upcoming",
+      "players": 32,
+      "confirmed": false,
+      "expectedFrom2025": "Redraft into two new teams under new captains; scramble + alternate shot with per-hole skins; losing team eliminated"
+    },
+    {
+      "id": "semi",
+      "label": "Semifinal · Ep 5",
+      "status": "upcoming",
+      "confirmed": false,
+      "expectedFrom2025": "Teams of three, 18-hole alternate-shot stroke play; top two advance"
+    },
+    {
+      "id": "final",
+      "label": "Finale · Nov 12",
+      "status": "upcoming",
+      "confirmed": false,
+      "expectedFrom2025": "3 vs 3 alternate-shot match play over 18 holes for the $4M"
+    }
+  ],
+  "teams": [
+    {
+      "id": "ruffels",
+      "name": "Team Ruffels",
+      "captain": "Ryan Ruffels",
+      "color": "White",
+      "status": "advanced",
+      "players": [
+        {
+          "name": "Ryan Ruffels",
+          "handicap": "+7.2",
+          "isCaptain": true
+        },
+        {
+          "name": "Micah Morris",
+          "handicap": "+5.6",
+          "isCaptain": false
+        },
+        {
+          "name": "Grant Horvat",
+          "handicap": "+3.7",
+          "isCaptain": false
+        },
+        {
+          "name": "Big John",
+          "handicap": null,
+          "isCaptain": false
+        },
+        {
+          "name": "Marissa Wenzler",
+          "handicap": "+3.6",
+          "isCaptain": false
+        },
+        {
+          "name": "Fat Perez",
+          "handicap": "+0.4",
+          "isCaptain": false
+        },
+        {
+          "name": "Paige Spiranac",
+          "handicap": null,
+          "isCaptain": false
+        },
+        {
+          "name": "Ryan Whitney",
+          "handicap": null,
+          "isCaptain": false
+        },
+        {
+          "name": "Jake Adams",
+          "handicap": null,
+          "isCaptain": false
+        },
+        {
+          "name": "Bobby Ray",
+          "handicap": null,
+          "isCaptain": false
+        },
+        {
+          "name": "Bubbie Broders",
+          "handicap": "7.2",
+          "isCaptain": false
+        },
+        {
+          "name": "Riggs",
+          "handicap": "3.3",
+          "isCaptain": false
+        },
+        {
+          "name": "Justin Gaethje",
+          "handicap": null,
+          "isCaptain": false
+        },
+        {
+          "name": "Salim",
+          "handicap": null,
+          "isCaptain": false
+        },
+        {
+          "name": "Jon Gruden",
+          "handicap": null,
+          "isCaptain": false
+        },
+        {
+          "name": "The Duke",
+          "handicap": null,
+          "isCaptain": false
+        }
+      ]
+    },
+    {
+      "id": "bryan",
+      "name": "Team Bryan",
+      "captain": "Wesley Bryan",
+      "color": "Green",
+      "status": "advanced",
+      "players": [
+        {
+          "name": "Wesley Bryan",
+          "handicap": "+6.0",
+          "isCaptain": true
+        },
+        {
+          "name": "George Bryan",
+          "handicap": "+5.2",
+          "isCaptain": false
+        },
+        {
+          "name": "Sam Heung Min",
+          "handicap": "+3.3",
+          "isCaptain": false
+        },
+        {
+          "name": "Evan Thompson",
+          "handicap": "+4.9",
+          "isCaptain": false
+        },
+        {
+          "name": "Cole Lantz",
+          "handicap": "+7.0",
+          "isCaptain": false
+        },
+        {
+          "name": "Mac Boucher",
+          "handicap": "+6.9",
+          "isCaptain": false
+        },
+        {
+          "name": "Chaz Bowker",
+          "handicap": "2.5",
+          "isCaptain": false
+        },
+        {
+          "name": "Seb Carmichael-Brown",
+          "handicap": null,
+          "isCaptain": false
+        },
+        {
+          "name": "Tisha Alyn",
+          "handicap": null,
+          "isCaptain": false
+        },
+        {
+          "name": "Claire Hogle",
+          "handicap": null,
+          "isCaptain": false
+        },
+        {
+          "name": "Sabrina Andolpho",
+          "handicap": null,
+          "isCaptain": false
+        },
+        {
+          "name": "Cheddy",
+          "handicap": null,
+          "isCaptain": false
+        },
+        {
+          "name": "Bobby Fairways",
+          "handicap": "11.2",
+          "isCaptain": false
+        },
+        {
+          "name": "Kyle Forgeard",
+          "handicap": null,
+          "isCaptain": false
+        },
+        {
+          "name": "Callux",
+          "handicap": "12.6",
+          "isCaptain": false
+        },
+        {
+          "name": "PFT Commenter",
+          "handicap": null,
+          "isCaptain": false
+        }
+      ]
+    },
+    {
+      "id": "finch",
+      "name": "Team Finch",
+      "captain": "Peter Finch",
+      "color": "Blue",
+      "status": "eliminated",
+      "players": [
+        {
+          "name": "Peter Finch",
+          "handicap": "+3.9",
+          "isCaptain": true
+        },
+        {
+          "name": "Luke Kwon",
+          "handicap": "+3.9",
+          "isCaptain": false
+        },
+        {
+          "name": "Roger Steele",
+          "handicap": "+3.3",
+          "isCaptain": false
+        },
+        {
+          "name": "Rick Shiels",
+          "handicap": "+2.9",
+          "isCaptain": false
+        },
+        {
+          "name": "Josh Kelley",
+          "handicap": "+2.6",
+          "isCaptain": false
+        },
+        {
+          "name": "Malosi Togisala",
+          "handicap": "1.4",
+          "isCaptain": false
+        },
+        {
+          "name": "Martin Borgmeier",
+          "handicap": "1.2",
+          "isCaptain": false
+        },
+        {
+          "name": "Short Game King",
+          "handicap": "+0.5",
+          "isCaptain": false
+        },
+        {
+          "name": "Cassandra Meyer",
+          "handicap": null,
+          "isCaptain": false
+        },
+        {
+          "name": "Francis Ellis",
+          "handicap": "7.1",
+          "isCaptain": false
+        },
+        {
+          "name": "Frankie Borrelli",
+          "handicap": "4.4",
+          "isCaptain": false
+        },
+        {
+          "name": "Jason Williams",
+          "handicap": null,
+          "isCaptain": false
+        },
+        {
+          "name": "Joey Cold Cuts",
+          "handicap": "9.1",
+          "isCaptain": false
+        },
+        {
+          "name": "The Jet",
+          "handicap": null,
+          "isCaptain": false
+        },
+        {
+          "name": "Trent Ryan",
+          "handicap": "12.2",
+          "isCaptain": false
+        },
+        {
+          "name": "Jersey Jerry",
+          "handicap": null,
+          "isCaptain": false
+        }
+      ]
+    },
+    {
+      "id": "dalke",
+      "name": "Team Dalke",
+      "captain": "Brad Dalke",
+      "color": "Red",
+      "status": "eliminated",
+      "players": [
+        {
+          "name": "Brad Dalke",
+          "handicap": "+7.0",
+          "isCaptain": true
+        },
+        {
+          "name": "Tooms",
+          "handicap": "+6.0",
+          "isCaptain": false
+        },
+        {
+          "name": "Taco Golf",
+          "handicap": "+4.6",
+          "isCaptain": false
+        },
+        {
+          "name": "Garrett Clark",
+          "handicap": "+4.2",
+          "isCaptain": false
+        },
+        {
+          "name": "Mason Nutt",
+          "handicap": "+3.6",
+          "isCaptain": false
+        },
+        {
+          "name": "DOD King",
+          "handicap": "5.6",
+          "isCaptain": false
+        },
+        {
+          "name": "Andrew Santino",
+          "handicap": null,
+          "isCaptain": false
+        },
+        {
+          "name": "Johnny Manziel",
+          "handicap": null,
+          "isCaptain": false
+        },
+        {
+          "name": "Tyler Toney",
+          "handicap": null,
+          "isCaptain": false
+        },
+        {
+          "name": "Hailey Ostrom",
+          "handicap": "+1.6",
+          "isCaptain": false
+        },
+        {
+          "name": "Keith Yandle",
+          "handicap": null,
+          "isCaptain": false
+        },
+        {
+          "name": "Sara Winter",
+          "handicap": "+0.1",
+          "isCaptain": false
+        },
+        {
+          "name": "Daltoosh",
+          "handicap": null,
+          "isCaptain": false
+        },
+        {
+          "name": "Josh Richards",
+          "handicap": null,
+          "isCaptain": false
+        },
+        {
+          "name": "Karol Priscilla",
+          "handicap": null,
+          "isCaptain": false
+        },
+        {
+          "name": "Biz",
+          "handicap": null,
+          "isCaptain": false
+        }
+      ]
+    }
+  ],
+  "matches": [
+    {
+      "id": "m01",
+      "session": "1",
+      "matchup": "FR",
+      "home": {
+        "team": "finch",
+        "players": [
+          "Frankie Borrelli",
+          "Francis Ellis"
+        ]
+      },
+      "away": {
+        "team": "ruffels",
+        "players": [
+          "Bubbie Broders",
+          "Marissa Wenzler"
+        ]
+      },
+      "result": "Halved",
+      "winner": "halved",
+      "note": "Bubbie Broders holed the final putt of the session to earn the half."
+    },
+    {
+      "id": "m02",
+      "session": "1",
+      "matchup": "FR",
+      "home": {
+        "team": "finch",
+        "players": [
+          "Roger Steele",
+          "Short Game King"
+        ]
+      },
+      "away": {
+        "team": "ruffels",
+        "players": [
+          "Paige Spiranac",
+          "Bobby Ray"
+        ]
+      },
+      "result": "4&2",
+      "winner": "home",
+      "note": null
+    },
+    {
+      "id": "m03",
+      "session": "1",
+      "matchup": "FR",
+      "home": {
+        "team": "finch",
+        "players": [
+          "Peter Finch",
+          "The Jet"
+        ]
+      },
+      "away": {
+        "team": "ruffels",
+        "players": [
+          "Grant Horvat",
+          "Riggs"
+        ]
+      },
+      "result": "4&3",
+      "winner": "home",
+      "note": null
+    },
+    {
+      "id": "m04",
+      "session": "1",
+      "matchup": "FR",
+      "home": {
+        "team": "finch",
+        "players": [
+          "Jersey Jerry",
+          "Trent Ryan"
+        ]
+      },
+      "away": {
+        "team": "ruffels",
+        "players": [
+          "Micah Morris",
+          "Ryan Whitney"
+        ]
+      },
+      "result": "5&3",
+      "winner": "away",
+      "note": null
+    },
+    {
+      "id": "m05",
+      "session": "1",
+      "matchup": "FR",
+      "home": {
+        "team": "finch",
+        "players": [
+          "Martin Borgmeier",
+          "Josh Kelley"
+        ]
+      },
+      "away": {
+        "team": "ruffels",
+        "players": [
+          "Ryan Ruffels",
+          "Justin Gaethje"
+        ]
+      },
+      "result": "2&1",
+      "winner": "away",
+      "note": "Ruffels and Gaethje made an eagle on the way to the win."
+    },
+    {
+      "id": "m06",
+      "session": "1",
+      "matchup": "FR",
+      "home": {
+        "team": "finch",
+        "players": [
+          "Luke Kwon",
+          "Jason Williams"
+        ]
+      },
+      "away": {
+        "team": "ruffels",
+        "players": [
+          "Big John",
+          "Fat Perez"
+        ]
+      },
+      "result": "1UP",
+      "winner": "away",
+      "note": "Kwon slept in a tent at the course so he wouldn't miss his tee time again. He still lost."
+    },
+    {
+      "id": "m07",
+      "session": "1",
+      "matchup": "FR",
+      "home": {
+        "team": "finch",
+        "players": [
+          "Rick Shiels",
+          "Joey Cold Cuts"
+        ]
+      },
+      "away": {
+        "team": "ruffels",
+        "players": [
+          "Jake Adams",
+          "Salim"
+        ]
+      },
+      "result": "2&1",
+      "winner": "home",
+      "note": "Jake Adams missed a putt he had to make to keep it alive."
+    },
+    {
+      "id": "m08",
+      "session": "1",
+      "matchup": "FR",
+      "home": {
+        "team": "finch",
+        "players": [
+          "Cassandra Meyer",
+          "Malosi Togisala"
+        ]
+      },
+      "away": {
+        "team": "ruffels",
+        "players": [
+          "Jon Gruden",
+          "The Duke"
+        ]
+      },
+      "result": "4&3",
+      "winner": "home",
+      "note": "Four up through six holes."
+    },
+    {
+      "id": "m09",
+      "session": "1",
+      "matchup": "DB",
+      "home": {
+        "team": "dalke",
+        "players": [
+          "Brad Dalke",
+          "Tyler Toney"
+        ]
+      },
+      "away": {
+        "team": "bryan",
+        "players": [
+          "George Bryan",
+          "Chaz Bowker"
+        ]
+      },
+      "result": "Halved",
+      "winner": "halved",
+      "note": "Chaz Bowker's putt on the 9th saved the half."
+    },
+    {
+      "id": "m10",
+      "session": "1",
+      "matchup": "DB",
+      "home": {
+        "team": "dalke",
+        "players": [
+          "Taco Golf",
+          "Daltoosh"
+        ]
+      },
+      "away": {
+        "team": "bryan",
+        "players": [
+          "Mac Boucher",
+          "Sabrina Andolpho"
+        ]
+      },
+      "result": "Halved",
+      "winner": "halved",
+      "note": null
+    },
+    {
+      "id": "m11",
+      "session": "1",
+      "matchup": "DB",
+      "home": {
+        "team": "dalke",
+        "players": [
+          "Johnny Manziel",
+          "Karol Priscilla"
+        ]
+      },
+      "away": {
+        "team": "bryan",
+        "players": [
+          "Tisha Alyn",
+          "Evan Thompson"
+        ]
+      },
+      "result": "4&2",
+      "winner": "away",
+      "note": null
+    },
+    {
+      "id": "m12",
+      "session": "1",
+      "matchup": "DB",
+      "home": {
+        "team": "dalke",
+        "players": [
+          "Mason Nutt",
+          "Hailey Ostrom"
+        ]
+      },
+      "away": {
+        "team": "bryan",
+        "players": [
+          "Sam Heung Min",
+          "Claire Hogle"
+        ]
+      },
+      "result": "3&2",
+      "winner": "away",
+      "note": null
+    },
+    {
+      "id": "m13",
+      "session": "1",
+      "matchup": "DB",
+      "home": {
+        "team": "dalke",
+        "players": [
+          "Biz",
+          "Keith Yandle"
+        ]
+      },
+      "away": {
+        "team": "bryan",
+        "players": [
+          "Cheddy",
+          "Kyle Forgeard"
+        ]
+      },
+      "result": "3&2",
+      "winner": "away",
+      "note": null
+    },
+    {
+      "id": "m14",
+      "session": "1",
+      "matchup": "DB",
+      "home": {
+        "team": "dalke",
+        "players": [
+          "Garrett Clark",
+          "Sara Winter"
+        ]
+      },
+      "away": {
+        "team": "bryan",
+        "players": [
+          "Cole Lantz",
+          "Seb Carmichael-Brown"
+        ]
+      },
+      "result": "4&3",
+      "winner": "away",
+      "note": null
+    },
+    {
+      "id": "m15",
+      "session": "1",
+      "matchup": "DB",
+      "home": {
+        "team": "dalke",
+        "players": [
+          "DOD King",
+          "Andrew Santino"
+        ]
+      },
+      "away": {
+        "team": "bryan",
+        "players": [
+          "Wesley Bryan",
+          "Bobby Fairways"
+        ]
+      },
+      "result": "2&1",
+      "winner": "away",
+      "note": null
+    },
+    {
+      "id": "m16",
+      "session": "1",
+      "matchup": "DB",
+      "home": {
+        "team": "dalke",
+        "players": [
+          "Tooms",
+          "Josh Richards"
+        ]
+      },
+      "away": {
+        "team": "bryan",
+        "players": [
+          "PFT Commenter",
+          "Callux"
+        ]
+      },
+      "result": "3&2",
+      "winner": "home",
+      "note": "Team Dalke's only full point of the morning."
+    },
+    {
+      "id": "m17",
+      "session": "2",
+      "matchup": "FR",
+      "home": {
+        "team": "finch",
+        "players": [
+          "Trent Ryan",
+          "Jersey Jerry"
+        ]
+      },
+      "away": {
+        "team": "ruffels",
+        "players": [
+          "Salim",
+          "The Duke"
+        ]
+      },
+      "result": "2UP",
+      "winner": "home",
+      "note": "Three up with three to play, then lost the 134-yard 16th in a bunker battle (an 8 beat a 9). Closed it out on 18."
+    },
+    {
+      "id": "m18",
+      "session": "2",
+      "matchup": "FR",
+      "home": {
+        "team": "finch",
+        "players": [
+          "Peter Finch",
+          "Josh Kelley"
+        ]
+      },
+      "away": {
+        "team": "ruffels",
+        "players": [
+          "Marissa Wenzler",
+          "Bubbie Broders"
+        ]
+      },
+      "result": "1UP",
+      "winner": "home",
+      "note": "Came back from two down to win on the last hole."
+    },
+    {
+      "id": "m19",
+      "session": "2",
+      "matchup": "FR",
+      "home": {
+        "team": "finch",
+        "players": [
+          "Luke Kwon",
+          "Malosi Togisala"
+        ]
+      },
+      "away": {
+        "team": "ruffels",
+        "players": [
+          "Big John",
+          "Fat Perez"
+        ]
+      },
+      "result": "2&1",
+      "winner": "home",
+      "note": null
+    },
+    {
+      "id": "m20",
+      "session": "2",
+      "matchup": "FR",
+      "home": {
+        "team": "finch",
+        "players": [
+          "Roger Steele",
+          "Short Game King"
+        ]
+      },
+      "away": {
+        "team": "ruffels",
+        "players": [
+          "Grant Horvat",
+          "Justin Gaethje"
+        ]
+      },
+      "result": "1UP",
+      "winner": "away",
+      "note": "Short Game King missed on 18."
+    },
+    {
+      "id": "m21",
+      "session": "2",
+      "matchup": "FR",
+      "home": {
+        "team": "finch",
+        "players": [
+          "Rick Shiels",
+          "Martin Borgmeier"
+        ]
+      },
+      "away": {
+        "team": "ruffels",
+        "players": [
+          "Ryan Ruffels",
+          "Riggs"
+        ]
+      },
+      "result": "4&3",
+      "winner": "away",
+      "note": null
+    },
+    {
+      "id": "m22",
+      "session": "2",
+      "matchup": "FR",
+      "home": {
+        "team": "finch",
+        "players": [
+          "Frankie Borrelli",
+          "Francis Ellis"
+        ]
+      },
+      "away": {
+        "team": "ruffels",
+        "players": [
+          "Bobby Ray",
+          "Jon Gruden"
+        ]
+      },
+      "result": "Halved",
+      "winner": "halved",
+      "note": "The \"Gruden rule\" match. Gruden holed a putt on 17 to go one up, then Bobby Ray played the wrong ball on 18 and lost the hole."
+    },
+    {
+      "id": "m23",
+      "session": "2",
+      "matchup": "FR",
+      "home": {
+        "team": "finch",
+        "players": [
+          "Cassandra Meyer",
+          "Jason Williams"
+        ]
+      },
+      "away": {
+        "team": "ruffels",
+        "players": [
+          "Micah Morris",
+          "Ryan Whitney"
+        ]
+      },
+      "result": "3&2",
+      "winner": "away",
+      "note": null
+    },
+    {
+      "id": "m24",
+      "session": "2",
+      "matchup": "FR",
+      "home": {
+        "team": "finch",
+        "players": [
+          "Joey Cold Cuts",
+          "The Jet"
+        ]
+      },
+      "away": {
+        "team": "ruffels",
+        "players": [
+          "Paige Spiranac",
+          "Jake Adams"
+        ]
+      },
+      "result": "5&4",
+      "winner": "away",
+      "note": null
+    },
+    {
+      "id": "m25",
+      "session": "2",
+      "matchup": "DB",
+      "home": {
+        "team": "dalke",
+        "players": [
+          "Mason Nutt",
+          "Josh Richards"
+        ]
+      },
+      "away": {
+        "team": "bryan",
+        "players": [
+          "Cheddy",
+          "Kyle Forgeard"
+        ]
+      },
+      "result": "3&2",
+      "winner": "home",
+      "note": "Cheddy bent his putter."
+    },
+    {
+      "id": "m26",
+      "session": "2",
+      "matchup": "DB",
+      "home": {
+        "team": "dalke",
+        "players": [
+          "Johnny Manziel",
+          "Tyler Toney"
+        ]
+      },
+      "away": {
+        "team": "bryan",
+        "players": [
+          "George Bryan",
+          "Chaz Bowker"
+        ]
+      },
+      "result": "3&2",
+      "winner": "away",
+      "note": null
+    },
+    {
+      "id": "m27",
+      "session": "2",
+      "matchup": "DB",
+      "home": {
+        "team": "dalke",
+        "players": [
+          "Daltoosh",
+          "Keith Yandle"
+        ]
+      },
+      "away": {
+        "team": "bryan",
+        "players": [
+          "PFT Commenter",
+          "Callux"
+        ]
+      },
+      "result": "5&4",
+      "winner": "home",
+      "note": "Team Bryan appealed the original Tooms/Yandle pairing, so Dalke swapped in Daltoosh."
+    },
+    {
+      "id": "m28",
+      "session": "2",
+      "matchup": "DB",
+      "home": {
+        "team": "dalke",
+        "players": [
+          "Brad Dalke",
+          "Karol Priscilla"
+        ]
+      },
+      "away": {
+        "team": "bryan",
+        "players": [
+          "Tisha Alyn",
+          "Evan Thompson"
+        ]
+      },
+      "result": "Halved",
+      "winner": "halved",
+      "note": null
+    },
+    {
+      "id": "m29",
+      "session": "2",
+      "matchup": "DB",
+      "home": {
+        "team": "dalke",
+        "players": [
+          "Hailey Ostrom",
+          "Tooms"
+        ]
+      },
+      "away": {
+        "team": "bryan",
+        "players": [
+          "Mac Boucher",
+          "Sabrina Andolpho"
+        ]
+      },
+      "result": "Halved",
+      "winner": "halved",
+      "note": null
+    },
+    {
+      "id": "m30",
+      "session": "2",
+      "matchup": "DB",
+      "home": {
+        "team": "dalke",
+        "players": [
+          "Garrett Clark",
+          "Sara Winter"
+        ]
+      },
+      "away": {
+        "team": "bryan",
+        "players": [
+          "Cole Lantz",
+          "Seb Carmichael-Brown"
+        ]
+      },
+      "result": "3&1",
+      "winner": "away",
+      "note": null
+    },
+    {
+      "id": "m31",
+      "session": "2",
+      "matchup": "DB",
+      "home": {
+        "team": "dalke",
+        "players": [
+          "DOD King",
+          "Andrew Santino"
+        ]
+      },
+      "away": {
+        "team": "bryan",
+        "players": [
+          "Claire Hogle",
+          "Sam Heung Min"
+        ]
+      },
+      "result": "Halved",
+      "winner": "halved",
+      "note": "Sam and Claire were penalized for missing their tee time and still got the half."
+    },
+    {
+      "id": "m32",
+      "session": "2",
+      "matchup": "DB",
+      "home": {
+        "team": "dalke",
+        "players": [
+          "Taco Golf",
+          "Biz"
+        ]
+      },
+      "away": {
+        "team": "bryan",
+        "players": [
+          "Wesley Bryan",
+          "Bobby Fairways"
+        ]
+      },
+      "result": "4&3",
+      "winner": "away",
+      "note": null
+    },
+    {
+      "id": "m33",
+      "session": "P",
+      "matchup": "FR",
+      "home": {
+        "team": "finch",
+        "players": [
+          "Peter Finch",
+          "Luke Kwon"
+        ]
+      },
+      "away": {
+        "team": "ruffels",
+        "players": [
+          "Ryan Ruffels",
+          "Micah Morris"
+        ]
+      },
+      "result": "Halved",
+      "winner": "halved",
+      "note": "Playoff hole 1. Both drives finished in the same fairway bunker."
+    },
+    {
+      "id": "m34",
+      "session": "P",
+      "matchup": "FR",
+      "home": {
+        "team": "finch",
+        "players": [
+          "Roger Steele",
+          "Rick Shiels"
+        ]
+      },
+      "away": {
+        "team": "ruffels",
+        "players": [
+          "Grant Horvat",
+          "Big John"
+        ]
+      },
+      "result": "Won",
+      "winner": "away",
+      "note": "Playoff hole 2. Horvat hit from the bunker onto the green and Big John holed the putt to send Team Ruffels through. (Finch-side pairing per The Big Lead.)"
+    }
+  ],
+  "moments": [
+    {
+      "title": "The vote",
+      "text": "Players voted the pros' group in as captains. Dalke took Tooms first overall; The Duke went last as Team Ruffels' \"Mr. Irrelevant.\""
+    },
+    {
+      "title": "The pick",
+      "text": "Ruffels won the captains' closest-to-the-pin after an appeal and a tape measure, earning $5K per teammate and the choice of opponent (Finch)."
+    },
+    {
+      "title": "The Gruden rule",
+      "text": "Portnoy let the committee veto any pairing that looked like a thrown match. Ruffels' objection to Bobby Ray/Gruden vs Borrelli/Ellis was denied."
+    },
+    {
+      "title": "The wrong ball",
+      "text": "Bobby Ray played a ball that wasn't theirs on 18, turning a Ruffels win into a halve and forcing the 8–8 tie."
+    },
+    {
+      "title": "The Fog Father",
+      "text": "Big John holed the putt on the second playoff hole to send Team Ruffels to Day 2."
+    },
+    {
+      "title": "Champions out",
+      "text": "2025 winners Brad Dalke and Francis Ellis were both eliminated with their teams."
+    }
+  ]
+}

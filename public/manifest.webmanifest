@@ -1,0 +1,16 @@
+{
+  "name": "Internet Invitational 2026",
+  "short_name": "II 2026",
+  "description": "Scores, rosters, standings and the bracket for the 2026 Internet Invitational.",
+  "start_url": "/standings",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0E4A30",
+  "theme_color": "#0E4A30",
+  "icons": [
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
+    { "src": "/icons/icon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}

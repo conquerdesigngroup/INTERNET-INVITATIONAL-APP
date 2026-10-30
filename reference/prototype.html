@@ -1,0 +1,671 @@
+<title>Internet Invitational 2026</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Public+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+/* Layout: a hand-operated tournament leaderboard — fairway-green header band, white scoreboard tiles, team colors from the show (Green, Red, Blue, White). */
+:root{
+  --bg:#EEF3EF;
+  --surface:#FFFFFF;
+  --surface-2:#F5F8F5;
+  --ink:#0F2219;
+  --muted:#5A6E62;
+  --line:#D2DDD5;
+  --accent:#0E5A38;
+  --accent-ink:#FFFFFF;
+  --band:#0E4A30;
+  --band-ink:#EAF4ED;
+  --band-muted:#A9C7B4;
+  --t-bryan:#1E8A4C;
+  --t-dalke:#C7362C;
+  --t-finch:#2A5FC4;
+  --t-ruffels:#FFFFFF;
+  --t-ruffels-edge:#0F2219;
+  --half:#8A7D4E;
+  --gold:#B88A1B;
+  --f-display:"Big Shoulders Display","Oswald","Arial Narrow",sans-serif;
+  --f-body:"Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0A1510;--surface:#11201A;--surface-2:#0E1B15;--ink:#E4EEE7;--muted:#8DA497;--line:#24392E;
+  --accent:#4DBE84;--accent-ink:#06150E;--band:#0C2E1F;--band-ink:#E4EEE7;--band-muted:#8DB59D;
+  --t-bryan:#39B56C;--t-dalke:#E2574C;--t-finch:#5B8BE6;--t-ruffels:#EEF2EF;--t-ruffels-edge:#EEF2EF;
+  --half:#C4B37A;--gold:#E0B54A;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0A1510;--surface:#11201A;--surface-2:#0E1B15;--ink:#E4EEE7;--muted:#8DA497;--line:#24392E;
+  --accent:#4DBE84;--accent-ink:#06150E;--band:#0C2E1F;--band-ink:#E4EEE7;--band-muted:#8DB59D;
+  --t-bryan:#39B56C;--t-dalke:#E2574C;--t-finch:#5B8BE6;--t-ruffels:#EEF2EF;--t-ruffels-edge:#EEF2EF;
+  --half:#C4B37A;--gold:#E0B54A;color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.5}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--band)}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;letter-spacing:.01em}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.eyebrow{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+
+/* Header band */
+.band{background:var(--band);color:var(--band-ink)}
+.band .wrap{padding-block:28px 22px;display:grid;gap:18px}
+.band h1{font-size:clamp(40px,7vw,68px);font-weight:900;line-height:.92;text-transform:uppercase}
+.band h1 span{color:var(--band-muted);font-weight:600}
+.band .meta{display:flex;flex-wrap:wrap;gap:6px 22px;color:var(--band-muted);font-size:13px}
+.band .meta b{color:var(--band-ink);font-weight:600}
+.status{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);padding:6px 10px;border-radius:999px;width:max-content;max-width:100%}
+.status i{width:8px;height:8px;border-radius:50%;background:#7CE0A8;box-shadow:0 0 0 3px rgba(124,224,168,.25)}
+
+/* Tabs */
+.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--band);border-top:1px solid rgba(255,255,255,.1)}
+.tabs .wrap{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+.tabs .wrap::-webkit-scrollbar{display:none}
+.tab{background:none;border:0;color:var(--band-muted);padding:12px 14px 11px;font-family:var(--f-display);font-weight:800;font-size:18px;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap}
+.tab:hover{color:var(--band-ink)}
+.tab[aria-selected="true"]{color:var(--band-ink);border-bottom-color:#7CE0A8}
+
+main .wrap{padding-block:28px 56px}
+section.view{display:grid;gap:28px}
+.sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.sec-head h2{font-size:30px;font-weight:800;text-transform:uppercase}
+.sec-head p{margin:0;color:var(--muted);font-size:14px;max-width:62ch}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px}
+
+/* Team chips */
+.tchip{display:inline-flex;align-items:center;gap:7px;font-weight:600}
+.tdot{width:12px;height:12px;border-radius:3px;flex:none;border:1.5px solid transparent}
+.tdot.bryan{background:var(--t-bryan)}.tdot.dalke{background:var(--t-dalke)}.tdot.finch{background:var(--t-finch)}
+.tdot.ruffels{background:var(--t-ruffels);border-color:var(--t-ruffels-edge)}
+
+/* Scoreboards */
+.boards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:16px}
+.board{padding:18px;display:grid;gap:14px}
+.board-top{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.score-row{display:grid;grid-template-columns:1fr auto;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;background:var(--surface-2);border:1px solid var(--line)}
+.score-row.win{border-color:var(--accent)}
+.score-row .who{display:grid;gap:2px;min-width:0}
+.score-row .who small{color:var(--muted);font-size:12px}
+.score-row .pts{font-family:var(--f-display);font-weight:900;font-size:44px;line-height:1}
+.score-row.lose .pts,.score-row.lose .tchip{opacity:.55}
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:999px;white-space:nowrap}
+.pill.adv{background:var(--accent);color:var(--accent-ink)}
+.pill.out{background:transparent;color:var(--muted);border:1px solid var(--line)}
+.pill.exp{background:transparent;color:var(--gold);border:1px dashed var(--gold)}
+.split{display:flex;height:12px;border-radius:3px;overflow:hidden;gap:2px}
+.split span{display:block;height:100%}
+.split .bryan{background:var(--t-bryan)}.split .dalke{background:var(--t-dalke)}.split .finch{background:var(--t-finch)}
+.split .ruffels{background:var(--t-ruffels);box-shadow:inset 0 0 0 1.5px var(--t-ruffels-edge)}
+.sess-table{width:100%;border-collapse:collapse;font-size:13px}
+.sess-table th,.sess-table td{padding:7px 4px;border-bottom:1px solid var(--line);text-align:right}
+.sess-table th:first-child,.sess-table td:first-child{text-align:left}
+.sess-table th{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.sess-table tr:last-child td{border-bottom:0;font-weight:700}
+.board .story{margin:0;font-size:13.5px;color:var(--muted)}
+
+/* Facts strip */
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.fact{background:var(--surface);padding:14px 16px;display:grid;gap:2px}
+.fact b{font-family:var(--f-display);font-size:28px;font-weight:800;line-height:1.05}
+.fact span{font-size:12.5px;color:var(--muted)}
+
+/* Schedule */
+.sched{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}
+.ep{padding:12px;border-radius:8px;border:1px solid var(--line);background:var(--surface);display:grid;gap:3px}
+.ep .n{font-family:var(--f-display);font-weight:800;font-size:20px;text-transform:uppercase}
+.ep .d{font-size:12.5px;color:var(--muted)}
+.ep.done{background:var(--surface-2)}
+.ep.next{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+.ep .tag{font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.ep.next .tag{color:var(--accent)}
+@media (max-width:760px){.sched{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:420px){.sched{grid-template-columns:repeat(2,1fr)}}
+
+/* Moments */
+.moments{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:12px}
+.moment{padding:14px 16px;display:grid;gap:6px}
+.moment .k{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.moment p{margin:0;font-size:14px}
+
+/* Survivors */
+.survivors{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px}
+.surv{padding:16px;display:grid;gap:10px}
+.names{display:flex;flex-wrap:wrap;gap:6px}
+.name{font-size:13px;padding:4px 9px;border-radius:6px;background:var(--surface-2);border:1px solid var(--line);cursor:pointer}
+.name:hover{border-color:var(--accent)}
+.name.cap{font-weight:700}
+.surv.out{opacity:.7}
+
+/* Teams view */
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px 12px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:14px}
+.seg button[aria-pressed="true"]{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.team-head{padding:18px;display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center}
+.team-head h3{font-size:34px;font-weight:900;text-transform:uppercase;line-height:1}
+.team-head .sub{color:var(--muted);font-size:13.5px}
+.team-stats{display:flex;gap:18px;flex-wrap:wrap}
+.team-stats div{display:grid}
+.team-stats b{font-family:var(--f-display);font-weight:800;font-size:26px;line-height:1}
+.team-stats span{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;font-weight:700}
+.table-scroll{overflow-x:auto}
+.roster{width:100%;border-collapse:collapse;font-size:14px;min-width:560px}
+.roster th{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+.roster td{padding:10px 12px;border-bottom:1px solid var(--line)}
+.roster tr:last-child td{border-bottom:0}
+.roster tbody tr{cursor:pointer}
+.roster tbody tr:hover td{background:var(--surface-2)}
+.roster .r{text-align:right}
+.star{color:var(--gold)}
+.rec{display:inline-flex;gap:3px}
+.rec i{width:14px;height:14px;border-radius:3px;display:inline-grid;place-items:center;font-style:normal;font-size:9px;font-weight:700;font-family:var(--f-mono)}
+.rec .W{background:var(--accent);color:var(--accent-ink)}
+.rec .L{background:transparent;border:1px solid var(--line);color:var(--muted)}
+.rec .H{background:var(--half);color:var(--surface)}
+.hint{font-size:12.5px;color:var(--muted);margin:0}
+
+/* Matches view */
+.filters{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.filters select,.filters input{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:9px 11px;font:inherit;font-size:14px;color:var(--ink);min-width:0}
+.filters input{flex:1 1 200px}
+.filters .clear{background:none;border:0;color:var(--accent);font-weight:600;cursor:pointer;padding:6px}
+.mgroup{display:grid;gap:10px}
+.mgroup h3{font-size:20px;font-weight:800;text-transform:uppercase;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.mgroup h3 .num{font-size:15px;color:var(--muted);font-weight:500}
+.match{display:grid;grid-template-columns:minmax(0,1fr) 108px minmax(0,1fr);align-items:center;gap:10px;padding:12px 14px}
+.pair{display:grid;gap:3px;min-width:0}
+.pair.right{text-align:right;justify-items:end}
+.pair .pl{font-weight:600;cursor:pointer;overflow-wrap:anywhere}
+.pair .pl:hover{text-decoration:underline}
+.pair .pl.hit{background:color-mix(in srgb,var(--gold) 28%,transparent);border-radius:3px;padding:0 3px}
+.pair.lost .pl{color:var(--muted);font-weight:500}
+.res{display:grid;justify-items:center;gap:4px;text-align:center}
+.res .score{font-family:var(--f-mono);font-weight:700;font-size:18px;padding:4px 10px;border-radius:6px;border:1.5px solid var(--line);min-width:72px}
+.res .score.bryan{border-color:var(--t-bryan);color:var(--t-bryan)}
+.res .score.dalke{border-color:var(--t-dalke);color:var(--t-dalke)}
+.res .score.finch{border-color:var(--t-finch);color:var(--t-finch)}
+.res .score.ruffels{border-color:var(--ink);color:var(--ink)}
+.res .score.half{border-color:var(--half);color:var(--half);font-size:14px}
+.res small{font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+.match .note{grid-column:1/-1;font-size:13px;color:var(--muted);border-top:1px dashed var(--line);padding-top:8px;margin:0}
+.empty{padding:28px;text-align:center;color:var(--muted)}
+@media (max-width:520px){.match{grid-template-columns:minmax(0,1fr) 84px minmax(0,1fr);padding:10px}.res .score{min-width:0;font-size:15px}.pair .pl{font-size:13.5px}}
+
+/* Format view */
+.bracket-scroll{overflow-x:auto;padding-bottom:6px}
+.bracket{position:relative;display:grid;grid-template-columns:150px 230px 210px 190px 200px;gap:46px;min-width:1000px;padding:18px;align-items:center}
+.bracket svg.links{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+.col{display:grid;gap:14px;align-content:center;position:relative;z-index:1}
+.col-label{position:absolute;top:-4px;left:0;transform:translateY(-100%)}
+.node{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px;cursor:pointer;text-align:left;display:grid;gap:6px;transition:transform .15s ease,border-color .15s ease}
+.node:hover{transform:translateY(-2px);border-color:var(--ink)}
+.node[aria-pressed="true"]{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent)}
+.node.future{border-style:dashed;background:var(--surface-2)}
+.node h4{margin:0;font-family:var(--f-display);font-weight:800;font-size:19px;text-transform:uppercase;line-height:1.05}
+.node .s{font-size:12px;color:var(--muted)}
+.node .vs{display:grid;gap:4px}
+.node .vs div{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:13.5px}
+.node .vs .lose{opacity:.5;text-decoration:line-through;text-decoration-thickness:1px}
+.node .big{font-family:var(--f-display);font-weight:900;font-size:30px;line-height:1}
+.teamnode{padding:9px 11px}
+.teamnode.out{opacity:.55}
+.trophy{border-color:var(--gold)}
+.trophy .big{color:var(--gold)}
+.links path{fill:none;stroke-width:2.5}
+.links .on{stroke:var(--accent)}
+.links .off{stroke:var(--line);stroke-dasharray:5 5}
+.links .tbd{stroke:var(--gold);stroke-dasharray:2 6;stroke-linecap:round}
+.links .draw{stroke-dasharray:var(--len);stroke-dashoffset:var(--len);animation:draw 1s ease forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.detail{padding:18px;display:grid;gap:8px}
+.detail h3{font-size:24px;font-weight:800;text-transform:uppercase}
+.detail p{margin:0;max-width:72ch}
+.detail ul{margin:0;padding-left:18px;display:grid;gap:4px;max-width:72ch}
+.legend{display:flex;flex-wrap:wrap;gap:16px;font-size:12.5px;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:7px}
+.legend svg{width:30px;height:6px}
+
+.explain{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:16px}
+.ex{padding:18px;display:grid;gap:10px;align-content:start}
+.ex h3{font-size:22px;font-weight:800;text-transform:uppercase}
+.ex p{margin:0;font-size:14px}
+.ex svg{width:100%;height:auto;max-width:100%}
+.hole-bg{fill:var(--surface-2);stroke:var(--line)}
+.fair{fill:color-mix(in srgb,var(--accent) 16%,var(--surface))}
+.green{fill:color-mix(in srgb,var(--accent) 34%,var(--surface))}
+.svg-ink{fill:var(--ink)}
+.svg-muted{fill:var(--muted)}
+.ball-a{fill:var(--t-finch)}
+.ball-b{fill:var(--t-dalke)}
+.ball-s{fill:var(--surface);stroke:var(--ink);stroke-width:1.5}
+.shot{stroke:var(--muted);stroke-width:1.5;fill:none;stroke-dasharray:4 4}
+.svg-label{font:600 11px var(--f-body);fill:var(--ink)}
+.svg-small{font:500 10px var(--f-body);fill:var(--muted)}
+.decoder .chips{display:flex;flex-wrap:wrap;gap:6px}
+.decoder .chips button{font-family:var(--f-mono);font-weight:700;font-size:13px;background:var(--surface-2);border:1px solid var(--line);border-radius:6px;padding:5px 9px;cursor:pointer}
+.decoder .chips button[aria-pressed="true"]{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+.holes{display:grid;grid-template-columns:repeat(9,1fr);gap:4px}
+.holes div{aspect-ratio:1;max-width:100%;border-radius:50%;display:grid;place-items:center;font-family:var(--f-mono);font-size:11px;font-weight:700;border:1.5px solid var(--line);color:var(--muted)}
+.holes .played{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.holes .skip{border-style:dashed;opacity:.6}
+.decoder .out{font-size:14px;min-height:3em;margin:0}
+.footnote{font-size:12.5px;color:var(--muted);margin:0}
+.footnote a{color:var(--accent)}
+
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.links .draw{stroke-dashoffset:0}}
+</style>
+
+<header class="band">
+  <div class="wrap">
+    <div class="status"><i></i>Updated through Episode 2 · 32 players left</div>
+    <h1>Internet Invitational <span>2026</span></h1>
+    <div class="meta">
+      <span><b>Big Cedar Lodge</b> · Ridgedale, MO</span>
+      <span>Host <b>Dave Portnoy</b></span>
+      <span>Rules official <b>Kevin Kisner</b></span>
+      <span>Prize <b>$4,000,000</b></span>
+      <span>Next: <b>Episode 3 · Mon Nov 2, 1pm ET</b></span>
+    </div>
+  </div>
+</header>
+<nav class="tabs" aria-label="Sections">
+  <div class="wrap" role="tablist">
+    <button class="tab" role="tab" data-view="standings" id="tab-standings">Standings</button>
+    <button class="tab" role="tab" data-view="teams" id="tab-teams">Teams</button>
+    <button class="tab" role="tab" data-view="matches" id="tab-matches">Matches</button>
+    <button class="tab" role="tab" data-view="format" id="tab-format">Format &amp; Bracket</button>
+  </div>
+</nav>
+
+<main><div class="wrap">
+
+<!-- STANDINGS -->
+<section class="view" id="view-standings" role="tabpanel" aria-labelledby="tab-standings">
+  <div class="sec-head">
+    <h2>Day 1 is done</h2>
+    <p>Two head-to-head contests, 16 points each (8 scramble + 8 alternate shot). The winner of each moved on with all 16 players. The losers went home.</p>
+  </div>
+  <div class="boards" id="boards"></div>
+
+  <div class="facts">
+    <div class="fact"><b>$4M</b><span>Total prize · about $1.3M per player on the winning team</span></div>
+    <div class="fact"><b>64 → 32</b><span>Players after Episode 2</span></div>
+    <div class="fact"><b>$500K</b><span>First hole-in-one each day on the Reese's hole</span></div>
+    <div class="fact"><b>$5K</b><span>Paid to each Team Ruffels player for the captains' closest-to-the-pin</span></div>
+    <div class="fact"><b>0</b><span>Handicaps. Everyone plays the same tees</span></div>
+  </div>
+
+  <div class="sec-head"><h2>Who's still alive</h2><p>Tap a name to see every match they've played.</p></div>
+  <div class="survivors" id="survivors"></div>
+
+  <div class="sec-head"><h2>Episode schedule</h2><p>New episodes drop Mondays and Thursdays at 1pm ET on the Fore Play, Bob Does Sports and Internet Invitational YouTube channels.</p></div>
+  <div class="sched" id="sched"></div>
+
+  <div class="sec-head"><h2>Moments that decided it</h2></div>
+  <div class="moments" id="moments"></div>
+</section>
+
+<!-- TEAMS -->
+<section class="view" id="view-teams" role="tabpanel" aria-labelledby="tab-teams" hidden>
+  <div class="sec-head">
+    <h2>The four teams</h2>
+    <p>Captains were voted in, then ran a snake draft. Handicaps are from YT Golf Stats; a "+" means better than scratch.</p>
+  </div>
+  <div class="seg" id="teamSeg" role="group" aria-label="Choose a team"></div>
+  <div class="card" id="teamPanel"></div>
+  <p class="hint">Record shows each player's two Day 1 matches in order (W win, H halved, L loss). Points: win = 1, halve = ½. Tap a row to open that player's matches.</p>
+</section>
+
+<!-- MATCHES -->
+<section class="view" id="view-matches" role="tabpanel" aria-labelledby="tab-matches" hidden>
+  <div class="sec-head">
+    <h2>Every match</h2>
+    <p>Nine-hole 2v2 match play. The score pill is colored by the winning team.</p>
+  </div>
+  <div class="filters">
+    <label class="eyebrow" for="fSess" hidden>Session</label>
+    <select id="fSess" aria-label="Session">
+      <option value="all">All sessions</option>
+      <option value="1">Episode 1 · Scramble</option>
+      <option value="2">Episode 2 · Alternate shot</option>
+      <option value="P">Episode 2 · Playoff</option>
+    </select>
+    <select id="fMatch" aria-label="Matchup">
+      <option value="all">Both matchups</option>
+      <option value="FR">Finch vs Ruffels</option>
+      <option value="DB">Dalke vs Bryan</option>
+    </select>
+    <input id="fSearch" type="search" placeholder="Search a player, e.g. Big John" aria-label="Search players">
+    <button class="clear" id="fClear" type="button">Reset</button>
+  </div>
+  <div id="matchList" style="display:grid;gap:26px"></div>
+</section>
+
+<!-- FORMAT -->
+<section class="view" id="view-format" role="tabpanel" aria-labelledby="tab-format" hidden>
+  <div class="sec-head">
+    <h2>The road to $4 million</h2>
+    <p>Tap any box for details. Solid green lines are confirmed results. Gold dotted lines are stages still to air, sketched from how the 2025 event ran.</p>
+  </div>
+  <div class="legend">
+    <span><svg viewBox="0 0 30 6"><line x1="0" y1="3" x2="30" y2="3" stroke="var(--accent)" stroke-width="2.5"/></svg>Advanced</span>
+    <span><svg viewBox="0 0 30 6"><line x1="0" y1="3" x2="30" y2="3" stroke="var(--line)" stroke-width="2.5" stroke-dasharray="5 5"/></svg>Eliminated</span>
+    <span><svg viewBox="0 0 30 6"><line x1="0" y1="3" x2="30" y2="3" stroke="var(--gold)" stroke-width="2.5" stroke-dasharray="2 6" stroke-linecap="round"/></svg>Not aired yet</span>
+  </div>
+  <div class="card bracket-scroll">
+    <div class="bracket" id="bracket">
+      <svg class="links" id="links" aria-hidden="true"></svg>
+      <div class="col" id="colTeams"></div>
+      <div class="col" id="colDay1"></div>
+      <div class="col" id="colDay2"></div>
+      <div class="col" id="colSemi"></div>
+      <div class="col" id="colFinal"></div>
+    </div>
+  </div>
+  <div class="card detail" id="detail" aria-live="polite"></div>
+
+  <div class="sec-head"><h2>How the golf works</h2></div>
+  <div class="explain">
+    <div class="card ex">
+      <h3>Scramble · Episode 1</h3>
+      <svg viewBox="0 0 320 130" role="img" aria-label="Scramble: both players hit, the team picks the best ball, both play from there">
+        <rect class="hole-bg" x="1" y="1" width="318" height="128" rx="10"/>
+        <path class="fair" d="M20 80 Q120 30 250 60 L280 70 Q200 100 20 100Z"/>
+        <circle class="green" cx="282" cy="62" r="24"/>
+        <circle class="svg-ink" cx="282" cy="62" r="3"/>
+        <rect class="svg-ink" x="20" y="84" width="10" height="10" rx="2"/>
+        <path class="shot" d="M30 88 Q90 40 150 58"/><path class="shot" d="M30 88 Q90 70 140 92"/>
+        <circle class="ball-a" cx="150" cy="58" r="6"/><circle class="ball-b" cx="140" cy="92" r="6"/>
+        <text class="svg-label" x="158" y="54">A's drive (picked)</text>
+        <text class="svg-small" x="150" y="108">B's drive</text>
+        <path class="shot" d="M150 58 Q210 30 268 62"/><path class="shot" d="M150 58 Q220 80 274 74"/>
+        <circle class="ball-a" cx="268" cy="62" r="4"/><circle class="ball-b" cx="274" cy="74" r="4"/>
+        <text class="svg-small" x="168" y="30">both hit again from the best spot</text>
+      </svg>
+      <p>Both partners hit every shot. The team picks the better ball and both play the next shot from there. It's the forgiving format, so birdies are expected and one great player can carry a pairing.</p>
+    </div>
+    <div class="card ex">
+      <h3>Alternate shot · Episode 2</h3>
+      <svg viewBox="0 0 320 130" role="img" aria-label="Alternate shot: one ball, partners take turns hitting it">
+        <rect class="hole-bg" x="1" y="1" width="318" height="128" rx="10"/>
+        <path class="fair" d="M20 80 Q120 30 250 60 L280 70 Q200 100 20 100Z"/>
+        <circle class="green" cx="282" cy="62" r="24"/>
+        <circle class="svg-ink" cx="282" cy="62" r="3"/>
+        <rect class="svg-ink" x="20" y="84" width="10" height="10" rx="2"/>
+        <path class="shot" d="M30 88 Q90 40 150 62"/><path class="shot" d="M150 62 Q210 36 262 66"/><path class="shot" d="M262 66 L281 63"/>
+        <circle class="ball-a" cx="30" cy="88" r="6"/><text class="svg-label" x="12" y="118">A tees off</text>
+        <circle class="ball-b" cx="150" cy="62" r="6"/><text class="svg-label" x="128" y="46">B hits 2nd</text>
+        <circle class="ball-a" cx="262" cy="66" r="6"/><text class="svg-label" x="214" y="108">A putts</text>
+      </svg>
+      <p>One ball per team. Partners take turns hitting it until it's holed, and one partner tees off on odd holes, the other on even holes. A single bad swing leaves your partner in trouble, which is why it decides the cut.</p>
+    </div>
+    <div class="card ex decoder">
+      <h3>Reading a result</h3>
+      <div class="chips" id="decChips" role="group" aria-label="Pick a result"></div>
+      <div class="holes" id="decHoles" aria-hidden="true"></div>
+      <p class="out" id="decOut"></p>
+      <p class="footnote">Each match is worth 1 point and a halve is worth ½. With 16 points on the table, 8½ clinches the contest. A tie at 8–8 goes to a sudden-death alternate-shot playoff.</p>
+    </div>
+  </div>
+  <p class="footnote">Sources: <a href="https://ytgolfstats.com/internet-invitational/2026/" target="_blank" rel="noopener">YT Golf Stats 2026 page</a> for teams and results, and its <a href="https://ytgolfstats.com/internet-invitational/2025/" target="_blank" rel="noopener">2025 page</a> for how later rounds ran last year.</p>
+</section>
+
+</div></main>
+
+<script>
+(function(){
+// ---------- DATA (YT Golf Stats, through Episode 2) ----------
+const TEAMS = {
+  ruffels:{name:"Team Ruffels",captain:"Ryan Ruffels",color:"White",status:"adv",
+    players:[["Ryan Ruffels","+7.2"],["Micah Morris","+5.6"],["Grant Horvat","+3.7"],["Big John",null],["Marissa Wenzler","+3.6"],["Fat Perez","+0.4"],["Paige Spiranac",null],["Ryan Whitney",null],["Jake Adams",null],["Bobby Ray",null],["Bubbie Broders","7.2"],["Riggs","3.3"],["Justin Gaethje",null],["Salim",null],["Jon Gruden",null],["The Duke",null]]},
+  bryan:{name:"Team Bryan",captain:"Wesley Bryan",color:"Green",status:"adv",
+    players:[["Wesley Bryan","+6.0"],["George Bryan","+5.2"],["Sam Heung Min","+3.3"],["Evan Thompson","+4.9"],["Cole Lantz","+7.0"],["Mac Boucher","+6.9"],["Chaz Bowker","2.5"],["Seb Carmichael-Brown",null],["Tisha Alyn",null],["Claire Hogle",null],["Sabrina Andolpho",null],["Cheddy",null],["Bobby Fairways","11.2"],["Kyle Forgeard",null],["Callux","12.6"],["PFT Commenter",null]]},
+  finch:{name:"Team Finch",captain:"Peter Finch",color:"Blue",status:"out",
+    players:[["Peter Finch","+3.9"],["Luke Kwon","+3.9"],["Roger Steele","+3.3"],["Rick Shiels","+2.9"],["Josh Kelley","+2.6"],["Malosi Togisala","1.4"],["Martin Borgmeier","1.2"],["Short Game King","+0.5"],["Cassandra Meyer",null],["Francis Ellis","7.1"],["Frankie Borrelli","4.4"],["Jason Williams",null],["Joey Cold Cuts","9.1"],["The Jet",null],["Trent Ryan","12.2"],["Jersey Jerry",null]]},
+  dalke:{name:"Team Dalke",captain:"Brad Dalke",color:"Red",status:"out",
+    players:[["Brad Dalke","+7.0"],["Tooms","+6.0"],["Taco Golf","+4.6"],["Garrett Clark","+4.2"],["Mason Nutt","+3.6"],["DOD King","5.6"],["Andrew Santino",null],["Johnny Manziel",null],["Tyler Toney",null],["Hailey Ostrom","+1.6"],["Keith Yandle",null],["Sara Winter","+0.1"],["Daltoosh",null],["Josh Richards",null],["Karol Priscilla",null],["Biz",null]]}
+};
+const ORDER = ["ruffels","bryan","finch","dalke"];
+const MATCHUPS = {FR:{home:"finch",away:"ruffels",label:"Finch vs Ruffels"},DB:{home:"dalke",away:"bryan",label:"Dalke vs Bryan"}};
+// winner: h = home pair, a = away pair, x = halved
+const M = [];
+function m(s,mu,h,a,res,w,note){M.push({s,mu,h,a,res,w,note})}
+// Episode 1 — Session 1 scramble
+m("1","FR",["Frankie Borrelli","Francis Ellis"],["Bubbie Broders","Marissa Wenzler"],"Halved","x","Bubbie Broders holed the final putt of the session to earn the half.");
+m("1","FR",["Roger Steele","Short Game King"],["Paige Spiranac","Bobby Ray"],"4&2","h");
+m("1","FR",["Peter Finch","The Jet"],["Grant Horvat","Riggs"],"4&3","h");
+m("1","FR",["Jersey Jerry","Trent Ryan"],["Micah Morris","Ryan Whitney"],"5&3","a");
+m("1","FR",["Martin Borgmeier","Josh Kelley"],["Ryan Ruffels","Justin Gaethje"],"2&1","a","Ruffels and Gaethje made an eagle on the way to the win.");
+m("1","FR",["Luke Kwon","Jason Williams"],["Big John","Fat Perez"],"1UP","a","Kwon slept in a tent at the course so he wouldn't miss his tee time again. He still lost.");
+m("1","FR",["Rick Shiels","Joey Cold Cuts"],["Jake Adams","Salim"],"2&1","h","Jake Adams missed a putt he had to make to keep it alive.");
+m("1","FR",["Cassandra Meyer","Malosi Togisala"],["Jon Gruden","The Duke"],"4&3","h","Four up through six holes.");
+m("1","DB",["Brad Dalke","Tyler Toney"],["George Bryan","Chaz Bowker"],"Halved","x","Chaz Bowker's putt on the 9th saved the half.");
+m("1","DB",["Taco Golf","Daltoosh"],["Mac Boucher","Sabrina Andolpho"],"Halved","x");
+m("1","DB",["Johnny Manziel","Karol Priscilla"],["Tisha Alyn","Evan Thompson"],"4&2","a");
+m("1","DB",["Mason Nutt","Hailey Ostrom"],["Sam Heung Min","Claire Hogle"],"3&2","a");
+m("1","DB",["Biz","Keith Yandle"],["Cheddy","Kyle Forgeard"],"3&2","a");
+m("1","DB",["Garrett Clark","Sara Winter"],["Cole Lantz","Seb Carmichael-Brown"],"4&3","a");
+m("1","DB",["DOD King","Andrew Santino"],["Wesley Bryan","Bobby Fairways"],"2&1","a");
+m("1","DB",["Tooms","Josh Richards"],["PFT Commenter","Callux"],"3&2","h","Team Dalke's only full point of the morning.");
+// Episode 2 — Session 2 alternate shot
+m("2","FR",["Trent Ryan","Jersey Jerry"],["Salim","The Duke"],"2UP","h","Three up with three to play, then lost the 134-yard 16th in a bunker battle (an 8 beat a 9). Closed it out on 18.");
+m("2","FR",["Peter Finch","Josh Kelley"],["Marissa Wenzler","Bubbie Broders"],"1UP","h","Came back from two down to win on the last hole.");
+m("2","FR",["Luke Kwon","Malosi Togisala"],["Big John","Fat Perez"],"2&1","h");
+m("2","FR",["Roger Steele","Short Game King"],["Grant Horvat","Justin Gaethje"],"1UP","a","Short Game King missed on 18.");
+m("2","FR",["Rick Shiels","Martin Borgmeier"],["Ryan Ruffels","Riggs"],"4&3","a");
+m("2","FR",["Frankie Borrelli","Francis Ellis"],["Bobby Ray","Jon Gruden"],"Halved","x","The \"Gruden rule\" match. Gruden holed a putt on 17 to go one up, then Bobby Ray played the wrong ball on 18 and lost the hole.");
+m("2","FR",["Cassandra Meyer","Jason Williams"],["Micah Morris","Ryan Whitney"],"3&2","a");
+m("2","FR",["Joey Cold Cuts","The Jet"],["Paige Spiranac","Jake Adams"],"5&4","a");
+m("2","DB",["Mason Nutt","Josh Richards"],["Cheddy","Kyle Forgeard"],"3&2","h","Cheddy bent his putter.");
+m("2","DB",["Johnny Manziel","Tyler Toney"],["George Bryan","Chaz Bowker"],"3&2","a");
+m("2","DB",["Daltoosh","Keith Yandle"],["PFT Commenter","Callux"],"5&4","h","Team Bryan appealed the original Tooms/Yandle pairing, so Dalke swapped in Daltoosh.");
+m("2","DB",["Brad Dalke","Karol Priscilla"],["Tisha Alyn","Evan Thompson"],"Halved","x");
+m("2","DB",["Hailey Ostrom","Tooms"],["Mac Boucher","Sabrina Andolpho"],"Halved","x");
+m("2","DB",["Garrett Clark","Sara Winter"],["Cole Lantz","Seb Carmichael-Brown"],"3&1","a");
+m("2","DB",["DOD King","Andrew Santino"],["Claire Hogle","Sam Heung Min"],"Halved","x","Sam and Claire were penalized for missing their tee time and still got the half.");
+m("2","DB",["Taco Golf","Biz"],["Wesley Bryan","Bobby Fairways"],"4&3","a");
+// Playoff (not counted toward the 16 points)
+m("P","FR",["Peter Finch","Luke Kwon"],["Ryan Ruffels","Micah Morris"],"Halved","x","Playoff hole 1. Both drives finished in the same fairway bunker.");
+m("P","FR",["Roger Steele","Rick Shiels"],["Grant Horvat","Big John"],"Won","a","Playoff hole 2. Horvat hit from the bunker onto the green and Big John holed the putt to send Team Ruffels through. (Finch-side pairing per The Big Lead.)");
+
+const SESS = {"1":"Episode 1 · Scramble","2":"Episode 2 · Alternate shot","P":"Episode 2 · Sudden-death playoff"};
+
+// ---------- DERIVED ----------
+const teamOf = {}; ORDER.forEach(t=>TEAMS[t].players.forEach(p=>teamOf[p[0]]=t));
+const recs = {}; Object.keys(teamOf).forEach(n=>recs[n]=[]);
+M.filter(x=>x.s!=="P").forEach(x=>{
+  x.h.forEach(n=>recs[n].push(x.w==="h"?"W":x.w==="a"?"L":"H"));
+  x.a.forEach(n=>recs[n].push(x.w==="a"?"W":x.w==="h"?"L":"H"));
+});
+const ptsOf = r => r.reduce((s,c)=>s+(c==="W"?1:c==="H"?.5:0),0);
+function tally(mu,s){let h=0,a=0;M.filter(x=>x.mu===mu&&x.s===s).forEach(x=>{if(x.w==="h")h++;else if(x.w==="a")a++;else{h+=.5;a+=.5}});return[h,a]}
+const fmt = n => { const w=Math.floor(n), f=n-w; return f? (w? w+"½":"½") : String(w); };
+const dot = t => `<span class="tdot ${t}" aria-hidden="true"></span>`;
+const chip = t => `<span class="tchip">${dot(t)}${TEAMS[t].name}</span>`;
+
+// ---------- STANDINGS ----------
+function boardHTML(mu, winner, extra, story){
+  const H=MATCHUPS[mu].home, A=MATCHUPS[mu].away;
+  const s1=tally(mu,"1"), s2=tally(mu,"2"); const th=s1[0]+s2[0], ta=s1[1]+s2[1];
+  const row=(t,p)=>`<div class="score-row ${t===winner?'win':'lose'}"><div class="who">${chip(t)}<small>Captain ${TEAMS[t].captain} · ${TEAMS[t].color} · ${t===winner?'<span class="pill adv">Advanced</span>':'<span class="pill out">Eliminated</span>'}</small></div><div class="pts num">${fmt(p)}</div></div>`;
+  const seg=(t,n)=>`<span class="${t}" style="flex:${n}"></span>`;
+  return `<div class="card board">
+    <div class="board-top"><span class="eyebrow">${MATCHUPS[mu].label}</span>${extra}</div>
+    ${row(winner===H?H:A, winner===H?th:ta)}${row(winner===H?A:H, winner===H?ta:th)}
+    <div class="split" role="img" aria-label="${TEAMS[H].name} ${fmt(th)}, ${TEAMS[A].name} ${fmt(ta)} of 16">${seg(H,th)}${seg(A,ta)}</div>
+    <table class="sess-table"><thead><tr><th>Session</th><th>${TEAMS[H].name.replace('Team ','')}</th><th>${TEAMS[A].name.replace('Team ','')}</th></tr></thead>
+    <tbody><tr><td>Ep 1 · Scramble</td><td class="num">${fmt(s1[0])}</td><td class="num">${fmt(s1[1])}</td></tr>
+    <tr><td>Ep 2 · Alternate shot</td><td class="num">${fmt(s2[0])}</td><td class="num">${fmt(s2[1])}</td></tr>
+    <tr><td>Total</td><td class="num">${fmt(th)}</td><td class="num">${fmt(ta)}</td></tr></tbody></table>
+    <p class="story">${story}</p></div>`;
+}
+document.getElementById("boards").innerHTML =
+  boardHTML("FR","ruffels",'<span class="pill exp">Won in playoff</span>',"Finch led 4½–3½ at lunch. Ruffels took the afternoon 4½–3½ to tie it at 8–8, then won on the second sudden-death hole when Big John holed a putt after Grant Horvat's bunker shot.") +
+  boardHTML("DB","bryan",'<span class="pill adv">Clinched</span>',"Bryan led 6–2 at lunch and won the afternoon 4½–3½. Defending champion Brad Dalke and his whole team are out.");
+
+function survivors(){
+  document.getElementById("survivors").innerHTML = ORDER.map(t=>{
+    const T=TEAMS[t];
+    return `<div class="card surv ${T.status==='out'?'out':''}"><div class="board-top">${chip(t)}${T.status==='adv'?'<span class="pill adv">16 alive</span>':'<span class="pill out">Out</span>'}</div>
+    <div class="names">${T.players.map((p,i)=>`<button class="name ${i===0?'cap':''}" data-player="${p[0]}">${i===0?'★ ':''}${p[0]}</button>`).join("")}</div></div>`;
+  }).join("");
+}
+survivors();
+
+const EPS=[["Ep 1","Mon Oct 26","Draft + scramble","done"],["Ep 2","Thu Oct 29","Alt shot + cut to 32","done"],["Ep 3","Mon Nov 2","Day 2 begins","next"],["Ep 4","Thu Nov 5","",""],["Ep 5","Mon Nov 9","",""],["Finale","Thu Nov 12","$4M final",""]];
+document.getElementById("sched").innerHTML = EPS.map(e=>`<div class="ep ${e[3]}"><span class="tag">${e[3]==='done'?'Out now':e[3]==='next'?'Up next':'Upcoming'}</span><span class="n">${e[0]}</span><span class="d">${e[1]}${e[2]?' · '+e[2]:''}</span></div>`).join("");
+
+const MOMENTS=[
+  ["The vote","Players voted the pros' group in as captains: Dalke, Bryan, Ruffels and Finch. Dalke took Tooms first overall; The Duke went last as Team Ruffels' \"Mr. Irrelevant.\""],
+  ["The pick","Ruffels won the captains' closest-to-the-pin after an appeal and a tape measure. That paid his team $5K each and let him choose Finch as his opponent."],
+  ["The Gruden rule","Before alternate shot, Portnoy let the committee veto any pairing that looked like a thrown match. Ruffels objected to Bobby Ray and Gruden facing Borrelli and Ellis, but it stood."],
+  ["The wrong ball","Bobby Ray played a ball that wasn't theirs on 18, turning a Ruffels win into a halve and forcing the 8–8 tie."],
+  ["The Fog Father","Big John, who was nearly left out of the event, holed the putt on the second playoff hole to send Team Ruffels to Day 2."],
+  ["Champions out","Both 2025 winners still in the field, Brad Dalke and Francis Ellis, were eliminated with their teams."]
+];
+document.getElementById("moments").innerHTML = MOMENTS.map(x=>`<div class="card moment"><span class="k">${x[0]}</span><p>${x[1]}</p></div>`).join("");
+
+// ---------- TEAMS ----------
+let curTeam = "ruffels";
+function renderTeams(){
+  document.getElementById("teamSeg").innerHTML = ORDER.map(t=>`<button type="button" data-team="${t}" aria-pressed="${t===curTeam}">${dot(t)}${TEAMS[t].name.replace('Team ','')}</button>`).join("");
+  const T=TEAMS[curTeam];
+  const total = T.players.reduce((s,p)=>s+ptsOf(recs[p[0]]),0)/2;
+  const allW = T.players.reduce((s,p)=>s+recs[p[0]].filter(c=>c==="W").length,0)/2;
+  const rows = T.players.map((p,i)=>{const r=recs[p[0]];return `<tr data-player="${p[0]}" tabindex="0">
+    <td>${i===0?'<span class="star" title="Captain">★</span> ':''}<b>${p[0]}</b></td>
+    <td class="num">${p[1]??'<span style="color:var(--muted)">n/a</span>'}</td>
+    <td><span class="rec">${r.map(c=>`<i class="${c}">${c}</i>`).join("")}</span></td>
+    <td class="r num">${fmt(ptsOf(r))}</td>
+    <td>${T.status==='adv'?'<span class="pill adv">Alive</span>':'<span class="pill out">Out</span>'}</td></tr>`}).join("");
+  document.getElementById("teamPanel").innerHTML = `<div class="team-head">
+    <div style="display:grid;gap:6px;min-width:0"><span class="tchip">${dot(curTeam)}<span class="eyebrow">${T.color} · Captain ${T.captain}</span></span><h3>${T.name}</h3>
+    <span class="sub">${curTeam==='ruffels'?'Beat Team Finch 8–8, won in a sudden-death playoff':curTeam==='bryan'?'Beat Team Dalke 10½–5½':curTeam==='finch'?'Lost to Team Ruffels in a sudden-death playoff after an 8–8 tie':'Lost to Team Bryan 10½–5½'}</span></div>
+    <div class="team-stats"><div><b class="num">${fmt(total)}</b><span>Day 1 pts</span></div><div><b class="num">${allW}</b><span>Matches won</span></div><div>${T.status==='adv'?'<span class="pill adv">Advanced</span>':'<span class="pill out">Eliminated</span>'}</div></div></div>
+    <div class="table-scroll"><table class="roster"><thead><tr><th>Player</th><th>Handicap</th><th>Record</th><th class="r">Pts</th><th>Status</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+}
+document.getElementById("teamSeg").addEventListener("click",e=>{const b=e.target.closest("[data-team]");if(!b)return;curTeam=b.dataset.team;save();renderTeams()});
+document.getElementById("teamPanel").addEventListener("click",e=>{const r=e.target.closest("[data-player]");if(r)openPlayer(r.dataset.player)});
+document.getElementById("teamPanel").addEventListener("keydown",e=>{if(e.key==="Enter"){const r=e.target.closest("[data-player]");if(r)openPlayer(r.dataset.player)}});
+
+// ---------- MATCHES ----------
+const fSess=document.getElementById("fSess"), fMatch=document.getElementById("fMatch"), fSearch=document.getElementById("fSearch");
+function renderMatches(){
+  const q=fSearch.value.trim().toLowerCase();
+  const list=M.filter(x=>(fSess.value==="all"||x.s===fSess.value)&&(fMatch.value==="all"||x.mu===fMatch.value)&&(!q||x.h.concat(x.a).some(n=>n.toLowerCase().includes(q))));
+  const groups=[];
+  ["1","2","P"].forEach(s=>["FR","DB"].forEach(mu=>{const g=list.filter(x=>x.s===s&&x.mu===mu);if(g.length)groups.push({s,mu,g})}));
+  const out=document.getElementById("matchList");
+  if(!groups.length){out.innerHTML=`<div class="card empty">No matches match those filters. Try a shorter name or reset the filters.</div>`;return}
+  out.innerHTML=groups.map(G=>{
+    const H=MATCHUPS[G.mu].home, A=MATCHUPS[G.mu].away;
+    const t=G.s==="P"?"":(()=>{const v=tally(G.mu,G.s);return `<span class="num">${TEAMS[H].name.replace('Team ','')} ${fmt(v[0])} – ${fmt(v[1])} ${TEAMS[A].name.replace('Team ','')}</span>`})();
+    return `<div class="mgroup"><h3>${SESS[G.s]} <span style="display:inline-flex;gap:8px;align-items:center;font-size:16px">${dot(H)}${dot(A)} ${MATCHUPS[G.mu].label}</span> ${t}</h3>
+    ${G.g.map(x=>{
+      const wt = x.w==="h"?H:x.w==="a"?A:null;
+      const pl = n=>`<span class="pl ${q&&n.toLowerCase().includes(q)?'hit':''}" data-player="${n}">${n}</span>`;
+      return `<div class="card match">
+        <div class="pair ${x.w==='a'?'lost':''}"><span class="tchip" style="font-weight:500;font-size:12px;color:var(--muted)">${dot(H)}${TEAMS[H].name.replace('Team ','')}</span>${x.h.map(pl).join("")}</div>
+        <div class="res"><span class="score ${wt||'half'}">${x.res}</span><small>${wt?TEAMS[wt].name.replace('Team ','')+' win':'Split ½–½'}</small></div>
+        <div class="pair right ${x.w==='h'?'lost':''}"><span class="tchip" style="font-weight:500;font-size:12px;color:var(--muted)">${TEAMS[A].name.replace('Team ','')}${dot(A)}</span>${x.a.map(pl).join("")}</div>
+        ${x.note?`<p class="note">${x.note}</p>`:''}</div>`}).join("")}</div>`;
+  }).join("");
+}
+[fSess,fMatch].forEach(el=>el.addEventListener("change",renderMatches));
+fSearch.addEventListener("input",renderMatches);
+document.getElementById("fClear").addEventListener("click",()=>{fSess.value="all";fMatch.value="all";fSearch.value="";renderMatches()});
+document.getElementById("matchList").addEventListener("click",e=>{const p=e.target.closest("[data-player]");if(p){fSearch.value=p.dataset.player;renderMatches()}});
+function openPlayer(n){fSess.value="all";fMatch.value="all";fSearch.value=n;renderMatches();go("matches");window.scrollTo({top:0})}
+document.getElementById("survivors").addEventListener("click",e=>{const b=e.target.closest("[data-player]");if(b)openPlayer(b.dataset.player)});
+
+// ---------- BRACKET ----------
+const NODES={
+  t_finch:{col:"colTeams",html:`<span class="tchip">${dot("finch")}Finch</span><span class="s">Blue · 16 players</span>`,cls:"teamnode out",d:"finch"},
+  t_ruffels:{col:"colTeams",html:`<span class="tchip">${dot("ruffels")}Ruffels</span><span class="s">White · 16 players</span>`,cls:"teamnode",d:"ruffels"},
+  t_dalke:{col:"colTeams",html:`<span class="tchip">${dot("dalke")}Dalke</span><span class="s">Red · 16 players</span>`,cls:"teamnode out",d:"dalke"},
+  t_bryan:{col:"colTeams",html:`<span class="tchip">${dot("bryan")}Bryan</span><span class="s">Green · 16 players</span>`,cls:"teamnode",d:"bryan"},
+  d1_fr:{col:"colDay1",html:`<span class="eyebrow">Day 1 · Eps 1–2</span><h4>Finch vs Ruffels</h4><div class="vs"><div class="lose">${chip("finch")}<b class="num">8</b></div><div>${chip("ruffels")}<b class="num">8</b></div></div><span class="s">Tied 8–8 → Ruffels won sudden-death playoff on hole 2</span>`,d:"d1_fr"},
+  d1_db:{col:"colDay1",html:`<span class="eyebrow">Day 1 · Eps 1–2</span><h4>Dalke vs Bryan</h4><div class="vs"><div class="lose">${chip("dalke")}<b class="num">5½</b></div><div>${chip("bryan")}<b class="num">10½</b></div></div><span class="s">Bryan won both sessions</span>`,d:"d1_db"},
+  d2:{col:"colDay2",html:`<span class="eyebrow">Day 2 · Eps 3–4</span><h4>32 remain</h4><div class="big num">32</div><span class="s">${dot("ruffels")} Ruffels + ${dot("bryan")} Bryan. Next cut airs Nov 2–5</span><span class="pill exp" style="width:max-content">Not aired yet</span>`,cls:"future",d:"d2"},
+  semi:{col:"colSemi",html:`<span class="eyebrow">Semifinal · Ep 5</span><h4>Teams of three</h4><span class="s">Stroke-play qualifier. Top two teams advance</span><span class="pill exp" style="width:max-content">Expected</span>`,cls:"future",d:"semi"},
+  fin:{col:"colFinal",html:`<span class="eyebrow">Finale · Thu Nov 12</span><h4>The final</h4><div class="big num">$4M</div><span class="s">3 vs 3 alternate-shot match play. Beef Franke Trophy</span>`,cls:"future trophy",d:"fin"}
+};
+const LINKS=[["t_finch","d1_fr","off"],["t_ruffels","d1_fr","on"],["t_dalke","d1_db","off"],["t_bryan","d1_db","on"],["d1_fr","d2","on"],["d1_db","d2","on"],["d2","semi","tbd"],["semi","fin","tbd"]];
+const DETAILS={
+  finch:["Team Finch · Blue","Captain Peter Finch. Led 4½–3½ after the scramble, lost the alternate shot 3½–4½, then lost the sudden-death playoff. Eliminated with defending champion Francis Ellis.",[]],
+  ruffels:["Team Ruffels · White","Captain Ryan Ruffels, the lowest handicap in the field at +7.2. Picked Finch as their opponent after winning the captains' closest-to-the-pin, and came back from 3½–4½ down at lunch.",[]],
+  dalke:["Team Dalke · Red","Captain Brad Dalke, a 2025 champion. Trailed 2–6 after the scramble and finished 5½–10½. Eliminated.",[]],
+  bryan:["Team Bryan · Green","Captain Wesley Bryan. The most dominant team on Day 1: won the scramble 6–2 and the alternate shot 4½–3½.",[]],
+  d1_fr:["Day 1 · Finch vs Ruffels","Eight scramble matches (Ep 1) plus eight alternate-shot matches (Ep 2), one point each.",["Scramble: Finch 4½ – Ruffels 3½","Alternate shot: Finch 3½ – Ruffels 4½","Playoff hole 1: Ruffels/Morris halved Finch/Kwon (both in the same fairway bunker)","Playoff hole 2: Horvat bunker shot, Big John holes the putt. Ruffels advance."]],
+  d1_db:["Day 1 · Dalke vs Bryan","Same format. Bryan won 10½–5½ and never trailed.",["Scramble: Bryan 6 – Dalke 2 (Bryan won 5, Dalke won 1, 2 halved)","Alternate shot: Bryan 4½ – Dalke 3½ (3 halved)"]],
+  d2:["Day 2 · 32 players","Team Ruffels and Team Bryan carry all 16 players each into Episode 3 (Mon Nov 2). Day 2's exact format hasn't aired yet.",["In 2025, Day 2 opened with the survivors re-drafted into two brand-new teams under newly voted captains.","Every hole carried a skin ($4K per hole in 2025), paid on top of the match result.","Scramble in the morning, alternate shot in the afternoon, and the losing team went home."]],
+  semi:["Semifinal","Not aired yet. Sketched from 2025.",["In 2025 the last 12 were split into four teams of three.","They played an 18-hole alternate-shot stroke-play round on the Cliffhangers par-3 course.","The top two teams advanced to the final; the other two went home."]],
+  fin:["The final","Two three-player teams, 18 holes of alternate-shot match play. The winning trio splits $4 million, about $1.3 million each, and lifts the trophy named for 2025 champion Cody \"Beef\" Franke.",["2025 final: Dalke, Ellis and Franke beat Spiranac, Togisala and Borrelli 1UP when Borrelli's chip on 18 went over the green into the water."]]
+};
+let curNode="d1_fr";
+function buildBracket(){
+  ["colTeams","colDay1","colDay2","colSemi","colFinal"].forEach(id=>document.getElementById(id).innerHTML="");
+  Object.entries(NODES).forEach(([id,n])=>{
+    const b=document.createElement("button");b.type="button";b.className="node "+(n.cls||"");b.id="n_"+id;b.dataset.d=n.d;b.innerHTML=n.html;
+    b.setAttribute("aria-pressed",String(n.d===curNode));
+    document.getElementById(n.col).appendChild(b);
+  });
+  const labels={colTeams:"Draft",colDay1:"Day 1",colDay2:"Day 2",colSemi:"Semis",colFinal:"Final"};
+  Object.entries(labels).forEach(([c,l])=>{const s=document.createElement("span");s.className="eyebrow col-label";s.textContent=l;document.getElementById(c).appendChild(s)});
+}
+function drawLinks(animate){
+  const br=document.getElementById("bracket"), svg=document.getElementById("links");
+  const B=br.getBoundingClientRect();
+  svg.setAttribute("viewBox",`0 0 ${B.width} ${B.height}`);
+  svg.innerHTML=LINKS.map(([a,b,k])=>{
+    const A=document.getElementById("n_"+a).getBoundingClientRect(), C=document.getElementById("n_"+b).getBoundingClientRect();
+    const x1=A.right-B.left, y1=A.top+A.height/2-B.top, x2=C.left-B.left, y2=C.top+C.height/2-B.top, mx=(x1+x2)/2;
+    return `<path class="${k} ${animate&&k==='on'?'draw':''}" d="M${x1} ${y1} C${mx} ${y1} ${mx} ${y2} ${x2} ${y2}"/>`;
+  }).join("");
+  svg.querySelectorAll(".draw").forEach(p=>{const L=p.getTotalLength();p.style.setProperty("--len",L)});
+}
+function showDetail(k){
+  curNode=k; const d=DETAILS[k];
+  document.querySelectorAll("#bracket .node").forEach(n=>n.setAttribute("aria-pressed",String(n.dataset.d===k)));
+  document.getElementById("detail").innerHTML=`<span class="eyebrow">Selected</span><h3>${d[0]}</h3><p>${d[1]}</p>${d[2].length?`<ul>${d[2].map(x=>`<li>${x}</li>`).join("")}</ul>`:''}`;
+}
+document.getElementById("bracket").addEventListener("click",e=>{const n=e.target.closest(".node");if(n)showDetail(n.dataset.d)});
+buildBracket(); showDetail(curNode);
+window.addEventListener("resize",()=>{if(current==="format")drawLinks(false)});
+
+// Result decoder
+const RESULTS=["Halved","1UP","2UP","2&1","3&2","3&1","4&2","4&3","5&3","5&4"];
+let curRes="4&3";
+function decode(r){
+  const holes=document.getElementById("decHoles"); let played=9, text="";
+  if(r==="Halved"){text="All square after 9 holes. Each side gets ½ point."}
+  else if(/UP$/.test(r)){const u=+r[0];text=`Went all 9 holes and finished ${u} hole${u>1?'s':''} ahead. Worth 1 point.`}
+  else{const [a,b]=r.split("&").map(Number);played=9-b;text=`${a} holes ahead with only ${b} left to play, so the match ended after hole ${played}. The trailing side couldn't catch up. Worth 1 point.`}
+  holes.innerHTML=Array.from({length:9},(_,i)=>`<div class="${i<played?'played':'skip'}">${i+1}</div>`).join("");
+  const n=M.filter(x=>x.res===r&&x.s!=="P").length;
+  document.getElementById("decOut").textContent=text+` Happened ${n} time${n===1?'':'s'} on Day 1.`;
+  document.querySelectorAll("#decChips button").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.r===r)));
+}
+document.getElementById("decChips").innerHTML=RESULTS.map(r=>`<button type="button" data-r="${r}">${r}</button>`).join("");
+document.getElementById("decChips").addEventListener("click",e=>{const b=e.target.closest("[data-r]");if(b){curRes=b.dataset.r;decode(curRes)}});
+decode(curRes);
+
+// ---------- ROUTING ----------
+const VIEWS=["standings","teams","matches","format"]; let current="standings";
+function go(v,push=true){
+  if(!VIEWS.includes(v))v="standings"; current=v;
+  VIEWS.forEach(x=>{document.getElementById("view-"+x).hidden=x!==v;document.getElementById("tab-"+x).setAttribute("aria-selected",String(x===v))});
+  if(push&&location.hash!=="#"+v){try{history.replaceState(null,"","#"+v)}catch(e){location.hash=v}}
+  if(v==="format")requestAnimationFrame(()=>drawLinks(true));
+  save();
+}
+document.querySelectorAll(".tab").forEach(t=>t.addEventListener("click",()=>go(t.dataset.view)));
+window.addEventListener("hashchange",()=>go(location.hash.slice(1),false));
+function save(){try{localStorage.setItem("ii26",JSON.stringify({team:curTeam}))}catch(e){}}
+try{const s=JSON.parse(localStorage.getItem("ii26")||"{}");if(s.team&&TEAMS[s.team])curTeam=s.team}catch(e){}
+renderTeams(); renderMatches();
+go(location.hash.slice(1)||"standings",false);
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>{if(current==="format")drawLinks(false)});
+})();
+</script>
