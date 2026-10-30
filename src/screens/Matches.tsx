@@ -3,19 +3,7 @@ import { Link, useSearchParams } from "react-router-dom";
 import { T, records, shortName, teamOfPlayer } from "../data";
 import { fmtPoints, sessionCounts, sessionTotal } from "../lib/scoring";
 import type { Match } from "../lib/types";
-import { RecordChips, SecHead, TeamDot, playerHref } from "../components";
-
-function Chips({ value, options, onChange, label }: { value: string; options: [string, string][]; onChange: (v: string) => void; label: string }) {
-  return (
-    <div className="chipset" role="group" aria-label={label}>
-      {options.map(([v, l]) => (
-        <button key={v} type="button" aria-pressed={value === v} onClick={() => onChange(v)}>
-          {l}
-        </button>
-      ))}
-    </div>
-  );
-}
+import { Chips, RecordChips, SecHead, TeamDot, playerHref } from "../components";
 
 function MatchCard({ m, q }: { m: Match; q: string }) {
   const mu = T.matchups[m.matchup];

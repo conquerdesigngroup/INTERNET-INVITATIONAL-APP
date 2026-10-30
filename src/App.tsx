@@ -1,15 +1,17 @@
 import { useEffect, useState } from "react";
-import { Navigate, NavLink, Route, Routes, useLocation } from "react-router-dom";
+import { Link, Navigate, NavLink, Route, Routes, useLocation } from "react-router-dom";
 import { T, epDate, epName, nextEpisode, playersAlive } from "./data";
 import Standings from "./screens/Standings";
 import Teams from "./screens/Teams";
 import Matches from "./screens/Matches";
 import Format from "./screens/Format";
+import Stats from "./screens/Stats";
 
 const TABS = [
   { to: "/standings", label: "Standings", icon: <path d="M4 20V10M10 20V4M16 20v-7M22 20H2" /> },
   { to: "/teams", label: "Teams", icon: <><circle cx="9" cy="8" r="3.5" /><path d="M2.5 20c.6-3.6 3.2-5.5 6.5-5.5s5.9 1.9 6.5 5.5M16 4.8a3.5 3.5 0 0 1 0 6.4M18 14.8c2 .7 3.2 2.4 3.5 5.2" /></> },
   { to: "/matches", label: "Matches", icon: <><rect x="3" y="4" width="18" height="7" rx="2" /><rect x="3" y="13" width="18" height="7" rx="2" /></> },
+  { to: "/stats", label: "Stats", longLabel: "Stats & Course", icon: <><path d="M3 20h18" /><path d="M4 16l5-6 4 3 7-8" /><circle cx="20" cy="5" r="1.5" /></> },
   { to: "/format", label: "Format", longLabel: "Format & Bracket", icon: <path d="M3 5h5v5H3zM3 14h5v5H3zM8 7.5h3v9H8M11 12h4M15 9.5h6v5h-6z" /> },
 ];
 
@@ -74,7 +76,10 @@ function Header() {
         </h1>
         <div className="meta">
           <span>
-            <b>{T.meta.venue.split(",")[0]}</b> · Ridgedale, MO
+            <Link to="/stats/course" className="venue-link">
+              <b>{T.meta.venue.split(",")[0]}</b>
+            </Link>{" "}
+            · Ridgedale, MO
           </span>
           <span className="hide-sm">
             Host <b>{T.meta.host}</b>
@@ -116,9 +121,11 @@ function Nav() {
 
 export default function App() {
   const { pathname } = useLocation();
+  // Scroll up when moving between sections, not when switching views inside one.
+  const section = pathname.split("/")[1];
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [pathname]);
+  }, [section]);
 
   return (
     <>
@@ -132,6 +139,8 @@ export default function App() {
             <Route path="/teams" element={<Teams />} />
             <Route path="/teams/:teamId" element={<Teams />} />
             <Route path="/matches" element={<Matches />} />
+            <Route path="/stats" element={<Stats />} />
+            <Route path="/stats/:view" element={<Stats />} />
             <Route path="/format" element={<Format />} />
             <Route path="*" element={<Navigate to="/standings" replace />} />
           </Routes>
