@@ -31,6 +31,13 @@
   --blob-mint: rgba(124, 224, 168, 0.40);
   --blob-gold: rgba(214, 168, 52, 0.24);
   --blur: blur(18px) saturate(170%);
+  --stripe: rgba(14, 74, 48, 0.035);
+  --topo: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240' viewBox='0 0 240 240'%3E%3Cg fill='none' stroke='rgba%2814%2C74%2C48%2C0.10%29' stroke-width='1.1'%3E%3Cpath d='M0 18 C40 4 80 4 120 18 S200 32 240 18'/%3E%3Cpath d='M0 46 C50 66 70 66 120 46 S190 26 240 46'/%3E%3Cpath d='M0 70 C40 60 80 60 120 70 S200 80 240 70'/%3E%3Cpath d='M0 98 C50 122 70 122 120 98 S190 74 240 98'/%3E%3Cpath d='M0 130 C40 114 80 114 120 130 S200 146 240 130'/%3E%3Cpath d='M0 156 C50 178 70 178 120 156 S190 134 240 156'/%3E%3Cpath d='M0 184 C40 172 80 172 120 184 S200 196 240 184'/%3E%3Cpath d='M0 214 C50 234 70 234 120 214 S190 194 240 214'/%3E%3C/g%3E%3C/svg%3E");
+  --glass-top: rgba(255, 255, 255, 0.74);
+  --glass-bottom: rgba(255, 255, 255, 0.40);
+  --glass-sheen: rgba(255, 255, 255, 0.55);
+  --glass-depth: rgba(14, 74, 48, 0.16);
+  --glass-catch: rgba(255, 255, 255, 0.55);
   --f-display: "Unbounded", "Arial Black", system-ui, sans-serif;
   --f-body: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
   --f-mono: "Space Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
@@ -46,7 +53,9 @@
     --half: #c4b37a; --gold: #e0b54a;
     --band-glow: #1d6e47; --glass: rgba(24, 52, 39, 0.55); --glass-strong: rgba(32, 66, 50, 0.72); --glass-inset: rgba(255, 255, 255, 0.04);
     --glass-line: rgba(255, 255, 255, 0.10); --glass-hl: rgba(255, 255, 255, 0.16); --glass-shadow: 0 14px 34px -18px rgba(0, 0, 0, 0.7), 0 1px 2px rgba(0, 0, 0, 0.3);
-    --blob-green: rgba(30, 138, 76, 0.38); --blob-mint: rgba(77, 190, 132, 0.18); --blob-gold: rgba(224, 181, 74, 0.13);
+    --blob-green: rgba(30, 138, 76, 0.38); --blob-mint: rgba(77, 190, 132, 0.18); --blob-gold: rgba(224, 181, 74, 0.13); --stripe: rgba(255, 255, 255, 0.022);
+    --topo: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240' viewBox='0 0 240 240'%3E%3Cg fill='none' stroke='rgba%28160%2C220%2C185%2C0.07%29' stroke-width='1.1'%3E%3Cpath d='M0 18 C40 4 80 4 120 18 S200 32 240 18'/%3E%3Cpath d='M0 46 C50 66 70 66 120 46 S190 26 240 46'/%3E%3Cpath d='M0 70 C40 60 80 60 120 70 S200 80 240 70'/%3E%3Cpath d='M0 98 C50 122 70 122 120 98 S190 74 240 98'/%3E%3Cpath d='M0 130 C40 114 80 114 120 130 S200 146 240 130'/%3E%3Cpath d='M0 156 C50 178 70 178 120 156 S190 134 240 156'/%3E%3Cpath d='M0 184 C40 172 80 172 120 184 S200 196 240 184'/%3E%3Cpath d='M0 214 C50 234 70 234 120 214 S190 194 240 214'/%3E%3C/g%3E%3C/svg%3E");
+    --glass-top: rgba(46, 88, 67, 0.58); --glass-bottom: rgba(16, 38, 28, 0.46); --glass-sheen: rgba(255, 255, 255, 0.10); --glass-depth: rgba(0, 0, 0, 0.35); --glass-catch: rgba(255, 255, 255, 0.10);
     color-scheme: dark;
   }
 }
@@ -57,7 +66,9 @@
   --half: #c4b37a; --gold: #e0b54a;
     --band-glow: #1d6e47; --glass: rgba(24, 52, 39, 0.55); --glass-strong: rgba(32, 66, 50, 0.72); --glass-inset: rgba(255, 255, 255, 0.04);
     --glass-line: rgba(255, 255, 255, 0.10); --glass-hl: rgba(255, 255, 255, 0.16); --glass-shadow: 0 14px 34px -18px rgba(0, 0, 0, 0.7), 0 1px 2px rgba(0, 0, 0, 0.3);
-    --blob-green: rgba(30, 138, 76, 0.38); --blob-mint: rgba(77, 190, 132, 0.18); --blob-gold: rgba(224, 181, 74, 0.13);
+    --blob-green: rgba(30, 138, 76, 0.38); --blob-mint: rgba(77, 190, 132, 0.18); --blob-gold: rgba(224, 181, 74, 0.13); --stripe: rgba(255, 255, 255, 0.022);
+    --topo: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240' viewBox='0 0 240 240'%3E%3Cg fill='none' stroke='rgba%28160%2C220%2C185%2C0.07%29' stroke-width='1.1'%3E%3Cpath d='M0 18 C40 4 80 4 120 18 S200 32 240 18'/%3E%3Cpath d='M0 46 C50 66 70 66 120 46 S190 26 240 46'/%3E%3Cpath d='M0 70 C40 60 80 60 120 70 S200 80 240 70'/%3E%3Cpath d='M0 98 C50 122 70 122 120 98 S190 74 240 98'/%3E%3Cpath d='M0 130 C40 114 80 114 120 130 S200 146 240 130'/%3E%3Cpath d='M0 156 C50 178 70 178 120 156 S190 134 240 156'/%3E%3Cpath d='M0 184 C40 172 80 172 120 184 S200 196 240 184'/%3E%3Cpath d='M0 214 C50 234 70 234 120 214 S190 194 240 214'/%3E%3C/g%3E%3C/svg%3E");
+    --glass-top: rgba(46, 88, 67, 0.58); --glass-bottom: rgba(16, 38, 28, 0.46); --glass-sheen: rgba(255, 255, 255, 0.10); --glass-depth: rgba(0, 0, 0, 0.35); --glass-catch: rgba(255, 255, 255, 0.10);
     color-scheme: dark;
 }
 
@@ -586,13 +597,30 @@ body { background: transparent; }
 html::before {
   content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
   background:
+    repeating-linear-gradient(112deg, var(--stripe) 0 72px, transparent 72px 144px),
     radial-gradient(46vmax 38vmax at 8% 12%, var(--blob-green), transparent 70%),
     radial-gradient(40vmax 34vmax at 96% 34%, var(--blob-mint), transparent 70%),
     radial-gradient(44vmax 36vmax at 74% 100%, var(--blob-gold), transparent 70%),
     radial-gradient(34vmax 30vmax at 0% 80%, var(--blob-mint), transparent 70%);
 }
-.card { box-shadow: inset 0 1px 0 var(--glass-hl), inset 0 0 0 1px var(--glass-line), var(--glass-shadow); }
-.card { background: var(--glass); border: 0; border-radius: 18px; -webkit-backdrop-filter: var(--blur); backdrop-filter: var(--blur); }
+/* Thick glass: a top-lit gradient body, heavy blur, a bright upper rim, a faint catch light on the
+   lower edge, shading inside the bottom for depth, and a long soft drop shadow. */
+.card {
+  position: relative; border: 0; border-radius: 20px;
+  background: linear-gradient(165deg, var(--glass-top), var(--glass-bottom));
+  -webkit-backdrop-filter: blur(30px) saturate(190%); backdrop-filter: blur(30px) saturate(190%);
+  box-shadow:
+    inset 0 1.5px 0 var(--glass-hl),
+    inset 0 -1px 0 var(--glass-catch),
+    inset 0 0 0 1px var(--glass-line),
+    inset 0 -18px 30px -24px var(--glass-depth),
+    0 26px 48px -26px rgba(10, 52, 33, 0.5),
+    0 4px 10px -6px rgba(10, 52, 33, 0.2);
+}
+.card::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit; pointer-events: none;
+  background: linear-gradient(135deg, var(--glass-sheen), transparent 32%);
+}
 
 .band {
   position: relative; border-radius: 0 0 26px 26px;
@@ -629,6 +657,13 @@ html::before {
 .subtab { border-radius: 12px; }
 .subtab.active { background: var(--glass-strong); box-shadow: inset 0 1px 0 var(--glass-hl), 0 4px 14px -6px rgba(14, 74, 48, 0.35); }
 
+/* Yardage-book contours drift behind the glass at a fraction of scroll speed (see main.tsx). */
+html::after {
+  content: ""; position: fixed; inset: 0 0 -240px; z-index: -1; pointer-events: none;
+  background: var(--topo) 0 0 / 240px 240px repeat;
+  transform: translate3d(0, calc(var(--py, 0px) * -1), 0); will-change: transform;
+}
+
 /* Phone: the tab bar floats as a tinted glass capsule */
 @media (max-width: 859.98px) {
   .tabs {
@@ -657,6 +692,54 @@ html::before {
   .tabs-inner { padding-block: 7px; gap: 4px; }
   .tab { padding: 8px 16px; border-radius: 999px; border-bottom: 0; }
   .tab.active { background: rgba(255, 255, 255, 0.14); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.24), inset 0 0 0 1px rgba(255, 255, 255, 0.10); }
+}
+
+/* ---------- Golf touches ----------
+   Mowing stripes on the backdrop (above), a dimpled header with a green and flagstick drawn in,
+   a golf-ball live dot, pennant markers on section titles, a scorecard total line, and a putt in the footer. */
+.band { overflow: hidden; }
+.band::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(circle, rgba(255, 255, 255, 0.07) 1.3px, transparent 1.8px) 0 0 / 10px 10px,
+    radial-gradient(circle, rgba(255, 255, 255, 0.07) 1.3px, transparent 1.8px) 5px 5px / 10px 10px;
+  -webkit-mask-image: linear-gradient(100deg, transparent 30%, #000 85%); mask-image: linear-gradient(100deg, transparent 30%, #000 85%);
+}
+.band-inner { position: relative; z-index: 1; }
+.band-art { position: absolute; right: -18px; bottom: -6px; width: 190px; height: auto; opacity: 0.4; pointer-events: none; }
+.band-art .contours ellipse { stroke: var(--band-ink); stroke-opacity: 0.16; stroke-width: 1.2; }
+.band-art .contours ellipse:last-child { fill: rgba(255, 255, 255, 0.05); }
+.putt { stroke: currentColor; stroke-width: 1.5; stroke-dasharray: 2 5; stroke-linecap: round; }
+.band-art .putt { color: var(--band-ink); opacity: 0.45; }
+.ball { fill: #f7faf8; stroke: rgba(15, 34, 25, 0.25); stroke-width: 0.8; }
+.cup { fill: rgba(0, 0, 0, 0.45); }
+.pole { stroke: #f2f5f3; stroke-width: 2; stroke-linecap: round; }
+.pennant { fill: var(--gold); }
+.band-art .pennant { fill: #e8c25a; }
+
+.status i {
+  width: 10px; height: 10px;
+  background: radial-gradient(circle at 34% 30%, #ffffff 0 30%, #e4ece6 55%, #b7c7bc 100%);
+  box-shadow: 0 0 0 3px rgba(124, 224, 168, 0.45);
+  animation: live-ring 2.4s ease-in-out infinite;
+}
+@keyframes live-ring { 50% { box-shadow: 0 0 0 5px rgba(124, 224, 168, 0.12); } }
+
+.sec-head h2::before {
+  content: ""; display: inline-block; width: 0.62em; height: 0.82em; margin-right: 0.38em; vertical-align: -0.06em;
+  background: var(--accent);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 26'%3E%3Crect x='2' y='0' width='2.6' height='26' rx='1.3'/%3E%3Cpath d='M4 1 L19 6 L4 11 Z'/%3E%3C/svg%3E") no-repeat center / contain;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 26'%3E%3Crect x='2' y='0' width='2.6' height='26' rx='1.3'/%3E%3Cpath d='M4 1 L19 6 L4 11 Z'/%3E%3C/svg%3E") no-repeat center / contain;
+}
+
+.sess-table tr:last-child td { border-top: 3px double var(--line-strong); }
+
+.foot-putt { display: block; margin-bottom: 6px; width: min(320px, 100%); height: 28px; color: var(--line-strong); }
+.foot-putt .cup { fill: color-mix(in srgb, var(--ink) 45%, transparent); }
+.foot-putt .pole { stroke: var(--muted); }
+
+@media (min-width: 860px) {
+  .band-art { right: max(16px, calc((100vw - 1120px) / 2 + 10px)); bottom: -4px; width: 180px; opacity: 1; }
 }
 
 @media (prefers-reduced-motion: reduce) {

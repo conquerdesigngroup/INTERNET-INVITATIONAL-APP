@@ -16,6 +16,23 @@ createRoot(document.getElementById("root")!).render(
   </StrictMode>,
 );
 
+// Parallax: the background contour texture moves at a quarter of scroll speed, wrapped to its 240px tile.
+if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  let frame = 0;
+  const root = document.documentElement;
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (frame) return;
+      frame = requestAnimationFrame(() => {
+        frame = 0;
+        root.style.setProperty("--py", `${((window.scrollY * 0.25) % 240).toFixed(1)}px`);
+      });
+    },
+    { passive: true },
+  );
+}
+
 if ("serviceWorker" in navigator && import.meta.env.PROD) {
   window.addEventListener("load", () => navigator.serviceWorker.register("/sw.js").catch(() => {}));
 }

@@ -63,6 +63,7 @@ function Header() {
   const next = nextEpisode();
   return (
     <header className="band">
+      <BandArt />
       <div className="wrap band-inner">
         <div className="band-top">
           <div className="status">
@@ -98,6 +99,25 @@ function Header() {
         </div>
       </div>
     </header>
+  );
+}
+
+// A green seen from above: slope contours, the cup, a flagstick and a ball lined up for the putt.
+function BandArt() {
+  return (
+    <svg className="band-art" viewBox="0 0 240 170" aria-hidden="true">
+      <g className="contours" fill="none">
+        <ellipse cx="160" cy="138" rx="150" ry="62" />
+        <ellipse cx="164" cy="140" rx="112" ry="44" />
+        <ellipse cx="168" cy="141" rx="76" ry="29" />
+        <ellipse cx="170" cy="142" rx="42" ry="15" />
+      </g>
+      <path className="putt" d="M92 150 C 118 160, 150 156, 168 143" fill="none" />
+      <circle className="ball" cx="90" cy="150" r="5" />
+      <ellipse className="cup" cx="170" cy="142" rx="7" ry="3" />
+      <line className="pole" x1="170" y1="142" x2="170" y2="26" />
+      <path className="pennant" d="M170 26 L214 38 L170 50 Z" />
+    </svg>
   );
 }
 
@@ -147,6 +167,13 @@ export default function App() {
         </div>
       </main>
       <footer className="foot wrap">
+        <svg className="foot-putt" viewBox="0 0 320 28" preserveAspectRatio="xMinYMid meet" aria-hidden="true">
+          <path className="putt" d="M12 20 C 90 6, 200 30, 286 19" fill="none" />
+          <circle className="ball" cx="10" cy="20" r="4.5" />
+          <ellipse className="cup" cx="290" cy="19" rx="7" ry="2.6" />
+          <line className="pole" x1="290" y1="19" x2="290" y2="2" />
+          <path className="pennant" d="M290 2 L304 6 L290 10 Z" />
+        </svg>
         Fan-made tracker. Results from{" "}
         <a href={T.meta.sources[0]} target="_blank" rel="noopener">
           YT Golf Stats
