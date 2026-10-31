@@ -25,6 +25,7 @@ npm run preview   # serve the production build
 | `src/screens/` | Standings, Teams, Matches, Stats & Course, Format & Bracket |
 | `src/lib/stats.ts` | Chart math: running score, margins, net holes, player and pairing lines, hole tallies |
 | `src/course.ts` | Ozarks National scorecard, hole moments, Big Cedar course locations |
+| `data/photos.json` | Player headshot sources (ytgolfstats creator pages), downloaded to `public/players/` at build time by `scripts/fetch-photos.mjs` |
 | `public/` | PWA manifest, service worker, icons |
 | `reference/prototype.html` | The original single-file prototype |
 
@@ -39,7 +40,8 @@ Results come from <https://ytgolfstats.com/internet-invitational/2026/>.
 3. **Episode + stage.** Flip the episode's `status` to `"released"` and give it a `summary`. Set the stage to `"status": "complete"`, `"confirmed": true`, with real `format` text. Bump `meta.updatedThrough` and `meta.updatedAt`.
 4. **Course.** If a new day moves to another course, add its scorecard to `src/course.ts`, update `NINES` (which session played which holes) and add any hole moments.
 5. **Words.** Update `src/content.ts` if a story line or bracket blurb changed, and add any new `moments`.
-6. **Check and ship.** `npm test && npm run build`, then push to `main`. Vercel deploys automatically.
+6. **Photos.** A new player needs a headshot URL in `data/photos.json` (copy the image link from their ytgolfstats creator page). Without one the app shows their initials.
+7. **Check and ship.** `npm test && npm run build`, then push to `main`. Vercel deploys automatically.
 
 Scores, records, standings and "up next" are all computed, so you never type a total by hand.
 

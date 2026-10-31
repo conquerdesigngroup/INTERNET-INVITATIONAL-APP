@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { TEAM_ORDER, T, records, shortName, teamOutcomeLine, teams } from "../data";
 import { fmtPoints, teamTotals } from "../lib/scoring";
-import { Pill, PlayerLink, RecordChips, SecHead, TeamDot } from "../components";
+import { Avatar, Pill, PlayerLink, RecordChips, SecHead, TeamDot } from "../components";
 
 const KEY = "ii26-team";
 
@@ -88,16 +88,19 @@ export default function Teams() {
             const r = records.get(p.name);
             return (
               <PlayerLink key={p.name} name={p.name} className="roster-row">
-                <span className="c-name">
-                  <b>
-                    {p.isCaptain && (
-                      <span className="star" title="Captain" aria-label="Captain">
-                        ★{" "}
-                      </span>
-                    )}
-                    {p.name}
-                  </b>
-                  <small className="hcp-sm num">{p.handicap ?? "n/a"}</small>
+                <span className="c-person">
+                  <Avatar name={p.name} size={36} />
+                  <span className="c-name">
+                    <b>
+                      {p.isCaptain && (
+                        <span className="star" title="Captain" aria-label="Captain">
+                          ★{" "}
+                        </span>
+                      )}
+                      {p.name}
+                    </b>
+                    <small className="hcp-sm num">{p.handicap ?? "n/a"}</small>
+                  </span>
                 </span>
                 <span className="c-hcp num">
                   {p.handicap ?? <span className="muted">n/a</span>}

@@ -5,7 +5,7 @@ import { fmtPoints, scoringSessions } from "../../lib/scoring";
 import { marginOf, sideMargin, teamSessionLines, worm } from "../../lib/stats";
 import type { Match } from "../../lib/types";
 import { ChartCard, signed, useWidth } from "../../charts";
-import { Chips, TeamDot, playerHref } from "../../components";
+import { Avatar, Chips, TeamDot, playerHref } from "../../components";
 
 const matchupOptions = (): [string, string][] => Object.entries(T.matchups).map(([k, m]) => [k, m.label]);
 
@@ -18,7 +18,10 @@ function MatchLine({ m }: { m: Match }) {
       {m[s].players.map((n, i) => (
         <span key={n}>
           {i > 0 && " & "}
-          <Link to={playerHref(n)}>{n}</Link>
+          <Link to={playerHref(n)} className="who">
+            <Avatar name={n} size={18} />
+            {n}
+          </Link>
         </span>
       ))}
     </span>

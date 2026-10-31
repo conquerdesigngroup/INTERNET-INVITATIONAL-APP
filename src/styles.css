@@ -766,3 +766,16 @@ html::after {
   .links .draw { stroke-dashoffset: 0; }
 }
 .hole-detail .pill, .map-card .pill { white-space: normal; width: auto; justify-self: start; }
+
+/* Player headshots: team-colour ring, initials underneath until (or unless) the photo loads */
+.av { position: relative; display: inline-grid; place-items: center; flex: none; border-radius: 50%; overflow: hidden; vertical-align: middle; background: var(--surface-2); color: var(--muted); font-weight: 700; letter-spacing: 0.02em; line-height: 1; box-shadow: 0 0 0 1.5px var(--av-ring, var(--line-strong)); user-select: none; }
+.av img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.av.bryan { --av-ring: var(--t-bryan); background: color-mix(in srgb, var(--t-bryan) 16%, var(--surface)); }
+.av.dalke { --av-ring: var(--t-dalke); background: color-mix(in srgb, var(--t-dalke) 16%, var(--surface)); }
+.av.finch { --av-ring: var(--t-finch); background: color-mix(in srgb, var(--t-finch) 16%, var(--surface)); }
+.av.ruffels { --av-ring: var(--t-ruffels-edge); }
+.name, .pl, .lb-person, .who { display: inline-flex; align-items: center; gap: 6px; }
+.who, .lb-person { margin-left: 3px; }
+.name .av { margin-left: -4px; }
+.c-person { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 10px; align-items: center; min-width: 0; }
+.player-strip-id { display: flex; align-items: center; gap: 12px; }
