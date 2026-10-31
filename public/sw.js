@@ -1,5 +1,5 @@
 // Network-first for pages (so new episode data shows up right away), cache-first for hashed assets.
-const CACHE = "ii26-v1";
+const CACHE = "ii26-v2";
 const SHELL = ["/", "/manifest.webmanifest", "/icons/icon-192.png"];
 
 self.addEventListener("install", (e) => {
@@ -30,7 +30,7 @@ self.addEventListener("fetch", (e) => {
     return;
   }
 
-  const sameOriginAsset = url.origin === location.origin && (url.pathname.startsWith("/assets/") || url.pathname.startsWith("/icons/"));
+  const sameOriginAsset = url.origin === location.origin && (url.pathname.startsWith("/assets/") || url.pathname.startsWith("/icons/") || url.pathname.startsWith("/players/"));
   const font = url.hostname === "fonts.googleapis.com" || url.hostname === "fonts.gstatic.com";
   if (sameOriginAsset || font) {
     e.respondWith(

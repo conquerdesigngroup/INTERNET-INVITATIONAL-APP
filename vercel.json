@@ -1,6 +1,28 @@
 {
-  "rewrites": [{ "source": "/((?!_vercel/|assets/|icons/|sw.js|manifest.webmanifest).*)", "destination": "/index.html" }],
+  "rewrites": [
+    {
+      "source": "/((?!_vercel/|assets/|icons/|players/|sw.js|manifest.webmanifest).*)",
+      "destination": "/index.html"
+    }
+  ],
   "headers": [
-    { "source": "/sw.js", "headers": [{ "key": "Cache-Control", "value": "no-cache" }] }
+    {
+      "source": "/sw.js",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache"
+        }
+      ]
+    },
+    {
+      "source": "/players/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=604800, stale-while-revalidate=86400"
+        }
+      ]
+    }
   ]
 }

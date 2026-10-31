@@ -1,7 +1,8 @@
-import type { ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 import { Link } from "react-router-dom";
 import type { RecordMark } from "./lib/types";
-import { shortName, teams } from "./data";
+import { shortName, teamOfPlayer, teams } from "./data";
+import { initials, photoPath, photoSources } from "./lib/photos";
 
 export function TeamDot({ id }: { id: string }) {
   return <span className={`tdot ${id}`} aria-hidden="true" />;
@@ -12,6 +13,21 @@ export function TeamChip({ id, short }: { id: string; short?: boolean }) {
     <span className="tchip">
       <TeamDot id={id} />
       {short ? shortName(id) : teams[id]?.name}
+    </span>
+  );
+}
+
+/** Round headshot with a team-colour ring. Tries the self-hosted copy, then the original source, then shows initials. */
+export function Avatar({ name, size = 22 }: { name: string; size?: number }) {
+  const local = photoPath(name);
+  const remote = photoSources[name];
+  const [step, setStep] = useState(0);
+  const src = step === 0 ? local : step === 1 ? remote : null;
+  const team = teamOfPlayer.get(name) ?? "";
+  return (
+    <span className={`av ${team}`} style={{ width: size, height: size, fontSize: Math.max(8, Math.round(size * 0.4)) }} aria-hidden="true">
+      {initials(name)}
+      {src && <img src={src} alt="" width={size} height={size} loading="lazy" decoding="async" onError={() => setStep((n) => n + 1)} />}
     </span>
   );
 }

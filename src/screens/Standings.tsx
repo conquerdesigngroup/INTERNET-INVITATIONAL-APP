@@ -1,7 +1,7 @@
 import { T, TEAM_ORDER, epDate, epName, episodeStates, money, sessionShort, shortName, teams } from "../data";
 import { boardStories, standingsIntro } from "../content";
 import { contestTotal, fmtPoints, scoringSessions, sessionTotal } from "../lib/scoring";
-import { Pill, PlayerLink, SecHead, TeamChip } from "../components";
+import { Avatar, Pill, PlayerLink, SecHead, TeamChip } from "../components";
 
 function Board({ mk }: { mk: string }) {
   const mu = T.matchups[mk];
@@ -107,8 +107,11 @@ function Survivors() {
           <div className="names">
             {t.players.map((p) => (
               <PlayerLink key={p.name} name={p.name} className={`name ${p.isCaptain ? "cap" : ""}`}>
-                {p.isCaptain && <span className="star" aria-label="Captain">★ </span>}
-                {p.name}
+                <Avatar name={p.name} size={20} />
+                <span>
+                  {p.isCaptain && <span className="star" aria-label="Captain">★ </span>}
+                  {p.name}
+                </span>
               </PlayerLink>
             ))}
           </div>

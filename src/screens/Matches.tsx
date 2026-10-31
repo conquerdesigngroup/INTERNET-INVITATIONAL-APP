@@ -3,13 +3,14 @@ import { Link, useSearchParams } from "react-router-dom";
 import { T, records, shortName, teamOfPlayer } from "../data";
 import { fmtPoints, sessionCounts, sessionTotal } from "../lib/scoring";
 import type { Match } from "../lib/types";
-import { Chips, RecordChips, SecHead, TeamDot, playerHref } from "../components";
+import { Avatar, Chips, RecordChips, SecHead, TeamDot, playerHref } from "../components";
 
 function MatchCard({ m, q }: { m: Match; q: string }) {
   const mu = T.matchups[m.matchup];
   const winTeam = m.winner === "home" ? mu.home : m.winner === "away" ? mu.away : null;
   const pl = (n: string) => (
     <Link key={n} to={playerHref(n)} className={`pl ${q && n.toLowerCase().includes(q) ? "hit" : ""}`}>
+      <Avatar name={n} size={22} />
       {n}
     </Link>
   );
@@ -116,11 +117,14 @@ export default function Matches() {
 
       {exact && rec && (
         <div className="card player-strip">
-          <div>
-            <span className="eyebrow">
-              <TeamDot id={teamOfPlayer.get(exact)!} /> {shortName(teamOfPlayer.get(exact)!)}
-            </span>
-            <h3>{exact}</h3>
+          <div className="player-strip-id">
+            <Avatar name={exact} size={52} />
+            <div>
+              <span className="eyebrow">
+                <TeamDot id={teamOfPlayer.get(exact)!} /> {shortName(teamOfPlayer.get(exact)!)}
+              </span>
+              <h3>{exact}</h3>
+            </div>
           </div>
           <div className="player-strip-stats">
             <RecordChips marks={rec.marks} />

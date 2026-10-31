@@ -5,7 +5,7 @@ import { fmtPoints } from "../../lib/scoring";
 import { handicapValue, pairLines, playerLines, type PlayerLine } from "../../lib/stats";
 import type { TeamId } from "../../lib/types";
 import { ChartCard, hcpLabel, signed, useWidth } from "../../charts";
-import { Chips, RecordChips, TeamDot, playerHref } from "../../components";
+import { Avatar, Chips, RecordChips, TeamDot, playerHref } from "../../components";
 
 const hcpOf = new Map<string, number | null>();
 for (const t of T.teams) for (const p of t.players) hcpOf.set(p.name, handicapValue(p.handicap));
@@ -64,11 +64,13 @@ function Leaderboard() {
             <li key={r.key} className="lb-row">
               <span className="lb-rank num">{k === 0 || rows[k - 1][metric] !== v ? rank : ""}</span>
               <span className="lb-name">
-                <TeamDot id={r.team} />{" "}
                 {r.names.map((n, i) => (
                   <span key={n}>
                     {i > 0 && " & "}
-                    <Link to={playerHref(n)}>{n}</Link>
+                    <Link to={playerHref(n)} className="lb-person">
+                      <Avatar name={n} size={20} />
+                      {n}
+                    </Link>
                   </span>
                 ))}
                 {r.sub && <RecordChips marks={records.get(r.sub.name)?.marks ?? []} />}
@@ -135,7 +137,7 @@ function Scatter() {
         <p className="hint">
           {cur ? (
             <>
-              <TeamDot id={cur.team} /> <Link to={playerHref(cur.name)}><b>{cur.name}</b></Link> · handicap {teams[cur.team].players.find((p) => p.name === cur.name)?.handicap} · {fmtPoints(cur.points)} pts · net {signed(cur.net)} holes
+              <Avatar name={cur.name} size={22} /> <Link to={playerHref(cur.name)}><b>{cur.name}</b></Link> · handicap {teams[cur.team].players.find((p) => p.name === cur.name)?.handicap} · {fmtPoints(cur.points)} pts · net {signed(cur.net)} holes
             </>
           ) : (
             <>
