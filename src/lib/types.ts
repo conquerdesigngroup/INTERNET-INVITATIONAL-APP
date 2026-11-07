@@ -1,6 +1,7 @@
 export type TeamId = "bryan" | "dalke" | "finch" | "ruffels";
 export type Side = "home" | "away";
-export type Winner = Side | "halved";
+/** "unfinished" = called in before it was decided; no points, no record mark. */
+export type Winner = Side | "halved" | "unfinished";
 export type RecordMark = "W" | "H" | "L";
 
 export interface Bonus {
@@ -16,6 +17,7 @@ export interface Meta {
   updatedAt: string;
   venue: string;
   day1Course: string;
+  day2Course?: string;
   host: string;
   rulesOfficial: string;
   presentedBy: string[];
@@ -43,6 +45,8 @@ export interface Session {
 }
 
 export interface Matchup {
+  /** Stage id from `stages`, e.g. "day1". */
+  stage: string;
   home: TeamId;
   away: TeamId;
   label: string;
@@ -83,7 +87,8 @@ export interface Team {
 
 export interface MatchSide {
   team: TeamId;
-  players: [string, string];
+  /** Two names for pairs formats, one for singles. */
+  players: string[];
 }
 
 export interface Match {

@@ -1,13 +1,13 @@
 import { T, TEAM_ORDER, epDate, epName, episodeStates, money, sessionShort, shortName, teams } from "../data";
 import { boardStories, standingsIntro } from "../content";
-import { contestTotal, fmtPoints, scoringSessions, sessionTotal } from "../lib/scoring";
+import { contestTotal, fmtPoints, matchupSessions, sessionTotal } from "../lib/scoring";
 import { Avatar, Pill, PlayerLink, SecHead, TeamChip } from "../components";
 
 function Board({ mk }: { mk: string }) {
   const mu = T.matchups[mk];
   const outcome = T.matchupOutcomes[mk];
   const tot = contestTotal(T, mk);
-  const sessions = scoringSessions(T);
+  const sessions = matchupSessions(T, mk);
   const winner = outcome?.winner;
   const order = winner === mu.away ? (["away", "home"] as const) : (["home", "away"] as const);
   const totalPts = tot.home + tot.away;
@@ -15,7 +15,9 @@ function Board({ mk }: { mk: string }) {
   return (
     <article className="card board">
       <div className="board-top">
-        <span className="eyebrow">{mu.label}</span>
+        <span className="eyebrow">
+          {T.stages.find((st) => st.id === mu.stage)?.label.split(" · ")[0] ?? ""} · {mu.label}
+        </span>
         {outcome?.decidedBy === "playoff" ? <Pill kind="exp">Won in playoff</Pill> : winner ? <Pill kind="adv">Clinched</Pill> : null}
       </div>
       {order.map((side) => {
@@ -76,11 +78,11 @@ function Board({ mk }: { mk: string }) {
 }
 
 function Facts() {
-  const day1 = T.stages.find((s) => s.id === "day1");
+  const cuts = T.stages.filter((s) => s.status === "complete" && s.players && s.playersAfter);
   const [ace, ctp] = T.meta.bonuses;
   const facts = [
     { b: money(T.meta.prizeTotalUSD), s: `Total prize · about ${money(T.meta.prizePerWinnerUSD)} per player on the winning team` },
-    day1?.players && day1.playersAfter ? { b: `${day1.players} → ${day1.playersAfter}`, s: "Players after Day 1" } : null,
+    ...cuts.map((st) => ({ b: `${st.players} → ${st.playersAfter}`, s: `Players after ${st.label.split(" · ")[0]}` })),
     ace ? { b: money(ace.amountUSD), s: ace.detail } : null,
     ctp ? { b: money(ctp.amountUSD), s: ctp.detail.split(";")[0] + " for the captains' closest-to-the-pin" } : null,
     { b: "0", s: "Handicaps. Everyone plays the same tees" },

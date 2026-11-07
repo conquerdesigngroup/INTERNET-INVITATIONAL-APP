@@ -10,14 +10,34 @@ export function sessionCounts(t: Tournament, session: string): boolean {
   return t.sessions[session]?.countsTowardPoints !== false;
 }
 
+/** Matches that score: in a counting session and actually decided (not called in unfinished). */
 export function countingMatches(t: Tournament): Match[] {
-  return t.matches.filter((m) => sessionCounts(t, m.session));
+  return t.matches.filter((m) => sessionCounts(t, m.session) && m.winner !== "unfinished");
+}
+
+/** Point-scoring sessions a matchup actually played, in display order. */
+export function matchupSessions(t: Tournament, matchup: string): string[] {
+  return scoringSessions(t).filter((s) => t.matches.some((m) => m.matchup === matchup && m.session === s));
+}
+
+/** Points available in a matchup: one per scheduled match, unfinished ones included. */
+export function matchupPointsAvailable(t: Tournament, matchup: string): number {
+  return t.matches.filter((m) => m.matchup === matchup && sessionCounts(t, m.session)).length;
+}
+
+/** Short name for a session format, e.g. "Alt shot". */
+export function formatShort(format: string | undefined): string {
+  if (format === "scramble") return "Scramble";
+  if (format === "alternate_shot") return "Alt shot";
+  if (format === "singles") return "Singles";
+  return format ?? "";
 }
 
 /** Points a single match is worth to each side: win = 1, halved = ½ each. */
 export function matchPoints(winner: Winner): Score {
   if (winner === "home") return { home: 1, away: 0 };
   if (winner === "away") return { home: 0, away: 1 };
+  if (winner === "unfinished") return { home: 0, away: 0 };
   return { home: 0.5, away: 0.5 };
 }
 
@@ -33,7 +53,7 @@ function sum(matches: Match[]): Score {
 
 /** Points for one matchup in one session. Raw tally, even for a playoff session. */
 export function sessionTotal(t: Tournament, matchup: string, session: string): Score {
-  return sum(t.matches.filter((m) => m.matchup === matchup && m.session === session));
+  return sum(t.matches.filter((m) => m.winner !== "unfinished").filter((m) => m.matchup === matchup && m.session === session));
 }
 
 /** Contest total for a matchup, excluding sessions that don't count. */
@@ -41,9 +61,17 @@ export function contestTotal(t: Tournament, matchup: string): Score {
   return sum(countingMatches(t).filter((m) => m.matchup === matchup));
 }
 
+/** Every session key in play order (by episode; JS would otherwise put "3" before "P"). */
+export function sessionOrder(t: Tournament): string[] {
+  return Object.keys(t.sessions)
+    .map((k, i) => ({ k, i }))
+    .sort((a, b) => t.sessions[a.k].episode - t.sessions[b.k].episode || a.i - b.i)
+    .map((x) => x.k);
+}
+
 /** Point-scoring session keys in display order. */
 export function scoringSessions(t: Tournament): string[] {
-  return Object.keys(t.sessions).filter((s) => sessionCounts(t, s));
+  return sessionOrder(t).filter((s) => sessionCounts(t, s));
 }
 
 export interface PlayerRecord {

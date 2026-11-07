@@ -43,15 +43,20 @@ describe("contest totals", () => {
 
 describe("player records", () => {
   const recs = playerRecords(t);
-  it("every player has two Day 1 matches and no playoff marks", () => {
-    for (const team of t.teams) for (const p of team.players) expect(recs.get(p.name)?.marks).toHaveLength(2);
+  it("Day 1 losers have two matches; Day 2 players three or four (no playoff marks)", () => {
+    for (const team of t.teams)
+      for (const p of team.players) {
+        const n = recs.get(p.name)?.marks.length;
+        if (team.id === "finch" || team.id === "dalke") expect(n).toBe(2);
+        else expect([3, 4]).toContain(n);
+      }
   });
-  it("Big John: W then L, playoff ignored", () => {
-    expect(recs.get("Big John")).toEqual({ marks: ["W", "L"], points: 1, wins: 1 });
+  it("Big John: W, L, then two Day 2 wins, playoff ignored", () => {
+    expect(recs.get("Big John")).toEqual({ marks: ["W", "L", "W", "W"], points: 3, wins: 3 });
   });
   it("team totals agree with contest totals", () => {
-    expect(teamTotals(t, "ruffels").points).toBe(8);
-    expect(teamTotals(t, "bryan").points).toBe(10.5);
+    expect(teamTotals(t, "ruffels").points).toBe(8 + 12.5);
+    expect(teamTotals(t, "bryan").points).toBe(10.5 + 6.5);
   });
 });
 
@@ -69,5 +74,23 @@ describe("holesPlayed", () => {
     expect(holesPlayed("4&3")).toBe(6);
     expect(holesPlayed("1UP")).toBe(9);
     expect(holesPlayed("Halved")).toBe(9);
+  });
+});
+
+describe("Day 2 (Bryan vs Ruffels)", () => {
+  it("scramble is 2–6 and singles 4½–6½", () => {
+    expect(sessionTotal(t, "BR", "3")).toEqual({ home: 2, away: 6 });
+    expect(sessionTotal(t, "BR", "4")).toEqual({ home: 4.5, away: 6.5 });
+  });
+  it("Ruffels win 12½–6½ and unfinished singles score nothing", () => {
+    expect(contestTotal(t, "BR")).toEqual({ home: 6.5, away: 12.5 });
+    expect(matchPoints("unfinished")).toEqual({ home: 0, away: 0 });
+    expect(t.matches.filter((m) => m.winner === "unfinished")).toHaveLength(5);
+  });
+  it("unfinished matches leave no record mark", () => {
+    const recs = playerRecords(t);
+    // The Duke: two Day 1 matches, the Ep 3 scramble win, and an unfinished single.
+    expect(recs.get("The Duke")?.marks).toHaveLength(3);
+    expect(recs.get("The Duke")?.marks.at(-1)).toBe("W");
   });
 });

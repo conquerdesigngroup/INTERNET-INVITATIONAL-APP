@@ -38,7 +38,7 @@ function ResortMap() {
   return (
     <ChartCard
       title="Big Cedar Lodge"
-      sub="The resort's courses outside Branson, Missouri. Day 1 was played at Ozarks National. Tap a pin."
+      sub="The resort's courses outside Branson, Missouri. Day 1 was played at Ozarks National, Day 2 at Buffalo Ridge. Tap a pin."
       foot={
         <div className="map-card">
           <div>

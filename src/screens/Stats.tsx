@@ -5,7 +5,7 @@ import PlayerStats from "./stats/PlayerStats";
 import CourseView from "./stats/CourseView";
 
 const VIEWS = [
-  { id: "teams", label: "Teams", title: "How Day 1 played out", text: "The running score, each format, and every margin. Switch contests and views with the buttons on each chart." },
+  { id: "teams", label: "Teams", title: "How each contest played out", text: "The running score, each format, and every margin. Switch contests and views with the buttons on each chart." },
   { id: "players", label: "Players", title: "Player stats", text: "Who carried their pairing, which partnerships clicked, and whether handicaps told the story." },
   { id: "course", label: "Course", title: "The course", text: "Ozarks National at Big Cedar Lodge, hole by hole, and where the resort's courses sit." },
 ];

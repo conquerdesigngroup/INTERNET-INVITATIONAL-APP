@@ -39,7 +39,7 @@ function Leaderboard() {
   return (
     <ChartCard
       title="Leaderboard"
-      sub="Points are what count. Net holes shows how convincingly: every hole won by, minus every hole lost by, across Day 1."
+      sub="Points are what count. Net holes shows how convincingly: every hole won by, minus every hole lost by, across every decided match. Pairings covers the 2v2 formats only."
       controls={
         <>
           <Chips label="Show" value={mode} onChange={(v) => setMode(v as "players" | "pairs")} options={[["players", "Players"], ["pairs", "Pairings"]]} />

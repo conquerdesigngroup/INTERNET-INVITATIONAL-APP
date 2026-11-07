@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { T, TEAM_ORDER, sessionShort, shortName, teams } from "../../data";
-import { fmtPoints, scoringSessions } from "../../lib/scoring";
+import { fmtPoints, formatShort, matchupPointsAvailable, matchupSessions } from "../../lib/scoring";
 import { marginOf, sideMargin, teamSessionLines, worm } from "../../lib/stats";
 import type { Match } from "../../lib/types";
 import { ChartCard, signed, useWidth } from "../../charts";
@@ -13,7 +13,7 @@ function MatchLine({ m }: { m: Match }) {
   const mu = T.matchups[m.matchup];
   const winTeam = m.winner === "home" ? mu.home : m.winner === "away" ? mu.away : null;
   const side = (s: "home" | "away") => (
-    <span className={m.winner !== "halved" && m.winner !== s ? "muted" : ""}>
+    <span className={(m.winner === "home" || m.winner === "away") && m.winner !== s ? "muted" : ""}>
       <TeamDot id={m[s].team} />{" "}
       {m[s].players.map((n, i) => (
         <span key={n}>
@@ -36,7 +36,7 @@ function MatchLine({ m }: { m: Match }) {
   );
 }
 
-/* ---------- Race chart: running score through the 16 matches ---------- */
+/* ---------- Race chart: running score through every decided match ---------- */
 
 function Race() {
   const [mk, setMk] = useState(Object.keys(T.matchups)[0]);
@@ -48,12 +48,13 @@ function Race() {
   const n = steps.length;
   const i = sel == null || sel >= n ? n - 1 : sel;
   const cur = steps[i];
-  const half = scoringSessions(T).length > 1 ? steps.filter((s) => s.match.session === scoringSessions(T)[0]).length : 0;
+  const muSessions = matchupSessions(T, mk);
+  const half = muSessions.length > 1 ? steps.filter((s) => s.match.session === muSessions[0]).length : 0;
 
   const h = 230;
   const pad = { l: 30, r: view === "race" ? 78 : 14, t: 14, b: 30 };
   const x = (k: number) => pad.l + (k / n) * (w - pad.l - pad.r);
-  const total = n; // one point per match
+  const total = matchupPointsAvailable(T, mk); // one point per scheduled match
   const clinch = total / 2 + 0.5;
   const yMax = Math.ceil(Math.max(clinch, ...steps.map((s) => Math.max(s.home, s.away))) + 0.5);
   const leads = steps.map((s) => s.home - s.away);
@@ -105,8 +106,8 @@ function Race() {
           {half > 0 && (
             <g>
               <line className="divider" x1={x(half)} x2={x(half)} y1={pad.t - 6} y2={h - pad.b} />
-              <text className="axis" x={x(half / 2)} y={h - 8} textAnchor="middle">Scramble</text>
-              <text className="axis" x={x(half + (n - half) / 2)} y={h - 8} textAnchor="middle">Alt shot</text>
+              <text className="axis" x={x(half / 2)} y={h - 8} textAnchor="middle">{formatShort(T.sessions[muSessions[0]]?.format)}</text>
+              <text className="axis" x={x(half + (n - half) / 2)} y={h - 8} textAnchor="middle">{formatShort(T.sessions[muSessions[1]]?.format)}</text>
             </g>
           )}
           {view === "race" ? (
@@ -166,22 +167,22 @@ type Metric = "points" | "wins" | "net";
 function SessionSplit() {
   const [metric, setMetric] = useState<Metric>("points");
   const lines = useMemo(() => teamSessionLines(T), []);
-  const sessions = scoringSessions(T);
+  const sessionsOf = (id: string) => [...(lines.get(id as never)?.keys() ?? [])];
   const val = (id: string, s: string) => {
     const l = lines.get(id as never)?.get(s);
     if (!l) return 0;
     return metric === "points" ? l.points : metric === "wins" ? l.wins : l.net;
   };
-  const all = TEAM_ORDER.flatMap((id) => sessions.map((s) => val(id, s)));
+  const all = TEAM_ORDER.flatMap((id) => sessionsOf(id).map((s) => val(id, s)));
   const max = Math.max(1, ...all.map(Math.abs));
   const diverging = metric === "net";
   const fmt = (v: number) => (metric === "net" ? signed(v) : metric === "points" ? fmtPoints(v) : String(v));
-  const fmtLabel = { points: "Points (of 8)", wins: "Matches won (of 8)", net: "Net holes up" }[metric];
+  const fmtLabel = { points: "Points", wins: "Matches won", net: "Net holes up" }[metric];
 
   return (
     <ChartCard
-      title="Scramble vs alternate shot"
-      sub="How each team did in each format. Net holes adds up every winning margin and subtracts every losing one, so a 5&4 counts more than a 1UP."
+      title="Session by session"
+      sub="How each team did in each session they played. Net holes adds up every winning margin and subtracts every losing one, so a 5&4 counts more than a 1UP."
       controls={<Chips label="Measure" value={metric} onChange={(v) => setMetric(v as Metric)} options={[["points", "Points"], ["wins", "Wins"], ["net", "Net holes"]]} />}
     >
       <div className="hbars" role="table" aria-label={fmtLabel}>
@@ -191,15 +192,15 @@ function SessionSplit() {
               <TeamDot id={id} /> {teams[id].name}
               {teams[id].status === "eliminated" && <span className="muted"> · out</span>}
             </div>
-            {sessions.map((s) => {
+            {sessionsOf(id).map((s, k) => {
               const v = val(id, s);
               const pct = (Math.abs(v) / max) * (diverging ? 50 : 100);
               return (
                 <div className="hbar-row" key={s} role="row" title={`${teams[id].name}, ${sessionShort(s)}: ${fmt(v)}`}>
-                  <span className="hbar-label" role="rowheader">{T.sessions[s].format === "scramble" ? "Scramble" : "Alt shot"}</span>
+                  <span className="hbar-label" role="rowheader">{sessionShort(s).replace(/^Ep (\d+) · (.*)$/, "$2 · Ep $1").replace("Alternate shot", "Alt shot")}</span>
                   <span className={`hbar-track ${diverging ? "div" : ""}`} role="cell">
                     <i
-                      className={`f-${id} ${s !== sessions[0] ? "tex" : ""}`}
+                      className={`f-${id} ${k % 2 ? "tex" : ""}`}
                       style={diverging ? (v >= 0 ? { left: "50%", width: `${pct}%` } : { right: "50%", width: `${pct}%` }) : { width: `${pct}%` }}
                     />
                   </span>
@@ -221,7 +222,7 @@ function Margins() {
   const [sess, setSess] = useState("all");
   const [sel, setSel] = useState<string | null>(null);
   const mu = T.matchups[mk];
-  const list = T.matches.filter((m) => m.matchup === mk && scoringSessions(T).includes(m.session) && (sess === "all" || m.session === sess));
+  const list = T.matches.filter((m) => m.matchup === mk && m.winner !== "unfinished" && matchupSessions(T, mk).includes(m.session) && (sess === "all" || m.session === sess));
   const maxM = Math.max(4, ...T.matches.map((m) => marginOf(m.result)));
   const selM = list.find((m) => m.id === sel) ?? null;
 
@@ -235,8 +236,8 @@ function Margins() {
       }
       controls={
         <>
-          <Chips label="Contest" value={mk} onChange={(v) => { setMk(v); setSel(null); }} options={matchupOptions()} />
-          <Chips label="Session" value={sess} onChange={setSess} options={[["all", "Both sessions"], ...scoringSessions(T).map((s) => [s, sessionShort(s)] as [string, string])]} />
+          <Chips label="Contest" value={mk} onChange={(v) => { setMk(v); setSel(null); setSess("all"); }} options={matchupOptions()} />
+          <Chips label="Session" value={sess} onChange={setSess} options={[["all", "Both sessions"], ...matchupSessions(T, mk).map((s) => [s, sessionShort(s)] as [string, string])]} />
         </>
       }
       foot={selM ? <MatchLine m={selM} /> : <p className="hint">Tap a row for the full match.</p>}

@@ -1,7 +1,7 @@
 import { Fragment, useLayoutEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { T, epDate, money, playersAlive, sessionShort, shortName, teams } from "../data";
 import { matchupBullets, stageDetails, teamBlurbs } from "../content";
-import { contestTotal, countingMatches, fmtPoints, holesPlayed, scoringSessions, sessionTotal } from "../lib/scoring";
+import { contestTotal, countingMatches, fmtPoints, holesPlayed, matchupSessions, sessionTotal } from "../lib/scoring";
 import { Pill, SecHead, TeamChip } from "../components";
 
 type LinkKind = "on" | "off" | "tbd";
@@ -28,7 +28,7 @@ function buildBracket() {
   const day1 = stage("day1");
   const day1Done = day1?.status === "complete";
 
-  for (const [mk, mu] of Object.entries(T.matchups)) {
+  for (const [mk, mu] of Object.entries(T.matchups).filter(([, m]) => m.stage === "day1")) {
     for (const id of [mu.home, mu.away]) {
       const t = teams[id];
       const out = t.status === "eliminated";
@@ -45,7 +45,8 @@ function buildBracket() {
           </>
         ),
       });
-      links.push([id, mk, out ? "off" : "on"]);
+      const lostHere = T.matchupOutcomes[mk] ? T.matchupOutcomes[mk].winner !== id : out;
+      links.push([id, mk, lostHere ? "off" : "on"]);
       details[id] = { title: `${t.name} · ${t.color}`, text: teamBlurbs[id] ?? `Captain ${t.captain}.`, bullets: [] };
     }
     const tot = contestTotal(T, mk);
@@ -77,7 +78,7 @@ function buildBracket() {
       title: `Day 1 · ${mu.label}`,
       text: day1?.format ?? "",
       bullets: [
-        ...scoringSessions(T).map((s) => {
+        ...matchupSessions(T, mk).map((s) => {
           const v = sessionTotal(T, mk, s);
           return `${sessionShort(s)}: ${shortName(mu.home)} ${fmtPoints(v.home)} – ${shortName(mu.away)} ${fmtPoints(v.away)}`;
         }),
@@ -87,13 +88,33 @@ function buildBracket() {
   }
 
   const alive = T.teams.filter((t) => t.status === "advanced");
+  const day2Mk = Object.keys(T.matchups).find((k) => T.matchups[k].stage === "day2");
   for (const [i, id] of (["day2", "semi", "final"] as const).entries()) {
     const st = stage(id);
     const future = st?.status !== "complete";
     const extra = stageDetails[id];
     const expected = st?.expectedFrom2025;
     let body: ReactNode;
-    if (id === "day2")
+    if (id === "day2" && day2Mk && !future) {
+      const mu = T.matchups[day2Mk];
+      const tot = contestTotal(T, day2Mk);
+      const outcome = T.matchupOutcomes[day2Mk];
+      body = (
+        <>
+          <span className="eyebrow">{st?.label}</span>
+          <h4>{mu.label}</h4>
+          <div className="vs">
+            {(["home", "away"] as const).map((side) => (
+              <div key={side} className={outcome && outcome.winner !== mu[side] ? "lose" : ""}>
+                <TeamChip id={mu[side]} short />
+                <b className="num">{fmtPoints(tot[side])}</b>
+              </div>
+            ))}
+          </div>
+          <span className="s">{st?.playersAfter} remain</span>
+        </>
+      );
+    } else if (id === "day2")
       body = (
         <>
           <span className="eyebrow">{st?.label}</span>
@@ -106,7 +127,7 @@ function buildBracket() {
       body = (
         <>
           <span className="eyebrow">{st?.label}</span>
-          <h4>Teams of three</h4>
+          <h4>{st?.players ? `${st.players} players, four teams` : "Teams of three"}</h4>
           <span className="s">{expected}</span>
         </>
       );
@@ -126,15 +147,23 @@ function buildBracket() {
       body: (
         <>
           {body}
-          {future && <Pill kind="exp">{id === "day2" ? "Not aired yet" : "Expected"}</Pill>}
+          {future && <Pill kind="exp">{id === "final" ? "Expected" : "Not aired yet"}</Pill>}
         </>
       ),
     });
     if (id !== "final") links.push([id, id === "day2" ? "semi" : "final", future ? "tbd" : "on"]);
+    const sessionLines =
+      id === "day2" && day2Mk && !future
+        ? matchupSessions(T, day2Mk).map((s) => {
+            const v = sessionTotal(T, day2Mk, s);
+            const mu = T.matchups[day2Mk];
+            return `${sessionShort(s)}: ${shortName(mu.home)} ${fmtPoints(v.home)} – ${shortName(mu.away)} ${fmtPoints(v.away)}`;
+          })
+        : [];
     details[id] = {
       title: extra?.title ?? st?.label ?? id,
       text: extra?.text ?? st?.format ?? "",
-      bullets: future && expected && !extra ? [`Expected from 2025: ${expected}`] : (extra?.bullets ?? []),
+      bullets: future && expected && !extra ? [`Expected from 2025: ${expected}`] : [...sessionLines, ...(extra?.bullets ?? [])],
     };
   }
   return { nodes, links, details };
@@ -192,7 +221,7 @@ function DetailPanel({ d }: { d: Detail }) {
 
 function Bracket() {
   const { nodes, links, details } = useMemo(buildBracket, []);
-  const [sel, setSel] = useState("FR");
+  const [sel, setSel] = useState("day2");
   const ref = useRef<HTMLDivElement>(null);
   const { paths, box } = useLinks(ref, links);
 
@@ -328,11 +357,12 @@ function Decoder() {
         ))}
       </div>
       <p className="out">
-        {text} Happened {n} time{n === 1 ? "" : "s"} on Day 1.
+        {text} Happened {n} time{n === 1 ? "" : "s"} so far.
       </p>
       <p className="footnote">
-        Each match is worth 1 point and a halve is worth ½. With 16 points on the table, 8½ clinches the contest. A tie at 8–8 goes to a
-        sudden-death alternate-shot playoff.
+        Each match is worth 1 point and a halve is worth ½. On Day 1, 16 points were on the table and 8½ clinched; a tie at 8–8 went to a
+        sudden-death alternate-shot playoff. Day 2 had 24 points (8 scramble + 16 singles), so 12½ clinched and the unplayed singles were
+        called in.
       </p>
     </div>
   );
@@ -353,15 +383,15 @@ export default function Format() {
   return (
     <section className="view">
       <SecHead title="The road to $4 million">
-        Tap any box for details. Solid green lines are confirmed results. Gold dotted lines are stages still to air, sketched from how the 2025
-        event ran.
+        Tap any box for details. Solid green lines are confirmed results. Gold dotted lines are stages still to air, sketched from what the
+        show has announced and how the 2025 event ran.
       </SecHead>
       <Bracket />
 
       <SecHead title="How the golf works" />
       <div className="explain">
         <div className="card ex">
-          <h3>Scramble · Episode 1</h3>
+          <h3>Scramble · Episodes 1 and 3</h3>
           <svg viewBox="0 0 320 130" role="img" aria-label="Scramble: both players hit, the team picks the best ball, both play from there">
             <Hole>
               <path className="shot" d="M30 88 Q90 40 150 58" />
@@ -412,6 +442,13 @@ export default function Format() {
           <p>
             One ball per team. Partners take turns hitting it until it's holed, and one partner tees off on odd holes, the other on even holes.
             A single bad swing leaves your partner in trouble, which is why it decides the cut.
+          </p>
+        </div>
+        <div className="card ex">
+          <h3>Singles · Episode 4</h3>
+          <p>
+            One player against one player, nine holes, every shot your own. Captains ranked their 16 players and Portnoy set the board, with a
+            few late swaps after complaints. Matches still on the course once a team reached 12½ were called in without a point.
           </p>
         </div>
         <Decoder />
