@@ -9,7 +9,7 @@ export function marginOf(result: string): number {
 
 /** Margin from one side's point of view: positive if that side won. */
 export function sideMargin(m: Match, side: Side): number {
-  if (m.winner === "halved") return 0;
+  if (m.winner === "halved" || m.winner === "unfinished") return 0;
   const mg = marginOf(m.result);
   return m.winner === side ? mg : -mg;
 }
@@ -93,17 +93,19 @@ export function playerLines(t: Tournament): PlayerLine[] {
 }
 
 export interface PairLine {
-  players: [string, string];
+  players: string[];
   team: TeamId;
   match: Match;
   side: Side;
   margin: number;
 }
 
-/** Every pairing that played, with its margin. */
+/** Every two-player pairing that played (singles left out), with its margin. */
 export function pairLines(t: Tournament): PairLine[] {
   return countingMatches(t).flatMap((m) =>
-    (["home", "away"] as const).map((side) => ({ players: m[side].players, team: m[side].team, match: m, side, margin: sideMargin(m, side) })),
+    (["home", "away"] as const)
+      .filter((side) => m[side].players.length === 2)
+      .map((side) => ({ players: m[side].players, team: m[side].team, match: m, side, margin: sideMargin(m, side) })),
   );
 }
 
@@ -130,7 +132,7 @@ export function holeTallies(t: Tournament, session: string): HoleTally[] {
   const holes = t.sessions[session]?.holes ?? 9;
   const out: HoleTally[] = Array.from({ length: holes }, () => ({ live: 0, decided: 0 }));
   if (!sessionCounts(t, session)) return out;
-  for (const m of t.matches.filter((x) => x.session === session)) {
+  for (const m of t.matches.filter((x) => x.session === session && x.winner !== "unfinished")) {
     const played = holesPlayed(m.result, holes);
     for (let i = 0; i < played; i++) out[i].live++;
     out[played - 1].decided++;

@@ -67,7 +67,7 @@ export default function Teams() {
           <div className="team-stats">
             <div>
               <b className="num">{fmtPoints(tot.points)}</b>
-              <span>Day 1 pts</span>
+              <span>Total pts</span>
             </div>
             <div>
               <b className="num">{tot.wins}</b>
@@ -120,7 +120,7 @@ export default function Teams() {
         </div>
       </div>
       <p className="hint">
-        Record shows each player's Day 1 matches in order (W win, H halved, L loss). Win = 1 pt, halve = ½. Tap a player to see their
+        Record shows each player's matches in order, Day 1 then Day 2 (W win, H halved, L loss). Win = 1 pt, halve = ½. Tap a player to see their
         matches.
       </p>
     </section>

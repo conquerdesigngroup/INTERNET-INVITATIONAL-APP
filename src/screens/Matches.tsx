@@ -1,13 +1,14 @@
 import { useMemo } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { T, records, shortName, teamOfPlayer } from "../data";
-import { fmtPoints, sessionCounts, sessionTotal } from "../lib/scoring";
+import { fmtPoints, sessionCounts, sessionOrder, sessionTotal } from "../lib/scoring";
 import type { Match } from "../lib/types";
 import { Avatar, Chips, RecordChips, SecHead, TeamDot, playerHref } from "../components";
 
 function MatchCard({ m, q }: { m: Match; q: string }) {
   const mu = T.matchups[m.matchup];
   const winTeam = m.winner === "home" ? mu.home : m.winner === "away" ? mu.away : null;
+  const decided = m.winner === "home" || m.winner === "away";
   const pl = (n: string) => (
     <Link key={n} to={playerHref(n)} className={`pl ${q && n.toLowerCase().includes(q) ? "hit" : ""}`}>
       <Avatar name={n} size={22} />
@@ -15,7 +16,7 @@ function MatchCard({ m, q }: { m: Match; q: string }) {
     </Link>
   );
   const side = (s: "home" | "away") => (
-    <div className={`pair ${s} ${m.winner !== "halved" && m.winner !== s ? "lost" : ""} ${m.winner === s ? "won" : ""}`}>
+    <div className={`pair ${s} ${decided && m.winner !== s ? "lost" : ""} ${m.winner === s ? "won" : ""}`}>
       <span className="pair-team">
         <TeamDot id={m[s].team} />
         {shortName(m[s].team)}
@@ -28,7 +29,7 @@ function MatchCard({ m, q }: { m: Match; q: string }) {
       {side("home")}
       <div className="res">
         <span className={`score ${winTeam ?? "half"}`}>{m.result}</span>
-        <small>{winTeam ? `${shortName(winTeam)} win` : "Split ½–½"}</small>
+        <small>{winTeam ? `${shortName(winTeam)} win` : m.winner === "unfinished" ? "No point awarded" : "Split ½–½"}</small>
       </div>
       {side("away")}
       {m.note && <p className="note">{m.note}</p>}
@@ -58,7 +59,7 @@ export default function Matches() {
         (!q || [...m.home.players, ...m.away.players].some((n) => n.toLowerCase().includes(q))),
     );
     const out: { s: string; mk: string; ms: Match[] }[] = [];
-    for (const s of Object.keys(T.sessions))
+    for (const s of sessionOrder(T).reverse())
       for (const k of Object.keys(T.matchups)) {
         const ms = list.filter((m) => m.session === s && m.matchup === k);
         if (ms.length) out.push({ s, mk: k, ms });
@@ -73,7 +74,7 @@ export default function Matches() {
 
   return (
     <section className="view">
-      <SecHead title="Every match">Nine-hole 2v2 match play. The score pill is colored by the winning team.</SecHead>
+      <SecHead title="Every match">Nine-hole match play, newest first: 2v2 pairs, then Day 2 singles. The score pill is colored by the winning team.</SecHead>
 
       <div className="filters">
         <div className="search">
@@ -100,13 +101,13 @@ export default function Matches() {
           label="Session"
           value={sess}
           onChange={(v) => set("session", v)}
-          options={[["all", "All"], ...Object.entries(T.sessions).map(([k, s]) => [k, s.label.replace(/^Episode (\d+) · /, "Ep $1 · ").replace("Sudden-death playoff", "Playoff")] as [string, string])]}
+          options={[["all", "All"], ...sessionOrder(T).map((k) => [k, T.sessions[k]] as const).map(([k, s]) => [k, s.label.replace(/^Episode (\d+) · /, "Ep $1 · ").replace("Sudden-death playoff", "Playoff")] as [string, string])]}
         />
         <Chips
           label="Matchup"
           value={mk}
           onChange={(v) => set("matchup", v)}
-          options={[["all", "Both matchups"], ...Object.entries(T.matchups).map(([k, m]) => [k, m.label] as [string, string])]}
+          options={[["all", "All matchups"], ...Object.entries(T.matchups).map(([k, m]) => [k, m.label] as [string, string])]}
         />
         {filtered && (
           <button type="button" className="clear" onClick={() => setParams({}, { replace: true })}>

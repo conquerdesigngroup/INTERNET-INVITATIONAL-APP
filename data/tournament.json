@@ -2,10 +2,11 @@
   "meta": {
     "event": "Internet Invitational 2026",
     "edition": 2,
-    "updatedThrough": "Episode 2",
-    "updatedAt": "2026-10-29",
+    "updatedThrough": "Episode 4",
+    "updatedAt": "2026-11-07",
     "venue": "Big Cedar Lodge, Ridgedale, Missouri",
     "day1Course": "Ozarks National",
+    "day2Course": "Buffalo Ridge",
     "host": "Dave Portnoy",
     "rulesOfficial": "Kevin Kisner",
     "presentedBy": [
@@ -24,13 +25,21 @@
         "name": "Captains' closest-to-the-pin",
         "amountUSD": 5000,
         "detail": "Paid to each Team Ruffels player; Ruffels also chose Finch as opponent"
+      },
+      {
+        "name": "Ep 3 par-3 9th",
+        "amountUSD": 50000,
+        "detail": "$50K per group on the scramble's last hole, ties roll forward"
       }
     ],
     "trophy": "Cody \"Beef\" Franke Trophy",
     "sources": [
       "https://ytgolfstats.com/internet-invitational/2026/",
       "https://ytgolfstats.com/internet-invitational/2025/",
-      "https://www.thebiglead.com/2026-internet-invitational-episode-2-spoilers-champions-out/"
+      "https://www.thebiglead.com/2026-internet-invitational-episode-2-spoilers-champions-out/",
+      "https://handicap-tracker.com/articles/internet-invitational-2026-episode-4",
+      "https://www.golfdigest.com/story/internet-invitational-2026-episode-3-recap-superlatives-grant-horvat-the-duke-kevin-kisner",
+      "https://www.golfdigest.com/story/internet-invitational-superlatives-ep-4-controversial-penalty-all-time-pillow-fight-devious-plot-twist"
     ]
   },
   "episodes": [
@@ -52,15 +61,15 @@
       "n": 3,
       "date": "2026-11-02",
       "timeET": "13:00",
-      "status": "upcoming",
-      "summary": null
+      "status": "released",
+      "summary": "Day 2 scramble at Buffalo Ridge, Ruffels lead 6–2"
     },
     {
       "n": 4,
       "date": "2026-11-05",
       "timeET": "13:00",
-      "status": "upcoming",
-      "summary": null
+      "status": "released",
+      "summary": "Day 2 singles, Ruffels win 12½–6½, Bryan out"
     },
     {
       "n": 5,
@@ -96,21 +105,46 @@
       "holes": null,
       "label": "Episode 2 · Sudden-death playoff",
       "countsTowardPoints": false
+    },
+    "3": {
+      "episode": 3,
+      "format": "scramble",
+      "holes": 9,
+      "label": "Episode 3 · Scramble"
+    },
+    "4": {
+      "episode": 4,
+      "format": "singles",
+      "holes": 9,
+      "label": "Episode 4 · Singles"
     }
   },
   "matchups": {
+    "BR": {
+      "stage": "day2",
+      "home": "bryan",
+      "away": "ruffels",
+      "label": "Bryan vs Ruffels"
+    },
     "FR": {
+      "stage": "day1",
       "home": "finch",
       "away": "ruffels",
       "label": "Finch vs Ruffels"
     },
     "DB": {
+      "stage": "day1",
       "home": "dalke",
       "away": "bryan",
       "label": "Dalke vs Bryan"
     }
   },
   "matchupOutcomes": {
+    "BR": {
+      "winner": "ruffels",
+      "decidedBy": "points",
+      "note": "12.5–6.5; five singles left unfinished once Ruffels clinched"
+    },
     "FR": {
       "winner": "ruffels",
       "decidedBy": "playoff",
@@ -140,17 +174,20 @@
     {
       "id": "day2",
       "label": "Day 2 · Eps 3–4",
-      "status": "upcoming",
+      "status": "complete",
       "players": 32,
-      "confirmed": false,
-      "expectedFrom2025": "Redraft into two new teams under new captains; scramble + alternate shot with per-hole skins; losing team eliminated"
+      "playersAfter": 16,
+      "confirmed": true,
+      "format": "Day 1 winners kept their teams: 8 scramble matches, then 16 singles, 1 pt each at Buffalo Ridge; 12½ clinches, losing team eliminated"
     },
     {
       "id": "semi",
-      "label": "Semifinal · Ep 5",
+      "label": "Elimination · Ep 5",
       "status": "upcoming",
       "confirmed": false,
-      "expectedFrom2025": "Teams of three, 18-hole alternate-shot stroke play; top two advance"
+      "expectedFrom2025": "Team Ruffels' 16 split into four teams of four; four players go home",
+      "players": 16,
+      "playersAfter": 12
     },
     {
       "id": "final",
@@ -180,12 +217,12 @@
         },
         {
           "name": "Grant Horvat",
-          "handicap": "+3.7",
+          "handicap": "+3.9",
           "isCaptain": false
         },
         {
           "name": "Big John",
-          "handicap": null,
+          "handicap": "+2.2",
           "isCaptain": false
         },
         {
@@ -195,7 +232,7 @@
         },
         {
           "name": "Fat Perez",
-          "handicap": "+0.4",
+          "handicap": "+0.5",
           "isCaptain": false
         },
         {
@@ -220,7 +257,7 @@
         },
         {
           "name": "Bubbie Broders",
-          "handicap": "7.2",
+          "handicap": "6.9",
           "isCaptain": false
         },
         {
@@ -255,7 +292,7 @@
       "name": "Team Bryan",
       "captain": "Wesley Bryan",
       "color": "Green",
-      "status": "advanced",
+      "status": "eliminated",
       "players": [
         {
           "name": "Wesley Bryan",
@@ -269,12 +306,12 @@
         },
         {
           "name": "Sam Heung Min",
-          "handicap": "+3.3",
+          "handicap": "+3.2",
           "isCaptain": false
         },
         {
           "name": "Evan Thompson",
-          "handicap": "+4.9",
+          "handicap": "+4.8",
           "isCaptain": false
         },
         {
@@ -319,7 +356,7 @@
         },
         {
           "name": "Bobby Fairways",
-          "handicap": "11.2",
+          "handicap": "10.9",
           "isCaptain": false
         },
         {
@@ -1266,9 +1303,525 @@
       "result": "Won",
       "winner": "away",
       "note": "Playoff hole 2. Horvat hit from the bunker onto the green and Big John holed the putt to send Team Ruffels through. (Finch-side pairing per The Big Lead.)"
+    },
+    {
+      "id": "m35",
+      "session": "3",
+      "matchup": "BR",
+      "home": {
+        "team": "bryan",
+        "players": [
+          "Cheddy",
+          "Kyle Forgeard"
+        ]
+      },
+      "away": {
+        "team": "ruffels",
+        "players": [
+          "Bobby Ray",
+          "The Duke"
+        ]
+      },
+      "result": "3&2",
+      "winner": "away",
+      "note": "The Duke's birdie on the par-3 9th won the $50K hole: $25K each for him and Bobby Ray."
+    },
+    {
+      "id": "m36",
+      "session": "3",
+      "matchup": "BR",
+      "home": {
+        "team": "bryan",
+        "players": [
+          "PFT Commenter",
+          "Callux"
+        ]
+      },
+      "away": {
+        "team": "ruffels",
+        "players": [
+          "Salim",
+          "Jon Gruden"
+        ]
+      },
+      "result": "3UP",
+      "winner": "away",
+      "note": "Both teams used their Kevin Kisner shot on the par-3 8th. Kisner came up short for Bryan, then hit Ruffels' to 12 feet for the winning par."
+    },
+    {
+      "id": "m37",
+      "session": "3",
+      "matchup": "BR",
+      "home": {
+        "team": "bryan",
+        "players": [
+          "Claire Hogle",
+          "Sam Heung Min"
+        ]
+      },
+      "away": {
+        "team": "ruffels",
+        "players": [
+          "Ryan Whitney",
+          "Micah Morris"
+        ]
+      },
+      "result": "Halved",
+      "winner": "halved",
+      "note": null
+    },
+    {
+      "id": "m38",
+      "session": "3",
+      "matchup": "BR",
+      "home": {
+        "team": "bryan",
+        "players": [
+          "Seb Carmichael-Brown",
+          "Cole Lantz"
+        ]
+      },
+      "away": {
+        "team": "ruffels",
+        "players": [
+          "Grant Horvat",
+          "Justin Gaethje"
+        ]
+      },
+      "result": "Halved",
+      "winner": "halved",
+      "note": "Horvat holed a slippery 10-footer on the last to save the half."
+    },
+    {
+      "id": "m39",
+      "session": "3",
+      "matchup": "BR",
+      "home": {
+        "team": "bryan",
+        "players": [
+          "Sabrina Andolpho",
+          "Mac Boucher"
+        ]
+      },
+      "away": {
+        "team": "ruffels",
+        "players": [
+          "Paige Spiranac",
+          "Jake Adams"
+        ]
+      },
+      "result": "1UP",
+      "winner": "away",
+      "note": null
+    },
+    {
+      "id": "m40",
+      "session": "3",
+      "matchup": "BR",
+      "home": {
+        "team": "bryan",
+        "players": [
+          "Tisha Alyn",
+          "Evan Thompson"
+        ]
+      },
+      "away": {
+        "team": "ruffels",
+        "players": [
+          "Bubbie Broders",
+          "Marissa Wenzler"
+        ]
+      },
+      "result": "2UP",
+      "winner": "away",
+      "note": null
+    },
+    {
+      "id": "m41",
+      "session": "3",
+      "matchup": "BR",
+      "home": {
+        "team": "bryan",
+        "players": [
+          "George Bryan",
+          "Chaz Bowker"
+        ]
+      },
+      "away": {
+        "team": "ruffels",
+        "players": [
+          "Big John",
+          "Fat Perez"
+        ]
+      },
+      "result": "2&1",
+      "winner": "away",
+      "note": null
+    },
+    {
+      "id": "m42",
+      "session": "3",
+      "matchup": "BR",
+      "home": {
+        "team": "bryan",
+        "players": [
+          "Wesley Bryan",
+          "Bobby Fairways"
+        ]
+      },
+      "away": {
+        "team": "ruffels",
+        "players": [
+          "Ryan Ruffels",
+          "Riggs"
+        ]
+      },
+      "result": "1UP",
+      "winner": "home",
+      "note": "Captains' match. Team Bryan's only point of the morning."
+    },
+    {
+      "id": "m43",
+      "session": "4",
+      "matchup": "BR",
+      "home": {
+        "team": "bryan",
+        "players": [
+          "Cheddy"
+        ]
+      },
+      "away": {
+        "team": "ruffels",
+        "players": [
+          "Riggs"
+        ]
+      },
+      "result": "Halved",
+      "winner": "halved",
+      "note": "Cheddy threw a ball in the pond on 8 and played 9 with an unmarked ball; Riggs held on for the half."
+    },
+    {
+      "id": "m44",
+      "session": "4",
+      "matchup": "BR",
+      "home": {
+        "team": "bryan",
+        "players": [
+          "Bobby Fairways"
+        ]
+      },
+      "away": {
+        "team": "ruffels",
+        "players": [
+          "Justin Gaethje"
+        ]
+      },
+      "result": "4&3",
+      "winner": "away",
+      "note": null
+    },
+    {
+      "id": "m45",
+      "session": "4",
+      "matchup": "BR",
+      "home": {
+        "team": "bryan",
+        "players": [
+          "Sam Heung Min"
+        ]
+      },
+      "away": {
+        "team": "ruffels",
+        "players": [
+          "Big John"
+        ]
+      },
+      "result": "3&2",
+      "winner": "away",
+      "note": null
+    },
+    {
+      "id": "m46",
+      "session": "4",
+      "matchup": "BR",
+      "home": {
+        "team": "bryan",
+        "players": [
+          "Wesley Bryan"
+        ]
+      },
+      "away": {
+        "team": "ruffels",
+        "players": [
+          "Ryan Ruffels"
+        ]
+      },
+      "result": "Halved",
+      "winner": "halved",
+      "note": "Both captains birdied the last to halve."
+    },
+    {
+      "id": "m47",
+      "session": "4",
+      "matchup": "BR",
+      "home": {
+        "team": "bryan",
+        "players": [
+          "Claire Hogle"
+        ]
+      },
+      "away": {
+        "team": "ruffels",
+        "players": [
+          "Paige Spiranac"
+        ]
+      },
+      "result": "1UP",
+      "winner": "home",
+      "note": null
+    },
+    {
+      "id": "m48",
+      "session": "4",
+      "matchup": "BR",
+      "home": {
+        "team": "bryan",
+        "players": [
+          "Mac Boucher"
+        ]
+      },
+      "away": {
+        "team": "ruffels",
+        "players": [
+          "Bubbie Broders"
+        ]
+      },
+      "result": "4&3",
+      "winner": "home",
+      "note": null
+    },
+    {
+      "id": "m49",
+      "session": "4",
+      "matchup": "BR",
+      "home": {
+        "team": "bryan",
+        "players": [
+          "Evan Thompson"
+        ]
+      },
+      "away": {
+        "team": "ruffels",
+        "players": [
+          "Grant Horvat"
+        ]
+      },
+      "result": "1UP",
+      "winner": "home",
+      "note": null
+    },
+    {
+      "id": "m50",
+      "session": "4",
+      "matchup": "BR",
+      "home": {
+        "team": "bryan",
+        "players": [
+          "George Bryan"
+        ]
+      },
+      "away": {
+        "team": "ruffels",
+        "players": [
+          "Micah Morris"
+        ]
+      },
+      "result": "Halved",
+      "winner": "halved",
+      "note": null
+    },
+    {
+      "id": "m51",
+      "session": "4",
+      "matchup": "BR",
+      "home": {
+        "team": "bryan",
+        "players": [
+          "PFT Commenter"
+        ]
+      },
+      "away": {
+        "team": "ruffels",
+        "players": [
+          "Jon Gruden"
+        ]
+      },
+      "result": "3&2",
+      "winner": "away",
+      "note": "The pillow fight: a run of halved holes with triple bogeys before Gruden pulled away."
+    },
+    {
+      "id": "m52",
+      "session": "4",
+      "matchup": "BR",
+      "home": {
+        "team": "bryan",
+        "players": [
+          "Kyle Forgeard"
+        ]
+      },
+      "away": {
+        "team": "ruffels",
+        "players": [
+          "Salim"
+        ]
+      },
+      "result": "1UP",
+      "winner": "away",
+      "note": "The clinching point. Salim was 1 down with two to play, won the 8th, and parred the 9th as Forgeard three-putted."
+    },
+    {
+      "id": "m53",
+      "session": "4",
+      "matchup": "BR",
+      "home": {
+        "team": "bryan",
+        "players": [
+          "Sabrina Andolpho"
+        ]
+      },
+      "away": {
+        "team": "ruffels",
+        "players": [
+          "Ryan Whitney"
+        ]
+      },
+      "result": "Not finished",
+      "winner": "unfinished",
+      "note": "Called in at 1 up with one to play after Ruffels clinched. No point awarded."
+    },
+    {
+      "id": "m54",
+      "session": "4",
+      "matchup": "BR",
+      "home": {
+        "team": "bryan",
+        "players": [
+          "Seb Carmichael-Brown"
+        ]
+      },
+      "away": {
+        "team": "ruffels",
+        "players": [
+          "Fat Perez"
+        ]
+      },
+      "result": "2&1",
+      "winner": "away",
+      "note": null
+    },
+    {
+      "id": "m55",
+      "session": "4",
+      "matchup": "BR",
+      "home": {
+        "team": "bryan",
+        "players": [
+          "Chaz Bowker"
+        ]
+      },
+      "away": {
+        "team": "ruffels",
+        "players": [
+          "Marissa Wenzler"
+        ]
+      },
+      "result": "Not finished",
+      "winner": "unfinished",
+      "note": "Called in after Ruffels clinched. No point awarded."
+    },
+    {
+      "id": "m56",
+      "session": "4",
+      "matchup": "BR",
+      "home": {
+        "team": "bryan",
+        "players": [
+          "Cole Lantz"
+        ]
+      },
+      "away": {
+        "team": "ruffels",
+        "players": [
+          "Jake Adams"
+        ]
+      },
+      "result": "Not finished",
+      "winner": "unfinished",
+      "note": "Called in after Ruffels clinched. No point awarded."
+    },
+    {
+      "id": "m57",
+      "session": "4",
+      "matchup": "BR",
+      "home": {
+        "team": "bryan",
+        "players": [
+          "Tisha Alyn"
+        ]
+      },
+      "away": {
+        "team": "ruffels",
+        "players": [
+          "Bobby Ray"
+        ]
+      },
+      "result": "Not finished",
+      "winner": "unfinished",
+      "note": "Called in after Ruffels clinched. No point awarded."
+    },
+    {
+      "id": "m58",
+      "session": "4",
+      "matchup": "BR",
+      "home": {
+        "team": "bryan",
+        "players": [
+          "Callux"
+        ]
+      },
+      "away": {
+        "team": "ruffels",
+        "players": [
+          "The Duke"
+        ]
+      },
+      "result": "Not finished",
+      "winner": "unfinished",
+      "note": "Called in after Ruffels clinched. No point awarded."
     }
   ],
   "moments": [
+    {
+      "title": "Same teams",
+      "text": "Bryan's Robby Berger (Bobby Fairways) asked Portnoy to keep the Day 1 teams together for Day 2. Portnoy agreed, and Ruffels won the morning 6–2."
+    },
+    {
+      "title": "Kisner's two shots",
+      "text": "Each team got one Kevin Kisner shot. Both used it on the same par 3: Kisner left Bryan's short, then stuck Ruffels' to 12 feet."
+    },
+    {
+      "title": "The $50K hole",
+      "text": "The Duke, Team Ruffels' last draft pick, birdied the par-3 9th to win $25K each for himself and Bobby Ray."
+    },
+    {
+      "title": "The clincher",
+      "text": "Salim came from 1 down with two to play to beat Kyle Forgeard and take Ruffels to 12½. The last five singles were called in."
+    },
+    {
+      "title": "The twist",
+      "text": "Portnoy split Ruffels' 16 into four teams of four under Big John, Horvat, Morris and Ruffels. Four more players go home in Episode 5."
+    },
     {
       "title": "The vote",
       "text": "Players voted the pros' group in as captains. Dalke took Tooms first overall; The Duke went last as Team Ruffels' \"Mr. Irrelevant.\""

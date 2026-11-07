@@ -59,10 +59,12 @@ export function epName(ep: Episode) {
   return ep.n === T.episodes.length ? "Finale" : `Ep ${ep.n}`;
 }
 
-/** One-line result for a team's Day 1 contest, built from the data. */
+/** Result line for each contest a team played, latest first, built from the data. */
 export function teamOutcomeLine(id: string): string {
+  const lines: string[] = [];
   for (const [key, mu] of Object.entries(T.matchups)) {
     if (mu.home !== id && mu.away !== id) continue;
+    const day = T.stages.find((s) => s.id === mu.stage)?.label.split(" · ")[0];
     const opp = mu.home === id ? mu.away : mu.home;
     const outcome = T.matchupOutcomes[key];
     const tot = contestTotal(T, key);
@@ -70,13 +72,17 @@ export function teamOutcomeLine(id: string): string {
     const theirs = mu.home === id ? tot.away : tot.home;
     const score = `${fmtPoints(Math.max(mine, theirs))}–${fmtPoints(Math.min(mine, theirs))}`;
     const won = outcome?.winner === id;
+    const prefix = day ? `${day}: ` : "";
     if (outcome?.decidedBy === "playoff")
-      return won
-        ? `Beat ${teams[opp].name} in a sudden-death playoff after a ${score} tie`
-        : `Lost to ${teams[opp].name} in a sudden-death playoff after a ${score} tie`;
-    return won ? `Beat ${teams[opp].name} ${score}` : `Lost to ${teams[opp].name} ${score}`;
+      lines.push(
+        prefix +
+          (won
+            ? `Beat ${teams[opp].name} in a sudden-death playoff after a ${score} tie`
+            : `Lost to ${teams[opp].name} in a sudden-death playoff after a ${score} tie`),
+      );
+    else lines.push(prefix + (won ? `Beat ${teams[opp].name} ${score}` : `Lost to ${teams[opp].name} ${score}`));
   }
-  return "";
+  return lines.join(". ");
 }
 
 export function money(usd: number): string {

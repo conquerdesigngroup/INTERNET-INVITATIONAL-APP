@@ -83,7 +83,7 @@ export interface ResortCourse {
 export const RESORT: ResortCourse[] = [
   { name: "Ozarks National", lat: 36.5590447545, lon: -93.1873172934, designer: "Coore & Crenshaw", kind: "18 holes · par 71", role: "Day 1 · Eps 1–2" },
   { name: "Payne's Valley", lat: 36.5648719041, lon: -93.2033565729, designer: "Tiger Woods", kind: "18 + bonus 19th · par 72", role: "2025 final" },
-  { name: "Buffalo Ridge", lat: 36.5758008745, lon: -93.1936311722, designer: "Tom Fazio", kind: "18 holes · par 71" },
+  { name: "Buffalo Ridge", lat: 36.5758008745, lon: -93.1936311722, designer: "Tom Fazio", kind: "18 holes · par 71", role: "Day 2 · Eps 3–4" },
   { name: "Top of the Rock", lat: 36.5428386495, lon: -93.2490694431, designer: "Jack Nicklaus", kind: "9-hole par 3" },
 ];
 
