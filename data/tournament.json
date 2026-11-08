@@ -39,7 +39,8 @@
       "https://www.thebiglead.com/2026-internet-invitational-episode-2-spoilers-champions-out/",
       "https://handicap-tracker.com/articles/internet-invitational-2026-episode-4",
       "https://www.golfdigest.com/story/internet-invitational-2026-episode-3-recap-superlatives-grant-horvat-the-duke-kevin-kisner",
-      "https://www.golfdigest.com/story/internet-invitational-superlatives-ep-4-controversial-penalty-all-time-pillow-fight-devious-plot-twist"
+      "https://www.golfdigest.com/story/internet-invitational-superlatives-ep-4-controversial-penalty-all-time-pillow-fight-devious-plot-twist",
+      "https://www.golfdigest.com/story/internet-invitational-season-2-player-handicap-indexes-brad-dalke-paige-spiranac-bob-does-sports"
     ]
   },
   "episodes": [
@@ -237,7 +238,7 @@
         },
         {
           "name": "Paige Spiranac",
-          "handicap": null,
+          "handicap": "+2.4",
           "isCaptain": false
         },
         {
@@ -267,7 +268,7 @@
         },
         {
           "name": "Justin Gaethje",
-          "handicap": null,
+          "handicap": "7.1",
           "isCaptain": false
         },
         {
@@ -277,7 +278,7 @@
         },
         {
           "name": "Jon Gruden",
-          "handicap": null,
+          "handicap": "13.7",
           "isCaptain": false
         },
         {
@@ -371,7 +372,7 @@
         },
         {
           "name": "PFT Commenter",
-          "handicap": null,
+          "handicap": "17.0",
           "isCaptain": false
         }
       ]
@@ -509,7 +510,7 @@
         },
         {
           "name": "Johnny Manziel",
-          "handicap": null,
+          "handicap": "1.7",
           "isCaptain": false
         },
         {

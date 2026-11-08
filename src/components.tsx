@@ -1,7 +1,7 @@
 import { useState, type ReactNode } from "react";
 import { Link } from "react-router-dom";
 import type { RecordMark } from "./lib/types";
-import { shortName, teamOfPlayer, teams } from "./data";
+import { handicapOf, shortName, teamOfPlayer, teams } from "./data";
 import { initials, photoPath, photoSources } from "./lib/photos";
 
 export function TeamDot({ id }: { id: string }) {
@@ -28,6 +28,17 @@ export function Avatar({ name, size = 22 }: { name: string; size?: number }) {
     <span className={`av ${team}`} style={{ width: size, height: size, fontSize: Math.max(8, Math.round(size * 0.4)) }} aria-hidden="true">
       {initials(name)}
       {src && <img src={src} alt="" width={size} height={size} loading="lazy" decoding="async" onError={() => setStep((n) => n + 1)} />}
+    </span>
+  );
+}
+
+/** Small handicap tag shown next to a player's name. Renders nothing when no index is published. */
+export function Hcp({ name }: { name: string }) {
+  const h = handicapOf.get(name);
+  if (!h) return null;
+  return (
+    <span className="hcp-tag num" title={`Handicap index ${h}`} aria-label={`handicap ${h}`}>
+      {h}
     </span>
   );
 }

@@ -1,9 +1,9 @@
 import { useMemo } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import { T, records, shortName, teamOfPlayer } from "../data";
+import { T, handicapOf, records, shortName, teamOfPlayer } from "../data";
 import { fmtPoints, sessionCounts, sessionOrder, sessionTotal } from "../lib/scoring";
 import type { Match } from "../lib/types";
-import { Avatar, Chips, RecordChips, SecHead, TeamDot, playerHref } from "../components";
+import { Avatar, Chips, Hcp, RecordChips, SecHead, TeamDot, playerHref } from "../components";
 
 function MatchCard({ m, q }: { m: Match; q: string }) {
   const mu = T.matchups[m.matchup];
@@ -13,6 +13,7 @@ function MatchCard({ m, q }: { m: Match; q: string }) {
     <Link key={n} to={playerHref(n)} className={`pl ${q && n.toLowerCase().includes(q) ? "hit" : ""}`}>
       <Avatar name={n} size={22} />
       {n}
+      <Hcp name={n} />
     </Link>
   );
   const side = (s: "home" | "away") => (
@@ -128,8 +129,15 @@ export default function Matches() {
             </div>
           </div>
           <div className="player-strip-stats">
+            <span className="ps-stat">
+              <b className="num">{handicapOf.get(exact) ?? "—"}</b>
+              <small>{handicapOf.get(exact) ? "Handicap" : "No public index"}</small>
+            </span>
+            <span className="ps-stat">
+              <b className="num">{fmtPoints(rec.points)}</b>
+              <small>Pts</small>
+            </span>
             <RecordChips marks={rec.marks} />
-            <span className="num">{fmtPoints(rec.points)} pts</span>
           </div>
         </div>
       )}
