@@ -5,7 +5,7 @@ import { fmtPoints } from "../../lib/scoring";
 import { handicapValue, pairLines, playerLines, type PlayerLine } from "../../lib/stats";
 import type { TeamId } from "../../lib/types";
 import { ChartCard, hcpLabel, signed, useWidth } from "../../charts";
-import { Avatar, Chips, RecordChips, TeamDot, playerHref } from "../../components";
+import { Avatar, Chips, Hcp, RecordChips, TeamDot, playerHref } from "../../components";
 
 const hcpOf = new Map<string, number | null>();
 for (const t of T.teams) for (const p of t.players) hcpOf.set(p.name, handicapValue(p.handicap));
@@ -70,6 +70,7 @@ function Leaderboard() {
                     <Link to={playerHref(n)} className="lb-person">
                       <Avatar name={n} size={20} />
                       {n}
+                      <Hcp name={n} />
                     </Link>
                   </span>
                 ))}

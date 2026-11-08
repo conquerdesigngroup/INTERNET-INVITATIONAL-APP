@@ -40,7 +40,7 @@ export default function Teams() {
   return (
     <section className="view">
       <SecHead title="The four teams">
-        Captains were voted in, then ran a snake draft. A "+" handicap means better than scratch.
+        Captains were voted in, then ran a snake draft. Hcp is each player's handicap index: a "+" means better than scratch, and "—" means no index is public.
       </SecHead>
 
       <div className="seg" role="group" aria-label="Choose a team">
@@ -99,11 +99,11 @@ export default function Teams() {
                       )}
                       {p.name}
                     </b>
-                    <small className="hcp-sm num">{p.handicap ?? "n/a"}</small>
+                    <small className="hcp-sm num">{p.handicap ? `Hcp ${p.handicap}` : "Hcp not public"}</small>
                   </span>
                 </span>
                 <span className="c-hcp num">
-                  {p.handicap ?? <span className="muted">n/a</span>}
+                  {p.handicap ?? <span className="muted" title="No public handicap index">—</span>}
                 </span>
                 <span>
                   <RecordChips marks={r?.marks ?? []} />

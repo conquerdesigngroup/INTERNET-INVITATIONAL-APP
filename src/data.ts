@@ -8,7 +8,13 @@ export const TEAM_ORDER: TeamId[] = ["ruffels", "bryan", "finch", "dalke"];
 export const teams: Record<string, Team> = Object.fromEntries(T.teams.map((t) => [t.id, t]));
 export const records = playerRecords(T);
 export const teamOfPlayer = new Map<string, TeamId>();
-for (const t of T.teams) for (const p of t.players) teamOfPlayer.set(p.name, t.id);
+/** Handicap index as published, e.g. "+7.2" (better than scratch) or "12.6"; null when no index is public. */
+export const handicapOf = new Map<string, string | null>();
+for (const t of T.teams)
+  for (const p of t.players) {
+    teamOfPlayer.set(p.name, t.id);
+    handicapOf.set(p.name, p.handicap);
+  }
 
 export const shortName = (id: string) => teams[id]?.name.replace(/^Team /, "") ?? id;
 export const playersAlive = T.teams.filter((t) => t.status === "advanced").reduce((n, t) => n + t.players.length, 0);
