@@ -2,11 +2,12 @@
   "meta": {
     "event": "Internet Invitational 2026",
     "edition": 2,
-    "updatedThrough": "Episode 4",
-    "updatedAt": "2026-11-07",
+    "updatedThrough": "Episode 5",
+    "updatedAt": "2026-11-10",
     "venue": "Big Cedar Lodge, Ridgedale, Missouri",
     "day1Course": "Ozarks National",
     "day2Course": "Buffalo Ridge",
+    "day3Course": "Payne's Valley",
     "host": "Dave Portnoy",
     "rulesOfficial": "Kevin Kisner",
     "presentedBy": [
@@ -40,7 +41,8 @@
       "https://handicap-tracker.com/articles/internet-invitational-2026-episode-4",
       "https://www.golfdigest.com/story/internet-invitational-2026-episode-3-recap-superlatives-grant-horvat-the-duke-kevin-kisner",
       "https://www.golfdigest.com/story/internet-invitational-superlatives-ep-4-controversial-penalty-all-time-pillow-fight-devious-plot-twist",
-      "https://www.golfdigest.com/story/internet-invitational-season-2-player-handicap-indexes-brad-dalke-paige-spiranac-bob-does-sports"
+      "https://www.golfdigest.com/story/internet-invitational-season-2-player-handicap-indexes-brad-dalke-paige-spiranac-bob-does-sports",
+      "https://handicap-tracker.com/events/internet-invitational-2026"
     ]
   },
   "episodes": [
@@ -76,15 +78,15 @@
       "n": 5,
       "date": "2026-11-09",
       "timeET": "13:00",
-      "status": "upcoming",
-      "summary": null
+      "status": "released",
+      "summary": "Four teams of four, Team Horvat out, semifinal at Payne's Valley, final six set"
     },
     {
       "n": 6,
       "date": "2026-11-12",
       "timeET": "13:00",
       "status": "upcoming",
-      "summary": "Finale"
+      "summary": "Finale · Team Big John vs Team FP"
     }
   ],
   "sessions": {
@@ -183,19 +185,20 @@
     },
     {
       "id": "semi",
-      "label": "Elimination · Ep 5",
-      "status": "upcoming",
-      "confirmed": false,
-      "expectedFrom2025": "Team Ruffels' 16 split into four teams of four; four players go home",
+      "label": "Semifinal · Ep 5",
+      "status": "complete",
       "players": 16,
-      "playersAfter": 12
+      "playersAfter": 6,
+      "confirmed": true,
+      "format": "Four teams of four played a hole-by-hole knockout and the worst team went home. The last 12 were redrafted into four teams of three for a 9-hole alternate-shot stroke-play semifinal at Payne's Valley; the top two teams reached the final."
     },
     {
       "id": "final",
       "label": "Finale · Nov 12",
       "status": "upcoming",
-      "confirmed": false,
-      "expectedFrom2025": "3 vs 3 alternate-shot match play over 18 holes for the $4M"
+      "players": 6,
+      "confirmed": true,
+      "format": "Team Big John vs Team FP: 18 holes of alternate-shot match play at Payne's Valley for the $4M"
     }
   ],
   "teams": [
@@ -1804,6 +1807,18 @@
   ],
   "moments": [
     {
+      "title": "Salim's bogey putt",
+      "text": "Salim holed a bogey putt on the last at Payne's Valley to finish Team Big John at +4, one shot clear of Team Micah, and into the final."
+    },
+    {
+      "title": "Horvat's team goes first",
+      "text": "Jake Adams bogeyed the second knockout hole while Ryan Whitney holed for par, sending Grant Horvat, Paige Spiranac, Jake Adams and Jon Gruden home."
+    },
+    {
+      "title": "Ruffels out",
+      "text": "Captain Ryan Ruffels, the lowest handicap in the field, went out in the semifinal when his trio finished last at +7."
+    },
+    {
       "title": "Same teams",
       "text": "Bryan's Robby Berger (Bobby Fairways) asked Portnoy to keep the Day 1 teams together for Day 2. Portnoy agreed, and Ruffels won the morning 6–2."
     },
@@ -1847,5 +1862,128 @@
       "title": "Champions out",
       "text": "2025 winners Brad Dalke and Francis Ellis were both eliminated with their teams."
     }
-  ]
+  ],
+  "episode5": {
+    "course": "Payne's Valley",
+    "knockout": {
+      "format": "Captains played the first hole and the best scores were safe. The other teams' second picks played the next hole, and the worst score sent that whole team home.",
+      "teams": [
+        {
+          "captain": "Big John",
+          "players": [
+            "Big John",
+            "Fat Perez",
+            "Bobby Ray",
+            "Riggs"
+          ],
+          "result": "safe",
+          "note": "Big John birdied the captains' hole"
+        },
+        {
+          "captain": "Ryan Ruffels",
+          "players": [
+            "Ryan Ruffels",
+            "Marissa Wenzler",
+            "Justin Gaethje",
+            "The Duke"
+          ],
+          "result": "safe",
+          "note": "Ruffels birdied the captains' hole"
+        },
+        {
+          "captain": "Micah Morris",
+          "players": [
+            "Micah Morris",
+            "Ryan Whitney",
+            "Bubbie Broders",
+            "Salim"
+          ],
+          "result": "safe",
+          "note": "Morris parred the captains' hole; Ryan Whitney holed for par on the next"
+        },
+        {
+          "captain": "Grant Horvat",
+          "players": [
+            "Grant Horvat",
+            "Jake Adams",
+            "Paige Spiranac",
+            "Jon Gruden"
+          ],
+          "result": "out",
+          "note": "Horvat parred the captains' hole; Jake Adams made bogey on the next"
+        }
+      ],
+      "holes": [
+        {
+          "label": "Captains' hole (par 5)",
+          "lines": [
+            "Big John and Ryan Ruffels birdie: both teams safe",
+            "Grant Horvat and Micah Morris par"
+          ]
+        },
+        {
+          "label": "Second picks",
+          "lines": [
+            "Ryan Whitney holes for par",
+            "Jake Adams bogeys: Team Horvat out"
+          ]
+        }
+      ],
+      "rosterNote": "Only Team Horvat's four are confirmed by name. The other three rosters are from YT Golf Stats' redraft list, with Riggs and Jon Gruden swapped to match who reached the semifinal."
+    },
+    "semifinal": {
+      "format": "alternate_shot_stroke_play",
+      "holes": 9,
+      "teams": [
+        {
+          "id": "blue",
+          "name": "Team FP",
+          "color": "Blue",
+          "players": [
+            "Fat Perez",
+            "Riggs",
+            "Bobby Ray"
+          ],
+          "toPar": 2,
+          "result": "advanced"
+        },
+        {
+          "id": "red",
+          "name": "Team Big John",
+          "color": "Red",
+          "players": [
+            "Big John",
+            "Ryan Whitney",
+            "Salim"
+          ],
+          "toPar": 4,
+          "result": "advanced"
+        },
+        {
+          "id": "green",
+          "name": "Team Micah",
+          "color": "Green",
+          "players": [
+            "Micah Morris",
+            "Bubbie Broders",
+            "Justin Gaethje"
+          ],
+          "toPar": 5,
+          "result": "eliminated"
+        },
+        {
+          "id": "white",
+          "name": "Team Ruffels",
+          "color": "White",
+          "players": [
+            "Ryan Ruffels",
+            "Marissa Wenzler",
+            "The Duke"
+          ],
+          "toPar": 7,
+          "result": "eliminated"
+        }
+      ]
+    }
+  }
 }

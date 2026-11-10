@@ -1,4 +1,4 @@
-import { T, TEAM_ORDER, epDate, epName, episodeStates, money, sessionShort, shortName, teams } from "../data";
+import { T, TEAM_ORDER, alivePlayers, ep5Exit, epDate, epName, episodeStates, finalTeams, fmtToPar, money, sessionShort, shortName, teams } from "../data";
 import { boardStories, standingsIntro } from "../content";
 import { contestTotal, fmtPoints, matchupSessions, sessionTotal } from "../lib/scoring";
 import { Avatar, Pill, PlayerLink, SecHead, TeamChip } from "../components";
@@ -77,6 +77,72 @@ function Board({ mk }: { mk: string }) {
   );
 }
 
+function SemiBoard() {
+  const e = T.episode5;
+  if (!e) return null;
+  const rows = [...e.semifinal.teams].sort((a, b) => a.toPar - b.toPar);
+  return (
+    <article className="card board">
+      <div className="board-top">
+        <span className="eyebrow">
+          {T.stages.find((st) => st.id === "semi")?.label ?? "Semifinal"} · {e.course}
+        </span>
+        <Pill kind="adv">Final set</Pill>
+      </div>
+      {rows.map((t, i) => {
+        const won = t.result === "advanced";
+        return (
+          <div key={t.id} className={`score-row ${won ? "win" : "lose"}`}>
+            <div className="who">
+              <span className="tchip">
+                <span className={`tdot ${t.id}`} aria-hidden="true" />
+                {t.name}
+              </span>
+              <small>
+                {i + 1}. {t.players.join(", ")}
+              </small>
+            </div>
+            <div className="score-right">
+              {won ? <Pill kind="adv">To the final</Pill> : <Pill kind="out">Out</Pill>}
+              <div className="pts num">{fmtToPar(t.toPar)}</div>
+            </div>
+          </div>
+        );
+      })}
+      <p className="story">
+        {e.semifinal.holes} holes of alternate shot, stroke play, teams of three; the top two went through. Before it, a hole-by-hole knockout
+        between four teams of four sent Team Horvat home.
+      </p>
+    </article>
+  );
+}
+
+function KnockoutBoard() {
+  const e = T.episode5;
+  if (!e) return null;
+  const k = e.knockout;
+  return (
+    <article className="card board">
+      <div className="board-top">
+        <span className="eyebrow">Episode 5 · Knockout</span>
+        <Pill kind="out">4 out</Pill>
+      </div>
+      {k.teams.map((t) => (
+        <div key={t.captain} className={`score-row ${t.result === "out" ? "lose" : ""}`}>
+          <div className="who">
+            <b>Team {t.captain}</b>
+            <small>{t.players.join(", ")}</small>
+            <small>{t.note}</small>
+          </div>
+          <div className="score-right">{t.result === "out" ? <Pill kind="out">Out</Pill> : <Pill kind="adv">Safe</Pill>}</div>
+        </div>
+      ))}
+      <p className="story">{k.format}</p>
+      {k.rosterNote && <p className="footnote">{k.rosterNote}</p>}
+    </article>
+  );
+}
+
 function Facts() {
   const cuts = T.stages.filter((s) => s.status === "complete" && s.players && s.playersAfter);
   const [ace, ctp] = T.meta.bonuses;
@@ -102,27 +168,66 @@ function Facts() {
 function Survivors() {
   return (
     <div className="survivors">
-      {TEAM_ORDER.map((id) => {
-        const t = teams[id];
-        const alive = t.status === "advanced";
-        const names = (
+      {finalTeams.map((ft) => (
+        <div key={ft.id} className="card surv">
+          <div className="board-top">
+            <span className="tchip">
+              <span className={`tdot ${ft.id}`} aria-hidden="true" />
+              {ft.name}
+            </span>
+            <Pill kind="adv">In the final</Pill>
+          </div>
           <div className="names">
-            {t.players.map((p) => (
-              <PlayerLink key={p.name} name={p.name} className={`name ${p.isCaptain ? "cap" : ""}`}>
-                <Avatar name={p.name} size={20} />
-                <span>
-                  {p.isCaptain && <span className="star" aria-label="Captain">★ </span>}
-                  {p.name}
-                </span>
+            {ft.players.map((n) => (
+              <PlayerLink key={n} name={n} className="name">
+                <Avatar name={n} size={20} />
+                <span>{n}</span>
               </PlayerLink>
             ))}
           </div>
+        </div>
+      ))}
+      {TEAM_ORDER.map((id) => {
+        const t = teams[id];
+        const left = t.players.filter((p) => alivePlayers.has(p.name)).length;
+        const alive = t.status === "advanced" && left > 0;
+        const names = (
+          <div className="names">
+            {t.players.map((p) => {
+              const exit = t.status === "advanced" ? ep5Exit(p.name) : null;
+              return (
+                <PlayerLink key={p.name} name={p.name} className={`name ${p.isCaptain ? "cap" : ""} ${exit ? "gone" : ""}`}>
+                  <Avatar name={p.name} size={20} />
+                  <span>
+                    {p.isCaptain && <span className="star" aria-label="Captain">★ </span>}
+                    {p.name}
+                    {exit && <small className="muted"> · out in {exit === "knockout" ? "knockout" : "semi"}</small>}
+                  </span>
+                </PlayerLink>
+              );
+            })}
+          </div>
         );
+        if (alive && finalTeams.length)
+          return (
+            <details key={id} className="card surv">
+              <summary className="board-top">
+                <TeamChip id={id} />
+                <span className="sum-right">
+                  <Pill kind="adv">{left} of {t.players.length} left</Pill>
+                  <svg className="chev" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" strokeWidth="2" />
+                  </svg>
+                </span>
+              </summary>
+              {names}
+            </details>
+          );
         return alive ? (
           <div key={id} className="card surv">
             <div className="board-top">
               <TeamChip id={id} />
-              <Pill kind="adv">{t.players.length} alive</Pill>
+              <Pill kind="adv">{left} alive</Pill>
             </div>
             {names}
           </div>
@@ -172,6 +277,8 @@ export default function Standings() {
     <section className="view">
       <SecHead title={standingsIntro.title}>{standingsIntro.text}</SecHead>
       <div className="boards">
+        <SemiBoard />
+        <KnockoutBoard />
         {Object.keys(T.matchups).map((mk) => (
           <Board key={mk} mk={mk} />
         ))}

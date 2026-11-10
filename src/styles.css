@@ -150,6 +150,11 @@ section.view { display: grid; grid-template-columns: minmax(0, 1fr); gap: 22px; 
 .tdot.dalke { background: var(--t-dalke); }
 .tdot.finch { background: var(--t-finch); }
 .tdot.ruffels { background: var(--t-ruffels); border-color: var(--t-ruffels-edge); }
+/* Episode 5 semifinal teams of three, keyed by colour. */
+.tdot.blue { background: var(--t-finch); }
+.tdot.red { background: var(--t-dalke); }
+.tdot.green { background: var(--t-bryan); }
+.tdot.white { background: var(--t-ruffels); border-color: var(--t-ruffels-edge); }
 
 .pill { display: inline-flex; align-items: center; gap: 6px; font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 3px 8px; border-radius: 999px; white-space: nowrap; width: max-content; }
 .pill.adv { background: var(--accent); color: var(--accent-ink); }
@@ -212,6 +217,8 @@ details[open] .chev { transform: rotate(180deg); }
 .name { font-size: 13px; padding: 6px 10px; border-radius: 8px; background: var(--surface-2); border: 1px solid var(--line); text-decoration: none; }
 .name:hover { border-color: var(--accent); }
 .name.cap { font-weight: 700; }
+.name.gone { opacity: 0.55; }
+.name.gone small { font-weight: 400; }
 .star { color: var(--gold); }
 
 /* ---------- Teams ---------- */

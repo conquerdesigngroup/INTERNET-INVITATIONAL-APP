@@ -17,7 +17,27 @@ for (const t of T.teams)
   }
 
 export const shortName = (id: string) => teams[id]?.name.replace(/^Team /, "") ?? id;
-export const playersAlive = T.teams.filter((t) => t.status === "advanced").reduce((n, t) => n + t.players.length, 0);
+/** Teams of three still alive after the Episode 5 semifinal; empty before it aired. */
+export const finalTeams = T.episode5?.semifinal.teams.filter((t) => t.result === "advanced") ?? [];
+/** Names still in the tournament. Before Episode 5 this is everyone on an advanced Day 1 team. */
+export const alivePlayers = new Set<string>(
+  finalTeams.length
+    ? finalTeams.flatMap((t) => t.players)
+    : T.teams.filter((t) => t.status === "advanced").flatMap((t) => t.players.map((p) => p.name)),
+);
+export const playersAlive = alivePlayers.size;
+
+/** Where a player went out in Episode 5, if they did. */
+export function ep5Exit(name: string): "knockout" | "semifinal" | null {
+  const e = T.episode5;
+  if (!e || alivePlayers.has(name)) return null;
+  if (e.knockout.teams.some((t) => t.result === "out" && t.players.includes(name))) return "knockout";
+  if (e.semifinal.teams.some((t) => t.result === "eliminated" && t.players.includes(name))) return "semifinal";
+  return null;
+}
+
+/** Stroke-play score to par: "E", "+2", "-1". */
+export const fmtToPar = (n: number) => (n === 0 ? "E" : n > 0 ? `+${n}` : `−${-n}`);
 
 /** Short label for a session, e.g. "Ep 1 · Scramble". */
 export function sessionShort(key: string): string {

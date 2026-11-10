@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { TEAM_ORDER, T, records, shortName, teamOutcomeLine, teams } from "../data";
+import { TEAM_ORDER, T, alivePlayers, ep5Exit, records, shortName, teamOutcomeLine, teams } from "../data";
 import { fmtPoints, teamTotals } from "../lib/scoring";
 import { Avatar, Pill, PlayerLink, RecordChips, SecHead, TeamDot } from "../components";
 
@@ -35,6 +35,7 @@ export default function Teams() {
   if (!cur) return null;
   const t = teams[cur];
   const alive = t.status === "advanced";
+  const left = t.players.filter((p) => alivePlayers.has(p.name)).length;
   const tot = teamTotals(T, cur);
 
   return (
@@ -73,7 +74,7 @@ export default function Teams() {
               <b className="num">{tot.wins}</b>
               <span>Matches won</span>
             </div>
-            <div className="team-status">{alive ? <Pill kind="adv">Advanced</Pill> : <Pill kind="out">Eliminated</Pill>}</div>
+            <div className="team-status">{alive ? <Pill kind="adv">{left < t.players.length ? `${left} of ${t.players.length} left` : "Advanced"}</Pill> : <Pill kind="out">Eliminated</Pill>}</div>
           </div>
         </div>
 
@@ -99,7 +100,11 @@ export default function Teams() {
                       )}
                       {p.name}
                     </b>
-                    <small className="hcp-sm num">{p.handicap ? `Hcp ${p.handicap}` : "Hcp not public"}</small>
+                    <small className="hcp-sm num">
+                      {p.handicap ? `Hcp ${p.handicap}` : "Hcp not public"}
+                      {alive && ep5Exit(p.name) && ` · Out in Ep 5 ${ep5Exit(p.name) === "knockout" ? "knockout" : "semifinal"}`}
+                      {alive && alivePlayers.has(p.name) && left < t.players.length && " · In the final"}
+                    </small>
                   </span>
                 </span>
                 <span className="c-hcp num">
