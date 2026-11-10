@@ -1,5 +1,5 @@
 import { Fragment, useLayoutEffect, useMemo, useRef, useState, type ReactNode } from "react";
-import { T, epDate, money, playersAlive, sessionShort, shortName, teams } from "../data";
+import { T, epDate, finalTeams, fmtToPar, money, playersAlive, sessionShort, shortName, teams } from "../data";
 import { matchupBullets, stageDetails, teamBlurbs } from "../content";
 import { contestTotal, countingMatches, fmtPoints, holesPlayed, matchupSessions, sessionTotal } from "../lib/scoring";
 import { Pill, SecHead, TeamChip } from "../components";
@@ -123,6 +123,27 @@ function buildBracket() {
           <span className="s">{alive.map((t) => shortName(t.id)).join(" + ")}</span>
         </>
       );
+    else if (id === "semi" && !future && T.episode5)
+      body = (
+        <>
+          <span className="eyebrow">{st?.label}</span>
+          <h4>Teams of three</h4>
+          <div className="vs">
+            {[...T.episode5.semifinal.teams]
+              .sort((a, b) => a.toPar - b.toPar)
+              .map((t) => (
+                <div key={t.id} className={t.result === "advanced" ? "" : "lose"}>
+                  <span className="tchip">
+                    <span className={`tdot ${t.id}`} aria-hidden="true" />
+                    {t.name.replace(/^Team /, "")}
+                  </span>
+                  <b className="num">{fmtToPar(t.toPar)}</b>
+                </div>
+              ))}
+          </div>
+          <span className="s">{st?.playersAfter} remain</span>
+        </>
+      );
     else if (id === "semi")
       body = (
         <>
@@ -135,7 +156,7 @@ function buildBracket() {
       body = (
         <>
           <span className="eyebrow">Finale · {epDate(finale)}</span>
-          <h4>The final</h4>
+          <h4>{finalTeams.length === 2 ? finalTeams.map((t) => t.name.replace(/^Team /, "")).join(" vs ") : "The final"}</h4>
           <div className="big num">{money(T.meta.prizeTotalUSD)}</div>
           <span className="s">{T.meta.trophy}</span>
         </>
@@ -147,7 +168,7 @@ function buildBracket() {
       body: (
         <>
           {body}
-          {future && <Pill kind="exp">{id === "final" ? "Expected" : "Not aired yet"}</Pill>}
+          {future && <Pill kind="exp">{id === "final" ? (st?.confirmed ? "Thu 1pm ET" : "Expected") : "Not aired yet"}</Pill>}
         </>
       ),
     });
@@ -221,7 +242,7 @@ function DetailPanel({ d }: { d: Detail }) {
 
 function Bracket() {
   const { nodes, links, details } = useMemo(buildBracket, []);
-  const [sel, setSel] = useState("day2");
+  const [sel, setSel] = useState(stage("semi")?.status === "complete" ? "semi" : "day2");
   const ref = useRef<HTMLDivElement>(null);
   const { paths, box } = useLinks(ref, links);
 

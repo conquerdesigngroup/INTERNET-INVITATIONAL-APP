@@ -18,6 +18,7 @@ export interface Meta {
   venue: string;
   day1Course: string;
   day2Course?: string;
+  day3Course?: string;
   host: string;
   rulesOfficial: string;
   presentedBy: string[];
@@ -107,6 +108,41 @@ export interface Moment {
   text: string;
 }
 
+/** A team of four in the Episode 5 knockout. */
+export interface KnockoutTeam {
+  captain: string;
+  players: string[];
+  result: "safe" | "out";
+  note: string;
+}
+
+/** A team of three in the Episode 5 stroke-play semifinal. */
+export interface SemiTeam {
+  /** Colour key used for the team dot: blue, red, green or white. */
+  id: string;
+  name: string;
+  color: string;
+  players: string[];
+  /** Score to par, e.g. 2 for +2. */
+  toPar: number;
+  result: "advanced" | "eliminated";
+}
+
+export interface Episode5 {
+  course: string;
+  knockout: {
+    format: string;
+    rosterNote?: string;
+    teams: KnockoutTeam[];
+    holes: { label: string; lines: string[] }[];
+  };
+  semifinal: {
+    format: string;
+    holes: number;
+    teams: SemiTeam[];
+  };
+}
+
 export interface Tournament {
   meta: Meta;
   episodes: Episode[];
@@ -117,4 +153,5 @@ export interface Tournament {
   teams: Team[];
   matches: Match[];
   moments: Moment[];
+  episode5?: Episode5;
 }
